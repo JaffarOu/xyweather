@@ -1,4 +1,4 @@
-package com.jf.djweather;
+package com.jf.xyweather;
 
 import org.junit.Test;
 

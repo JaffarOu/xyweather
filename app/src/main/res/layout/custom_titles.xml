@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="8dp" android:gravity="center_vertical">
+
+    <!-- 左边的第一个图标-->
+    <ImageView
+        android:id="@+id/iv_custom_titles_left1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <!-- 左边的第二个图标-->
+    <ImageView
+        android:id="@+id/iv_custom_titles_left2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_custom_titles_left1"
+        android:layout_toEndOf="@id/iv_custom_titles_left1"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"/>
+
+    <!-- 标题文字-->
+    <TextView
+        android:id="@+id/tv_custom_titles_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:layout_centerInParent="true"/>
+
+    <!-- 右边的第一个图标-->
+    <ImageView
+        android:id="@+id/iv_custom_titles_right1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <!-- 右边的第二个图标-->
+    <ImageView
+        android:id="@+id/iv_custom_titles_right2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/iv_custom_titles_right1"
+        android:layout_toStartOf="@id/iv_custom_titles_right1"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"/>
+</RelativeLayout>

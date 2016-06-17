@@ -1,4 +1,4 @@
-package com.jf.djweather;
+package com.jf.xyweather;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
