@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">弦音天气</string>
 
-    <!-- activity_main-->
+    <!-- main-->
     <string name="weather">天气</string>
     <string name="live_action">实景</string>
     <string name="me">我</string>
+    <string name="search_more_about_weather">搜索更多天气内容</string>
+    <string name="short_term_forecast">短时预报</string>
 </resources>

@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/djweather.iml" filepath="$PROJECT_DIR$/djweather.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewpagerindicatorlibrary/viewpagerindicatorlibrary.iml" filepath="$PROJECT_DIR$/viewpagerindicatorlibrary/viewpagerindicatorlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xyweather.iml" filepath="$PROJECT_DIR$/xyweather.iml" />
     </modules>
   </component>
 </project>

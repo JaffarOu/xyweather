@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- non-transparent color-->
+    <color name="white">#ffffffff</color>
+
+    <!-- translucent colors-->
+    <color name="white_translucent">#80ffffff</color>
+    <color name="black_translucent">#80000000</color>
+  
+    <!-- other-->
+    <!-- main-->
+    <color name="hui_se">#80202020</color><!--"CityWeatherFragment" search button background-->
+    <color name="c0000000">#c0000000</color><!--"activity_main" radioGroup-->
+    <color name="ff3299cc">#ff3299CC</color><!--sky blue-->
+</resources>

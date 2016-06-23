@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--自定义标题的布局文件-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:padding="8dp" android:gravity="center_vertical">
+    android:gravity="center_vertical">
 
     <!-- 左边的第一个图标-->
     <ImageView
-        android:id="@+id/iv_custom_titles_left1"
+        android:id="@+id/iv_custom_titles_left_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -13,11 +14,11 @@
 
     <!-- 左边的第二个图标-->
     <ImageView
-        android:id="@+id/iv_custom_titles_left2"
+        android:id="@+id/iv_custom_titles_left_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_custom_titles_left1"
-        android:layout_toEndOf="@id/iv_custom_titles_left1"
+        android:layout_toRightOf="@id/iv_custom_titles_left_first"
+        android:layout_toEndOf="@id/iv_custom_titles_left_first"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"/>
 
@@ -29,21 +30,21 @@
         android:text="title"
         android:layout_centerInParent="true"/>
 
-    <!-- 右边的第一个图标-->
+    <!-- 从右数起的第一个图标-->
     <ImageView
-        android:id="@+id/iv_custom_titles_right1"
+        android:id="@+id/iv_custom_titles_right_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
 
-    <!-- 右边的第二个图标-->
+    <!-- 从右数起的第二个图标-->
     <ImageView
-        android:id="@+id/iv_custom_titles_right2"
+        android:id="@+id/iv_custom_titles_right_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/iv_custom_titles_right1"
-        android:layout_toStartOf="@id/iv_custom_titles_right1"
+        android:layout_toLeftOf="@id/iv_custom_titles_right_first"
+        android:layout_toStartOf="@id/iv_custom_titles_right_first"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"/>
 </RelativeLayout>

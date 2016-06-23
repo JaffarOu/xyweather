@@ -13,7 +13,7 @@ import com.jf.xyweather.base.activity.BaseActivity;
 public class MyApplications extends Application{
 
     private static Context context = null;
-    private static final String LOG_TAG = "com.jf.djweather.test";
+    private static final String LOG_TAG = "com.jf.xyweather.test";
 
     @Override
     public void onCreate() {
