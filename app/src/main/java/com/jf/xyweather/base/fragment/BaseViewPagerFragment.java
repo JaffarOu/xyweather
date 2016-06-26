@@ -30,6 +30,12 @@ abstract public class BaseViewPagerFragment extends BaseFragment{
     protected void initExtra() {
     }
 
+    /**
+     * initial the "CustomTitles","ViewPager" and the "ViewPagerIndicator",
+     * if you want to set something for the title or viewpager,
+     * you can override this method and do what you want to after call super.initView()
+     * @param layoutView
+     */
     @Override
     protected void initView(View layoutView) {
         //initial the title

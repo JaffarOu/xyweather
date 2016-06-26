@@ -4,12 +4,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#00000000">
 
+    <!--it will be showed during the work thread running-->
     <ProgressBar
         android:id="@+id/pb_fragment_city_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_gravity="center_horizontal"/>
+
     <!-- search button-->
     <RelativeLayout
         android:id="@+id/rl_fragment_city_weather_search"
@@ -29,12 +31,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_search"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/tv_fragment_city_weather"
             android:layout_toStartOf="@id/tv_fragment_city_weather"
             android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"/>
     </RelativeLayout>
-
 
     <!-- air quality index-->
     <TextView
@@ -54,12 +56,12 @@
         android:visibility="invisible"/>
 
     <!--short-term weather forecast at the lower left corner-->
-    <include
-        android:id="@+id/view_fragment_city_weather_short_term_forecast"
-        layout="@layout/layout_short_term_forecasting"
+    <com.jf.xyweather.customview.RealTimeWeather
+        android:id="@+id/short_term_forecast_fragment_city_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp">
+    </com.jf.xyweather.customview.RealTimeWeather>
 
     <!-- bottom layout-->
     <LinearLayout
@@ -67,25 +69,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="horizontal">
-
         <!-- the view to show today's weather information-->
-        <include
-            android:id="@+id/view_fragment_city_weather_today"
+        <com.jf.xyweather.customview.DailyWeather
+            android:id="@+id/daily_weather_fragment_city_weather_today"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            layout="@layout/layout_weather_info"/>
+            android:layout_weight="1">
+        </com.jf.xyweather.customview.DailyWeather>
         <!-- dividing line-->
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:background="@color/white_translucent"/>
         <!-- The view to show tomorrow's weather information-->
-        <include
-            android:id="@+id/view_fragment_city_weather_tomorrow"
+        <com.jf.xyweather.customview.DailyWeather
+            android:id="@+id/daily_weather_fragment_city_weather_tomorrow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            layout="@layout/layout_weather_info"/>
+            android:layout_weight="1">
+        </com.jf.xyweather.customview.DailyWeather>
     </LinearLayout>
 </LinearLayout>

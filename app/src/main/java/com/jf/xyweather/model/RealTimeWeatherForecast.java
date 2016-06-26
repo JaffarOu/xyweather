@@ -4,22 +4,23 @@ package com.jf.xyweather.model;
  * Created by jf on 2016/6/23.
  * The real-time weather information
  */
-public class RealTimeWeatherInfo {
+public class RealTimeWeatherForecast {
 
-    private RealTimeWeatherCondition cond;
+//    private RealTimeWeatherCondition cond;
+    private WeatherCondition cond;//real-time weather condition
     private float fl;//body feeling temperature
     private float hum;//humidity(%)
     private double pcpn;//precipitation rainfall capacity（降雨量）
     private float pres;//air pressure
-    private float tmp;//temperature （℃）
+    private int tmp;//temperature （℃）
     private float vis;//visibility
     private Wind wind;//wind condition
 
-    public RealTimeWeatherInfo(){
+    public RealTimeWeatherForecast(){
 
     }
 
-    public RealTimeWeatherInfo(RealTimeWeatherCondition cond, float fl, float hum, double pcpn, float pres, float tmp, float vis, Wind wind) {
+    public RealTimeWeatherForecast(WeatherCondition cond, float fl, float hum, double pcpn, float pres, int tmp, float vis, Wind wind) {
         this.cond = cond;
         this.fl = fl;
         this.hum = hum;
@@ -30,11 +31,11 @@ public class RealTimeWeatherInfo {
         this.wind = wind;
     }
 
-    public RealTimeWeatherCondition getCond() {
+    public WeatherCondition getCond() {
         return cond;
     }
 
-    public void setCond(RealTimeWeatherCondition cond) {
+    public void setCond(WeatherCondition cond) {
         this.cond = cond;
     }
 
@@ -70,11 +71,11 @@ public class RealTimeWeatherInfo {
         this.pres = pres;
     }
 
-    public float getTmp() {
+    public int getTmp() {
         return tmp;
     }
 
-    public void setTmp(float tmp) {
+    public void setTmp(int tmp) {
         this.tmp = tmp;
     }
 
@@ -92,5 +93,35 @@ public class RealTimeWeatherInfo {
 
     public void setWind(Wind wind) {
         this.wind = wind;
+    }
+
+    /**
+     * real-time weather condition
+     */
+    public class WeatherCondition{
+        private int code;//weather code that from the He Feng web server
+        private String txt;//weather type
+
+        public WeatherCondition(){
+        }
+
+        public WeatherCondition(int code, String txt) {
+            this.code = code;
+            this.txt = txt;
+        }
+
+        public int getCode() {
+            return code;
+        }
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        public String getTxt() {
+            return txt;
+        }
+        public void setTxt(String txt) {
+            this.txt = txt;
+        }
     }
 }

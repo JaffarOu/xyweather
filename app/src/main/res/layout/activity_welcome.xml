@@ -1,38 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--欢迎界面-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jf.xyweather.customview.CustomTitles
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        custom:leftFirstImageSrc="@drawable/ic_xyweather_launcher"
-        custom:leftSecondImageSrc="@drawable/ic_xyweather_launcher"
-        custom:titleText="欢迎界面"
-        custom:rightFirstImageSrc="@drawable/ic_xyweather_launcher"
-        custom:rightSecondImageSrc="@drawable/ic_xyweather_launcher">
-    </com.jf.xyweather.customview.CustomTitles>
 
-    <Button
-        android:id="@+id/btn_activity_welcome_get_weather_json"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="获取天气JSON数据"/>
-    <Button
-        android:id="@+id/btn_activity_welcome_parse_json"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="解析json数据"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_activity_welcome_json_resource"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="JSON数据源"/>
-    </ScrollView>
 </LinearLayout>

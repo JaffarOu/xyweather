@@ -16,10 +16,11 @@ import com.jf.xyweather.base.MyApplications;
 abstract public class BaseFragment extends Fragment {
 
     protected View layoutView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplications.showLog(getClass().getSimpleName());
+        MyApplications.showLog("which_fragment", getClass().getSimpleName());
     }
 
     @Nullable
@@ -31,9 +32,20 @@ abstract public class BaseFragment extends Fragment {
         return layoutView;
     }
 
+    /**
+     * get the id of the layout file
+     * @return the resource id of the layout file that child class want to inflate
+     */
     abstract protected int getLayoutViewId();
 
+    /**
+     * initial some before initial view
+     */
     abstract protected void initExtra();
 
+    /**
+     * initial view before the "onCreateView" method return
+     * @param layoutView the view inflated according the id that from "getLayoutViewId()" method
+     */
     abstract protected void initView(View layoutView);
 }

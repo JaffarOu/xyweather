@@ -9,12 +9,15 @@ import android.widget.RadioGroup;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
+import com.jf.xyweather.liveactionpage.LiveActionFragment;
+import com.jf.xyweather.settingpage.SettingFragment;
+import com.jf.xyweather.weatherpage.WeatherFragment;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
 
     private RadioGroup radioGroup;
-    private String currentFragment;//The fragment that interact with the user now
-    private String[] fragmentsTag;//All fragments' name in this Activity
+    private String currentFragmentTag;//The fragment that interact with the user now
+    private String[] fragmentsTag;//All fragments' tags in this Activity
     private FragmentManager fragmentManager;
 
     @Override
@@ -29,73 +32,58 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     protected void initExtra() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentsTag = new String[]{WeatherFragment.class.getSimpleName(), LiveActionFragment.class.getSimpleName(), MeFragment.class.getSimpleName()};
     }
 
     @Override
     protected void initView() {
-        initRadioGroup();
-        initFragment();
-    }
-
-    private void initRadioGroup(){
+        //initial "RadioGroup"
         radioGroup = (RadioGroup)findViewById(R.id.rg_activity_base_view_pager);
         radioGroup.setOnCheckedChangeListener(this);
-    }
 
-    private void initFragment(){
+        //initial "Fragment"
+        fragmentManager = getSupportFragmentManager();
+        fragmentsTag = new String[]{WeatherFragment.class.getSimpleName(), LiveActionFragment.class.getSimpleName(), SettingFragment.class.getSimpleName()};
         fragmentManager.beginTransaction().add(R.id.fl_activity_main_fragment_group, new WeatherFragment(), fragmentsTag[0]).commit();
-        currentFragment = fragmentsTag[0];
+        currentFragmentTag = fragmentsTag[0];
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        FragmentTransaction fragmentTransaction;
         switch (checkedId){
             case R.id.rb_activity_main_weather:
-                if(currentFragment.equals(fragmentsTag[0])){
-                    break;
-                }
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.hide(fragmentManager.findFragmentByTag(currentFragment));
-                fragmentTransaction.show(fragmentManager.findFragmentByTag(fragmentsTag[0]));
-                currentFragment = fragmentsTag[0];
-                fragmentTransaction.commit();
+                changeFragment(fragmentsTag[0]);
                 break;
             case R.id.rb_activity_main_live_action:
-                if(currentFragment.equals(fragmentsTag[1])){
-                    break;
-                }
-                fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment liceActionFragment = fragmentManager.findFragmentByTag(fragmentsTag[1]);
-                fragmentTransaction.hide(fragmentManager.findFragmentByTag(currentFragment));
-                if(liceActionFragment != null){
-                    fragmentTransaction.show(liceActionFragment).commit();
-                    currentFragment = fragmentsTag[1];
-                    break;
-                }
-                MyApplications.showLog("新建\"LiveActionFragment\"");
-                fragmentTransaction.add(R.id.fl_activity_main_fragment_group, new LiveActionFragment(), fragmentsTag[1]).commit();
-                currentFragment = fragmentsTag[1];
+                changeFragment(fragmentsTag[1]);
                 break;
             case R.id.rb_activity_main_me:
-                if(currentFragment.equals(fragmentsTag[2])){
-                    break;
-                }
-                fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment meFragment = fragmentManager.findFragmentByTag(fragmentsTag[2]);
-                fragmentTransaction.hide(fragmentManager.findFragmentByTag(currentFragment));
-                if(meFragment != null){
-                    fragmentTransaction.show(meFragment).commit();
-                    currentFragment = fragmentsTag[2];
-                    break;
-                }
-                MyApplications.showLog("新建\"MeFragment\"");
-                fragmentTransaction.add(R.id.fl_activity_main_fragment_group, new MeFragment(), fragmentsTag[2]).commit();
-                currentFragment = fragmentsTag[2];
+                changeFragment(fragmentsTag[2]);
                 break;
             default:break;
         }
+    }
+
+    //change fragment according fragmentTag
+    private void changeFragment(String fragmentTag){
+        if(currentFragmentTag.equals(fragmentTag)){
+            return;
+        }
+        //hide current fragment
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.hide(fragmentManager.findFragmentByTag(currentFragmentTag));
+        Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+        //show the fragment that point by fragmentTag
+        if(fragment != null){
+            transaction.show(fragment).commit();
+            currentFragmentTag = fragmentTag;
+            return;
+        }
+        if(fragmentTag.equals(fragmentsTag[1])){
+            fragment = new LiveActionFragment();
+        }else if(fragmentTag.equals(fragmentsTag[2])){
+            fragment = new SettingFragment();
+        }
+        transaction.add(R.id.fl_activity_main_fragment_group, fragment, fragmentTag).commit();
+        currentFragmentTag = fragmentTag;
     }
 }

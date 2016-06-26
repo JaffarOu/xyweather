@@ -7,7 +7,7 @@ package com.jf.xyweather.model;
 public class DailyWeatherForecast {
 
     private Astronomy astro;//_astronomy numerical（天文数值）
-    private WeatherCondition cond;//weather state（天气状况）
+    private WeatherCondition cond;//weather condition（天气状况）
     private String date;//location date（当地时间）
     private float hum;//humidity（湿度）
     private float pcpn;//precipitation rainfall capacity（降雨量）

@@ -24,6 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile project(':viewpagerindicatorlibrary')
-    compile files('E:/AndroidApp/xyweather/libs/gson-2.3-sources.jar')
+    compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.code.gson:gson:2.7'
 }

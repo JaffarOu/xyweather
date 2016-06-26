@@ -25,12 +25,15 @@ public class MyApplications extends Application{
         return context;
     }
 
+    public static void showLog(String tag, String content){
+        Log.i(tag, content);
+    }
     /**
      * 打印Log的信息
      * @param content 待打印的字符串
      */
     public static void showLog(String content){
-        Log.i(LOG_TAG,content);
+        showLog(LOG_TAG, content);
     }
 
     /**

@@ -16,22 +16,19 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class HttpRequestUtils {
 
-//    public static final int HTTP_REQUEST_ON_FINISH = 0;
-//    public static final int HTTP_REQUEST_ON_ERROR = 1;
-//    public static final int HTTP_REQUEST_ON_NO_RESPONSE = 1<<1;
-
     /**
      * send a http request with "get" method
      * @param cityName The name of the city that you want to get the weather information
      * @param httpListener http request result listener
      */
     public static void sendWeatherInfoRequest(String cityName, HttpListener httpListener){
-        String httpUrl = "https://api.heweather.com/x3/weather?city="+cityName+"&key="+ Contact.apiKey;
+//        String httpUrl = "https://api.heweather.com/x3/weather?city="+cityName+"&key="+ Contact._apiKey;
+        String httpUrl = Contact.CITY_INTERFACE_URL+"?"+"city="+cityName+"&key="+Contact.API_KEY;
         MyApplications.showLog(httpUrl);
         String result = null;//result of http request
         BufferedReader bfrd = null;
         StringBuffer sb = new StringBuffer();
-        boolean hasThread = false;//if ever occur thread
+        boolean hasException = false;//if occur exception ever
         String threadString = null;//the information of thread
         try{
             //send the http request
@@ -49,7 +46,7 @@ public class HttpRequestUtils {
             }
             result = sb.toString();
         }catch (IOException e){
-            hasThread = true;
+            hasException = true;
             threadString = e.toString();
         }finally {
             if(bfrd != null){
@@ -63,7 +60,7 @@ public class HttpRequestUtils {
         if(httpListener == null){
             return;
         }
-        if(hasThread){
+        if(hasException){
             httpListener.onError(threadString);
             return;
         }

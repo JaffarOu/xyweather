@@ -2,14 +2,25 @@ package com.jf.xyweather.model;
 
 /**
  * Created by jf on 2016/6/21.
- *
+ * the weather of a day
  */
 public class WeatherCondition {
 
-    private int code_d;
-    private int code_n;
-    private String txt_d;//the describe of the day weather
-    private String txt_n;//the describe of the night weather
+    private int code_d;//weather code of the day
+    private int code_n;//weather code of the night
+    private String txt_d;//weather type of a day,such as sunny or cloudy
+    private String txt_n;//weather type of a night such as sunny or cloudy
+
+    public WeatherCondition(){
+
+    }
+
+    public WeatherCondition(int code_d, int code_n, String txt_d, String txt_n){
+        this.code_d = code_d;
+        this.code_n = code_n;
+        this.txt_d = txt_d;
+        this.txt_n = txt_n;
+    }
 
     public int getCode_d() {
         return code_d;

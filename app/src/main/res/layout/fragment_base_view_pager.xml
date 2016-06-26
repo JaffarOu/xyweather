@@ -4,15 +4,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--title-->
     <com.jf.xyweather.customview.CustomTitles
         android:id="@+id/custom_titles_fragment_base_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
     </com.jf.xyweather.customview.CustomTitles>
+
+    <!--ViewPager indicator-->
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/circle_page_indicator_fragment_base_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <!--ViewPager-->
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_fragment_base_view_pager"
         android:layout_width="match_parent"

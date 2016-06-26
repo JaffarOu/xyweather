@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- 主界面-->
+        <!-- main user interface-->
         <activity android:name="com.jf.xyweather.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <!-- 欢迎界面-->
+        <!-- welcome user interface-->
         <activity android:name=".main.WelcomeActivity"/>
     </application>
 

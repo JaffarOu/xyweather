@@ -16,7 +16,7 @@
         android:id="@+id/rg_activity_base_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/c0000000"
+        android:background="@android:color/black"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
         <RadioButton
