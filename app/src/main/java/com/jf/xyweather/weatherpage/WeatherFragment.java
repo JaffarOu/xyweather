@@ -16,11 +16,13 @@ import java.util.List;
 
 /**
  * Created by jf on 2016/6/16
- * The "weather page" in the "MainActivity".
+ * The "weather page" Fragment in the MainActivity.
  */
 public class WeatherFragment extends BaseViewPagerFragment implements CustomTitles.OnTitleClickListener{
 
     private FragmentStatePagerAdapter fragmentViewPagerAdapter;
+    private int fragmentNumber = 1;
+
     @Override
     protected void initView(View layoutView) {
         super.initView(layoutView);
@@ -33,11 +35,16 @@ public class WeatherFragment extends BaseViewPagerFragment implements CustomTitl
 
         //initial other view
         layoutView.setBackgroundResource(R.drawable.bg_weather_fragment);
+
+        //hide the ViewPagerIndicator if this fragment just have one child fragment
+        if(fragmentNumber == 1){
+            circlePageIndicator.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
     protected FragmentStatePagerAdapter getFragmentPagerAdapter() {
-        List<Fragment> fragmentList = new ArrayList<>();
+        List<Fragment> fragmentList = new ArrayList<>(fragmentNumber);
         fragmentList.add(new CityWeatherFragment());
         fragmentViewPagerAdapter = new BaseViewPagerAdapter(getChildFragmentManager(), fragmentList);
         return fragmentViewPagerAdapter;

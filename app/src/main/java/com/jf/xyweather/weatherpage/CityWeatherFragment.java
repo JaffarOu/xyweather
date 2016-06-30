@@ -48,8 +48,8 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     @Override
     protected void initExtra() {
         Bundle arguments = getArguments();
-        //determined which city'weather information should be query,the default city is "guangzhou"
-        cityName = arguments==null?"guangzhou":arguments.getString("cityName", "guangzhou");
+        //determined which city we need to query the weather information,,the default city is "guangzhou"
+        cityName = arguments == null?"guangzhou":arguments.getString("cityName", "guangzhou");
         //initial other
         canChangeUIs = true;
         httpHandler = new HttpHandler(this);
