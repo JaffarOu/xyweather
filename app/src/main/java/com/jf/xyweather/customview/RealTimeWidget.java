@@ -92,13 +92,13 @@ public class RealTimeWidget extends FrameLayout
         windOrBodyFeelingTv.setText(wind+"级");
     }
     private void setHumilityText(float humility){
-        humilityOrAirPressureTv.setText(humility+"%");
+        humilityOrAirPressureTv.setText((int)humility+"%");
     }
     private void setBodyFeelingText(float bodyFeelingTemperature){
-        windOrBodyFeelingTv.setText(bodyFeelingTemperature+"℃");
+        windOrBodyFeelingTv.setText((int)bodyFeelingTemperature+"℃");
     }
     private void setAirPressureText(float airPressure){
-        humilityOrAirPressureTv.setText(airPressure+"");
+        humilityOrAirPressureTv.setText((int)airPressure+"");
     }
 
     //initial the animation for the viewGroup

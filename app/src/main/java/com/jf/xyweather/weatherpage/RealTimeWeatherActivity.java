@@ -21,7 +21,7 @@ public class RealTimeWeatherActivity extends BaseActivity{
     private int humility;
     private String wind;
     private int visibility;
-    private String airPressure;
+    private int airPressure;
 
     public static final String KEY_REAL_TIME_WEATHER_FORECAST = "RealTimeWeather";
     private RealTimeWeather realTimeWeather;
@@ -48,7 +48,7 @@ public class RealTimeWeatherActivity extends BaseActivity{
         //the direction of wind and the power of the wind,such as "东风4级"
         wind = windModule.getDir()+windModule.getSc()+"级";
         visibility = (int)realTimeWeather.getVis();
-        airPressure = realTimeWeather.getPres()+"";
+        airPressure = (int)realTimeWeather.getPres();
 
     }
 
@@ -61,7 +61,7 @@ public class RealTimeWeatherActivity extends BaseActivity{
         ((TextView)findViewById(R.id.tv_activity_real_time_weather_humility)).setText(humility+"%");
         ((TextView)findViewById(R.id.tv_activity_real_time_weather_wind)).setText(wind);
         ((TextView)findViewById(R.id.tv_activity_real_time_weather_visibility)).setText(visibility+"");
-        ((TextView)findViewById(R.id.tv_activity_real_time_weather_air_pressure)).setText(airPressure);
+        ((TextView)findViewById(R.id.tv_activity_real_time_weather_air_pressure)).setText(airPressure+"");
 
         findViewById(R.id.ll_activity_short_term_forecast_layout).setOnClickListener(new View.OnClickListener() {
             @Override

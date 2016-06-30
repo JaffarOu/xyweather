@@ -109,6 +109,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        //change the flag so that the work thread will not to update the UI
         canChangeUIs = false;
     }
 
@@ -158,6 +159,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     }
 
     private static class HttpHandler extends Handler{
+
         private WeakReference<CityWeatherFragment> weakReference;
 
         public HttpHandler(CityWeatherFragment cityWeatherFragment){
@@ -185,6 +187,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
             }else if(msg.what == HttpThread.HTTP_REQUEST_ON_NO_RESPONSE){
                 MyApplications.showLog(getClass().getSimpleName()+"服务器没有响应");
             }
+            //set the variable to equals null as the flag that work thread is over
             cityWeatherFragment.httpThread = null;
             super.handleMessage(msg);
         }

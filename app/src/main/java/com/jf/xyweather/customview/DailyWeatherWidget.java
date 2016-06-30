@@ -34,7 +34,8 @@ public class DailyWeatherWidget extends FrameLayout{
 
     public void setDailyWeather(DailyWeatherForecast dailyWeatherForecast){
         this.dailyWeatherForecast = dailyWeatherForecast;
-        maxAndMinTemperatureTv.setText(dailyWeatherForecast.getTmp().getMax()+"/"+dailyWeatherForecast.getTmp().getMin());
+        //set the max temperature and the minimum temperature
+        maxAndMinTemperatureTv.setText((int)dailyWeatherForecast.getTmp().getMax()+"/"+(int)dailyWeatherForecast.getTmp().getMin()+"℃");
         weatherTypeTv.setText(dailyWeatherForecast.getCond().getTxt_d());
     }
 
