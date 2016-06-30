@@ -13,7 +13,7 @@ import com.jf.xyweather.model.DailyWeatherForecast;
  * Created by JF on 2016/6/25.
  * daily weather information widget on the "CityWeatherFragment"
  */
-public class DailyWeather extends FrameLayout{
+public class DailyWeatherWidget extends FrameLayout{
 
     private TextView whichTv;
     private TextView maxAndMinTemperatureTv;
@@ -22,7 +22,7 @@ public class DailyWeather extends FrameLayout{
 
     private DailyWeatherForecast dailyWeatherForecast;
 
-    public DailyWeather(Context context, AttributeSet attrs) {
+    public DailyWeatherWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
         inflate(context, R.layout.layout_daily_weather, this);
         //find view

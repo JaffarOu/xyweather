@@ -24,6 +24,8 @@
 
         <!-- welcome user interface-->
         <activity android:name=".main.WelcomeActivity"/>
+
+        <activity android:name=".weatherpage.RealTimeWeatherActivity"/>
     </application>
 
 </manifest>

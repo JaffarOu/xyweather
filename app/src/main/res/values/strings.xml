@@ -6,5 +6,12 @@
     <string name="live_action">实景</string>
     <string name="me">我</string>
     <string name="search_more_about_weather">搜索更多天气内容</string>
-    <string name="short_term_forecast">短时预报</string>
+    <string name="real_time_forecast">实时天气</string>
+    
+    <!-- weather page-->
+    <string name="body_feeling_temperature">体感</string>
+    <string name="humility">湿度</string>
+    <string name="wind">风</string>
+    <string name="air_pressure">气压</string>
+    <string name="visibility">能见度</string>
 </resources>

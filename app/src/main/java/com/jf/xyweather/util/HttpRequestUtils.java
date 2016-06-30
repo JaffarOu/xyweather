@@ -24,6 +24,7 @@ public class HttpRequestUtils {
     public static void sendWeatherInfoRequest(String cityName, HttpListener httpListener){
 //        String httpUrl = "https://api.heweather.com/x3/weather?city="+cityName+"&key="+ Contact._apiKey;
         String httpUrl = Contact.CITY_INTERFACE_URL+"?"+"city="+cityName+"&key="+Contact.API_KEY;
+        //print the http request url make our debug easy
         MyApplications.showLog(httpUrl);
         String result = null;//result of http request
         BufferedReader bfrd = null;
@@ -62,6 +63,7 @@ public class HttpRequestUtils {
         }
         if(hasException){
             httpListener.onError(threadString);
+            MyApplications.showLog(HttpRequestUtils.class.getSimpleName()+"请求异常-"+threadString);
             return;
         }
         httpListener.onFinish(result);

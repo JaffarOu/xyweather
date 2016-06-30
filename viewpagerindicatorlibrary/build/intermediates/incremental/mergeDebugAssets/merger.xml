@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\Android_text\xyweather\viewpagerindicatorlibrary\src\main\assets"/><source path="E:\Android_text\xyweather\viewpagerindicatorlibrary\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="E:\Android_text\xyweather\viewpagerindicatorlibrary\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\AndroidApp\xyweather\viewpagerindicatorlibrary\src\main\assets"/><source path="E:\AndroidApp\xyweather\viewpagerindicatorlibrary\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="E:\AndroidApp\xyweather\viewpagerindicatorlibrary\src\debug\assets"/></dataSet></merger>

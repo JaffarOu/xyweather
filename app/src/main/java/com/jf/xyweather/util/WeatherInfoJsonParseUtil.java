@@ -1,13 +1,11 @@
 package com.jf.xyweather.util;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.jf.xyweather.base.MyApplications;
-import com.jf.xyweather.customview.DailyWeather;
 import com.jf.xyweather.model.AirQualityIndex;
 import com.jf.xyweather.model.CityBasicInformation;
 import com.jf.xyweather.model.DailyWeatherForecast;
-import com.jf.xyweather.model.RealTimeWeatherForecast;
+import com.jf.xyweather.model.RealTimeWeather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,18 +46,6 @@ public class WeatherInfoJsonParseUtil {
      *          （用来描述我们的请求结果的状态码）
      */
     public String getStatus(){
-//        if(weatherInfoJson == null){
-//            return null;
-//        }
-//        if(realJSONObject == null){
-//            return null;
-//        }
-//        try{
-//            status = realJSONObject.getString("status");
-//        }catch (JSONException e){
-//            MyApplications.showLog("异常--"+getClass().getSimpleName()+"--getStatus()方法异常-"+e.toString());
-//            status = "";
-//        }
         return status;
     }
 
@@ -69,9 +55,6 @@ public class WeatherInfoJsonParseUtil {
      *          （返回空气质量指数对象，如果JSON解析出错，将返回null）
      */
     public AirQualityIndex getAirQualityIndex(){
-//        if(realJSONObject == null || !status.equals(Contact.OK)){
-//            return null;
-//        }
         if( !status.equals(Contact.OK) ){
             return null;
         }
@@ -80,7 +63,7 @@ public class WeatherInfoJsonParseUtil {
             JSONObject aqiJsonObject = realJSONObject.getJSONObject("aqi").getJSONObject("city");
             airQualityIndex = new Gson().fromJson(aqiJsonObject.toString(), AirQualityIndex.class);
         }catch (JSONException e){
-            MyApplications.showLog("异常--"+getClass().getSimpleName()+"--_getCityAqi()方法异常-"+e.toString());
+            MyApplications.showLog(getClass().getSimpleName()+"--getCityAqi()方法异常-"+e.toString());
             return null;
         }
         return airQualityIndex;
@@ -104,17 +87,17 @@ public class WeatherInfoJsonParseUtil {
         return cityBasicInformation;
     }
 
-    public RealTimeWeatherForecast getRealTimeWeather(){
+    public RealTimeWeather getRealTimeWeather(){
 //        if(realJSONObject == null || !status.equals(Contact.OK)){
 //            return null;
 //        }
         if( !status.equals(Contact.OK) ){
             return null;
         }
-        RealTimeWeatherForecast realTimeWeather = null;
+        RealTimeWeather realTimeWeather = null;
         try{
             JSONObject aqiJsonObject = realJSONObject.getJSONObject("now");
-            realTimeWeather = new Gson().fromJson(aqiJsonObject.toString(), RealTimeWeatherForecast.class);
+            realTimeWeather = new Gson().fromJson(aqiJsonObject.toString(), RealTimeWeather.class);
         }catch (JSONException e){
             MyApplications.showLog("异常--"+getClass().getSimpleName()+"--getRealTimeWeather()方法异常-"+e.toString());
             return null;

@@ -14,7 +14,7 @@ import com.jf.xyweather.R;
  * Created by JF on 2016/6/24.
  * A short-term-forecast widget in the "CityWeatherFragment"
  */
-public class RealTimeWeather extends FrameLayout
+public class RealTimeWidget extends FrameLayout
         implements Animation.AnimationListener, Runnable{
 
     private TextView weatherTypeTv;//TextView to show weather type(such as sunny or cloudy)
@@ -38,7 +38,7 @@ public class RealTimeWeather extends FrameLayout
     private static final String SHOW_WIND_AND_HUMILITY = "windAndHumility";
     private static final String SHOW_BODY_FELLING_AND_AIR_PRESSURE = "bodyFellingAndAirPressure";
 
-    public RealTimeWeather(Context context, AttributeSet attrs) {
+    public RealTimeWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
         inflate(context, R.layout.layout_real_time_weather, this);
 

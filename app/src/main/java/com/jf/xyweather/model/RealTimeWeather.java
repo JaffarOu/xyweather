@@ -1,26 +1,28 @@
 package com.jf.xyweather.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jf on 2016/6/23.
  * The real-time weather information
  */
-public class RealTimeWeatherForecast {
+public class RealTimeWeather implements Serializable{
 
 //    private RealTimeWeatherCondition cond;
     private WeatherCondition cond;//real-time weather condition
     private float fl;//body feeling temperature
     private float hum;//humidity(%)
-    private double pcpn;//precipitation rainfall capacity（降雨量）
+    private String pcpn;//precipitation rainfall capacity（mm）
     private float pres;//air pressure
     private int tmp;//temperature （℃）
     private float vis;//visibility
     private Wind wind;//wind condition
 
-    public RealTimeWeatherForecast(){
+    public RealTimeWeather(){
 
     }
 
-    public RealTimeWeatherForecast(WeatherCondition cond, float fl, float hum, double pcpn, float pres, int tmp, float vis, Wind wind) {
+    public RealTimeWeather(WeatherCondition cond, float fl, float hum, String pcpn, float pres, int tmp, float vis, Wind wind) {
         this.cond = cond;
         this.fl = fl;
         this.hum = hum;
@@ -55,11 +57,11 @@ public class RealTimeWeatherForecast {
         this.hum = hum;
     }
 
-    public double getPcpn() {
+    public String getPcpn() {
         return pcpn;
     }
 
-    public void setPcpn(double pcpn) {
+    public void setPcpn(String pcpn) {
         this.pcpn = pcpn;
     }
 
@@ -98,7 +100,7 @@ public class RealTimeWeatherForecast {
     /**
      * real-time weather condition
      */
-    public class WeatherCondition{
+    public class WeatherCondition implements Serializable{
         private int code;//weather code that from the He Feng web server
         private String txt;//weather type
 

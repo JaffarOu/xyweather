@@ -1,10 +1,12 @@
 package com.jf.xyweather.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jf on 2016/6/21.
  * The state of the wind
  */
-public class Wind {
+public class Wind implements Serializable{
 
     private float deg;//degree
     private String dir;//wind direction

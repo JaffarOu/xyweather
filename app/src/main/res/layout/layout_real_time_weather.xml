@@ -4,13 +4,32 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_custom_view_real_time_weather_weather_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+        <!-- weather type-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="@string/real_time_forecast"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
+    </FrameLayout>
     <!--weather type-->
-    <TextView
-        android:id="@+id/tv_custom_view_real_time_weather_weather_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="22sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_custom_view_real_time_weather_weather_type"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="22sp" />-->
 
     <!-- temperature-->
     <TextView

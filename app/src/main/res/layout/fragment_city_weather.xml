@@ -56,12 +56,12 @@
         android:visibility="invisible"/>
 
     <!--short-term weather forecast module at the lower left corner-->
-    <com.jf.xyweather.customview.RealTimeWeather
-        android:id="@+id/short_term_forecast_fragment_city_weather"
+    <com.jf.xyweather.customview.RealTimeWidget
+        android:id="@+id/real_time_forecast_fragment_city_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
-    </com.jf.xyweather.customview.RealTimeWeather>
+    </com.jf.xyweather.customview.RealTimeWidget>
 
     <!-- dividing line-->
     <View
@@ -75,12 +75,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <!-- the view to show today's weather information-->
-        <com.jf.xyweather.customview.DailyWeather
+        <com.jf.xyweather.customview.DailyWeatherWidget
             android:id="@+id/daily_weather_fragment_city_weather_today"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-        </com.jf.xyweather.customview.DailyWeather>
+        </com.jf.xyweather.customview.DailyWeatherWidget>
 
         <!-- dividing line-->
         <View
@@ -89,11 +89,11 @@
             android:background="@color/white_translucent"/>
 
         <!-- The view to show tomorrow's weather information-->
-        <com.jf.xyweather.customview.DailyWeather
+        <com.jf.xyweather.customview.DailyWeatherWidget
             android:id="@+id/daily_weather_fragment_city_weather_tomorrow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-        </com.jf.xyweather.customview.DailyWeather>
+        </com.jf.xyweather.customview.DailyWeatherWidget>
     </LinearLayout>
 </LinearLayout>
