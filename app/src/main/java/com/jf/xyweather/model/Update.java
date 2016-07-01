@@ -5,7 +5,7 @@ package com.jf.xyweather.model;
  */
 public class Update {
 
-    private String loc;//the location time of the data update（数据更新的当地时间）
+    private String loc;//the _location time of the data update（数据更新的当地时间）
     private String utc;//the UTC time of the data update（数据更新的UTC时间）
 
     public String getLoc() {

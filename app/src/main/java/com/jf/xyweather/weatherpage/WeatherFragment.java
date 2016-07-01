@@ -1,5 +1,7 @@
 package com.jf.xyweather.weatherpage;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.View;
@@ -10,6 +12,7 @@ import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.base.fragment.BaseViewPagerFragment;
 import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
 import com.jf.xyweather.customview.CustomTitles;
+import com.jf.xyweather.selectedcity.SelectedCityActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ public class WeatherFragment extends BaseViewPagerFragment implements CustomTitl
 
     private FragmentStatePagerAdapter fragmentViewPagerAdapter;
     private int fragmentNumber = 1;
+    private static final int WHICH_CITY = 1;
 
     @Override
     protected void initView(View layoutView) {
@@ -54,13 +58,25 @@ public class WeatherFragment extends BaseViewPagerFragment implements CustomTitl
     public void onTitleClick(View view, int which) {
         //if click the home button,start the Activity to select city
         if(which == CustomTitles.LEFT_FIRST){
-            MyApplications.showToast((BaseActivity) getActivity(), "the function is not completed yet");
+//            MyApplications.showToast((BaseActivity) getActivity(), "the function is not completed yet");
+            Intent intent = new Intent(getActivity(), SelectedCityActivity.class);
+            startActivityForResult(intent, WHICH_CITY);
             return;
         }
+
         //if click the refresh button,refresh the weather information of current page
         if(which == CustomTitles.RIGHT_FIRST){
             CityWeatherFragment cityWeatherFragment = (CityWeatherFragment) fragmentViewPagerAdapter.instantiateItem(viewPager, viewPager.getCurrentItem());
             cityWeatherFragment.refreshWeather();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(resultCode == Activity.RESULT_OK){
+//            if(requestCode == WHICH_CITY){
+//                viewPager.setCurrentItem(data.getIntExtra());
+//            }
+//        }
     }
 }

@@ -26,6 +26,10 @@
         <activity android:name=".main.WelcomeActivity"/>
 
         <activity android:name=".weatherpage.RealTimeWeatherActivity"/>
+
+        <!-- select city_start-->
+        <activity android:name=".selectedcity.SelectedCityActivity"/>
+        <!-- select city_end-->
     </application>
 
 </manifest>

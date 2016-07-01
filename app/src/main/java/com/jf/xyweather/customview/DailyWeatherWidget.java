@@ -20,7 +20,7 @@ public class DailyWeatherWidget extends FrameLayout{
     private TextView weatherTypeTv;
     private ImageView weatherIconIv;
 
-    private DailyWeatherForecast dailyWeatherForecast;
+//    private DailyWeatherForecast dailyWeatherForecast;
 
     public DailyWeatherWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -33,7 +33,7 @@ public class DailyWeatherWidget extends FrameLayout{
     }
 
     public void setDailyWeather(DailyWeatherForecast dailyWeatherForecast){
-        this.dailyWeatherForecast = dailyWeatherForecast;
+//        this.dailyWeatherForecast = dailyWeatherForecast;
         //set the max temperature and the minimum temperature
         maxAndMinTemperatureTv.setText((int)dailyWeatherForecast.getTmp().getMax()+"/"+(int)dailyWeatherForecast.getTmp().getMin()+"℃");
         weatherTypeTv.setText(dailyWeatherForecast.getCond().getTxt_d());
