@@ -2,6 +2,7 @@ package com.jf.xyweather.util;
 
 /**
  * Created by jf on 2016/6/20.
+ * A call back interface for http request
  */
 public interface HttpListener {
 

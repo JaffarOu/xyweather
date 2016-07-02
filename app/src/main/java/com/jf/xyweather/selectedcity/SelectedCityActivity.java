@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Created by jf on 2016/6/30.
- * This Activity will display all the selected name of the city
+ * This Activity will display all of city that selected by user
  */
 public class SelectedCityActivity extends BaseActivity
         implements CustomTitles.OnTitleClickListener, AdapterView.OnItemClickListener{
