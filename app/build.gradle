@@ -27,4 +27,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.code.gson:gson:2.7'
     compile project(':Volley')
+    compile project(':AMap_Location_V2.6.0_20160628')
 }

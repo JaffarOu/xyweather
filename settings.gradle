@@ -1,2 +1,2 @@
-include ':app', ':Volley'
+include ':app', ':Volley', ':AMap_Location_V2.6.0_20160628'
 include ':viewpagerindicatorlibrary'

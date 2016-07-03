@@ -2,6 +2,7 @@ package com.jf.xyweather.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -34,31 +35,14 @@ public class CustomTitles extends FrameLayout implements View.OnClickListener{
         inflate(context, R.layout.custom_view_custom_titles, this);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomTitles);
 
-        //找到各控件
+        //find every child view
         leftFirstIv = (ImageView)findViewById(R.id.iv_custom_titles_left_first);
         leftSecondIv = (ImageView)findViewById(R.id.iv_custom_titles_left_second);
         titleTv = (TextView)findViewById(R.id.tv_custom_titles_title);
         rightFirstIv = (ImageView)findViewById(R.id.iv_custom_titles_right_first);
         rightSecondIv = (ImageView)findViewById(R.id.iv_custom_titles_right_second);
 
-        //initial the resource for every ImageView
-//        if(leftFirstIv.getVisibility() == VISIBLE){
-//            int leftFirstImageSrcId = typedArray.getResourceId(R.styleable.CustomTitles_leftFirstImageSrc, R.drawable.ic_xyweather_launcher);
-//            leftFirstIv.setImageResource(leftFirstImageSrcId);
-//        }
-//        if(leftSecondIv.getVisibility() == VISIBLE){
-//            int leftSecondImageSrcId = typedArray.getResourceId(R.styleable.CustomTitles_leftSecondImageSrc, R.drawable.ic_xyweather_launcher);
-//            leftSecondIv.setImageResource(leftSecondImageSrcId);
-//        }
-//        if(rightFirstIv.getVisibility() == VISIBLE){
-//            int rightFirstImageSrcId = typedArray.getResourceId(R.styleable.CustomTitles_rightFirstImageSrc, R.drawable.ic_xyweather_launcher);
-//            rightFirstIv.setImageResource(rightFirstImageSrcId);
-//        }
-//        if(rightSecondIv.getVisibility() == VISIBLE){
-//            int rightSecondImageSrcId = typedArray.getResourceId(R.styleable.CustomTitles_rightSecondImageSrc, R.drawable.ic_xyweather_launcher);
-//            rightSecondIv.setImageResource(rightSecondImageSrcId);
-//        }
-        //initial the title's' text
+        //initial the title's text
         String titleString = typedArray.getString(R.styleable.CustomTitles_titleText);
         titleTv.setText(titleString);
 
@@ -127,19 +111,19 @@ public class CustomTitles extends FrameLayout implements View.OnClickListener{
         }
     }
 
-    /**
-     * set the visibility for the ImageView in the CustomTitles
-     * @param leftFirst set the visibility for the ImageView on the left first
-     * @param leftSecond set the visibility for the ImageView on the left second
-     * @param rightFirst set the visibility for the ImageView on the right first
-     * @param rightSecond set the visibility for the ImageView on the right second
-     */
-    public void setImageViewVisibility(int leftFirst, int leftSecond, int rightFirst, int rightSecond){
-        leftSecondIv.setVisibility(leftFirst);
-        leftSecondIv.setVisibility(leftSecond);
-        rightFirstIv.setVisibility(rightFirst);
-        rightSecondIv.setVisibility(rightSecond);
-    }
+//    /**
+//     * set the visibility for the ImageView in the CustomTitles
+//     * @param leftFirst set the visibility for the ImageView on the left first
+//     * @param leftSecond set the visibility for the ImageView on the left second
+//     * @param rightFirst set the visibility for the ImageView on the right first
+//     * @param rightSecond set the visibility for the ImageView on the right second
+//     */
+//    public void setImageViewVisibility(int leftFirst, int leftSecond, int rightFirst, int rightSecond){
+//        leftSecondIv.setVisibility(leftFirst);
+//        leftSecondIv.setVisibility(leftSecond);
+//        rightFirstIv.setVisibility(rightFirst);
+//        rightSecondIv.setVisibility(rightSecond);
+//    }
 
     public void setOnTitleClickListener(OnTitleClickListener listener){
         if(listener == null){

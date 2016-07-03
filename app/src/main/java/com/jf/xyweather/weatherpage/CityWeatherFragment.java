@@ -17,9 +17,10 @@ import com.jf.xyweather.base.fragment.BaseFragment;
 import com.jf.xyweather.customview.DailyWeatherWidget;
 import com.jf.xyweather.customview.RealTimeWidget;
 import com.jf.xyweather.model.AirQualityIndex;
+import com.jf.xyweather.model.CityName;
 import com.jf.xyweather.model.DailyWeatherForecast;
 import com.jf.xyweather.model.RealTimeWeather;
-import com.jf.xyweather.util.HttpListener;
+import com.jf.xyweather.util.HttpJSONListener;
 import com.jf.xyweather.util.HttpRequestUtils;
 import com.jf.xyweather.util.WeatherInfoJsonParseUtil;
 
@@ -31,21 +32,20 @@ import java.util.List;
  * The weather information about a city
  */
 public class CityWeatherFragment extends BaseFragment
-        implements View.OnClickListener, HttpListener {
+        implements View.OnClickListener, HttpJSONListener {
 
-    //name of the city that should be query the weather information
-    private String cityName;
-
-    //view in this fragment
-    private ProgressBar progressBar;//it will be show during the work thread running
-    private TextView airQualityIndexTv;//city's air quality index
+    //variables of view
+    private View refreshHint;////it will be show during the work thread running
+    private TextView airQualityIndexTv;//air quality index of city
     private RealTimeWidget realTimeWidget;//real-time weather forecast widget
-    private DailyWeatherWidget todayDailyWeatherWidget;
-    private DailyWeatherWidget tomorrowDailyWeatherWidget;
-    private RealTimeWeather realTimeWeather;
+    private DailyWeatherWidget todayDailyWeatherWidget;//daily weather forecast of today
+    private DailyWeatherWidget tomorrowDailyWeatherWidget;//daily weather forecast of tomorrow
 
-    private RequestQueue requestQueue;
+    //other variables
+    private RealTimeWeather realTimeWeather;
+    private RequestQueue requestQueue;//request queue of volley
     private boolean isHttpFinished = true;//To identity whether http request is finished or not
+    private CityName cityName;//name of city that this fragment will query the weather information
 
     @Override
     protected int getLayoutViewId() {
@@ -56,7 +56,12 @@ public class CityWeatherFragment extends BaseFragment
     protected void initExtra() {
         //determined which city we need to query the weather information,,the default city is "guangzhou"
         Bundle arguments = getArguments();
-        cityName = arguments == null ? "guangzhou" : arguments.getString("cityName", "guangzhou");
+        if(arguments != null){
+            cityName = (CityName)arguments.getSerializable("cityName");
+        }else{
+            //if arguments == null,the city we query will determined by "GaoDe"
+            cityName = new CityName("广州", "guangzhou");
+        }
 
         //initial the requestQueue in this Fragment
         requestQueue = Volley.newRequestQueue(getActivity());
@@ -65,7 +70,8 @@ public class CityWeatherFragment extends BaseFragment
     @Override
     protected void initView(View layoutView) {
         //find view
-        progressBar = (ProgressBar) layoutView.findViewById(R.id.pb_fragment_city_weather);
+//        progressBar = (ProgressBar) layoutView.findViewById(R.id.pb_fragment_city_weather);
+        refreshHint = layoutView.findViewById(R.id.ll_fragment_city_weather_refresh_hint);
         airQualityIndexTv = (TextView) layoutView.findViewById(R.id.tv_fragment_city_weather_air_quality_index);
         realTimeWidget = (RealTimeWidget) layoutView.findViewById(R.id.real_time_forecast_fragment_city_weather);
         todayDailyWeatherWidget = (DailyWeatherWidget) layoutView.findViewById(R.id.daily_weather_fragment_city_weather_today);
@@ -77,6 +83,8 @@ public class CityWeatherFragment extends BaseFragment
         todayDailyWeatherWidget.setOnClickListener(this);
         tomorrowDailyWeatherWidget.setOnClickListener(this);
         realTimeWidget.setOnClickListener(this);
+
+        refreshWeather();
     }
 
     @Override
@@ -114,14 +122,42 @@ public class CityWeatherFragment extends BaseFragment
      */
     public void refreshWeather() {
         if (isHttpFinished) {
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
+            refreshHint.setVisibility(View.VISIBLE);
             isHttpFinished = false;//change the flag
-            HttpRequestUtils.queryWeatherByCityName(cityName, this, requestQueue);
+            HttpRequestUtils.queryWeatherByCityName(cityName.getCityPinYinName(), this, requestQueue);
         }else{
             MyApplications.showToast((BaseActivity)getActivity(), "正在拼命拉取天气信息，稍等哦亲");
         }
     }
 
+    /**
+     * return the name of city that this fragment is showing
+     * @return name of city
+     */
+    public CityName getCityName(){
+        return cityName;
+    }
+
+    /*override the method of HttpListener_start*/
+    @Override
+    public void onFinish(String result) {
+//        progressBar.setVisibility(View.GONE);
+        refreshHint.setVisibility(View.GONE);
+        MyApplications.showToast((BaseActivity)getActivity(), "已获取到最新天气信息");
+        setWeatherInformation(result);
+        isHttpFinished = true;
+    }
+
+    @Override
+    public void onError(String error) {
+        isHttpFinished = true;
+        refreshHint.setVisibility(View.GONE);
+        MyApplications.showToast((BaseActivity)getActivity(), "网络异常");
+    }
+    /*override the method of HttpListener_end*/
+
+    //set various of weather information according JSONString
     private void setWeatherInformation(String JSON) {
         //get the JSON parse tool
         WeatherInfoJsonParseUtil weatherInfoJsonParseUtil = new WeatherInfoJsonParseUtil(JSON);
@@ -156,27 +192,5 @@ public class CityWeatherFragment extends BaseFragment
             tomorrowDailyWeatherWidget.setWhichDay("明天");
             tomorrowDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(1));
         }
-    }
-
-    /*override the method of HttpListener_start*/
-    @Override
-    public void onFinish(String result) {
-        progressBar.setVisibility(View.GONE);
-        MyApplications.showToast((BaseActivity)getActivity(), "已获取到最新天气信息");
-        setWeatherInformation(result);
-        isHttpFinished = true;
-    }
-
-    @Override
-    public void onError(String error) {
-        isHttpFinished = true;
-        MyApplications.showToast((BaseActivity)getActivity(), error);
-    }
-
-    @Override
-    public void onNoResponse() {
-        isHttpFinished = true;
-    }
-    /*override the method of HttpListener_end*/
-
+    }//setWeatherInformation()
 }

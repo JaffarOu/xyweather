@@ -9,16 +9,8 @@ import com.jf.xyweather.base.MyApplications;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Method;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by jf on 2016/6/20.
@@ -29,43 +21,43 @@ public class HttpRequestUtils {
     /**
      * query weather information of a city according name of the city
      * @param cityName
-     * @param httpListener
+     * @param httpJSONListener
      * @param requestQueue
      */
-    public static void queryWeatherByCityName(String cityName, HttpListener httpListener, RequestQueue requestQueue){
+    public static void queryWeatherByCityName(String cityName, HttpJSONListener httpJSONListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         //put the name of city and developer's key of "He Feng weather"
         parameter.put("city", cityName);
         parameter.put("key", Contact.API_KEY);
-        sendHttpGetRequest(Contact.CITY_WEATHER_URL, parameter, httpListener, requestQueue);
+        sendHttpGetForJSON(Contact.CITY_WEATHER_URL, parameter, httpJSONListener, requestQueue);
     }
 
-    public static void queryWeatherByCityIp(String cityIp, HttpListener httpListener, RequestQueue requestQueue){
+    public static void queryWeatherByCityIp(String cityIp, HttpJSONListener httpJSONListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("cityip",cityIp);
         parameter.put("key", Contact.API_KEY);
-        sendHttpGetRequest(Contact.CITY_WEATHER_URL, parameter, httpListener, requestQueue);
+        sendHttpGetForJSON(Contact.CITY_WEATHER_URL, parameter, httpJSONListener, requestQueue);
     }
 
-    public static void queryCityByType(String cityType, HttpListener httpListener, RequestQueue requestQueue){
+    public static void queryCityByType(String cityType, HttpJSONListener httpListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("search", cityType);
         parameter.put("key" ,Contact.API_KEY);
-        sendHttpGetRequest(Contact.CITY_TYPE_URL, parameter, httpListener, requestQueue);
+        sendHttpGetForJSON(Contact.CITY_TYPE_URL, parameter, httpListener, requestQueue);
     }
 
-    public static void sendHttpPostRequest(String url, HttpListener httpListener, Map<String, String> requestParameter){
+    public static void sendHttpPostForJSON(String url, HttpJSONListener httpListener, Map<String, String> requestParameter){
 
     }
 
     /**
-     * send a Http request using GET method
+     * send a Http request using GET method to get JSON string
      * @param url url that need to access
      * @param parameter parameter of GET method
      * @param httpListener callback interface of http request
      * @param requestQueue requestQueue from Volley
      */
-    public static void sendHttpGetRequest(String url, Map<String, String> parameter, final HttpListener httpListener, RequestQueue requestQueue){
+    public static void sendHttpGetForJSON(String url, Map<String, String> parameter, final HttpJSONListener httpListener, RequestQueue requestQueue){
         String finalUrl;
         if(parameter == null){
             finalUrl = url;
@@ -82,7 +74,7 @@ public class HttpRequestUtils {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        MyApplications.showLog(HttpRequestUtils.class.getSimpleName()+"--sendHttpGetRequest()方法异常");
+                        MyApplications.showLog(HttpRequestUtils.class.getSimpleName()+"--sendHttpGetForJSON()方法异常");
                         httpListener.onError(volleyError.getMessage());
                     }
                 }

@@ -2,15 +2,15 @@ package com.jf.xyweather.util;
 
 /**
  * Created by jf on 2016/6/20.
- * A call back interface for http request
+ * A call back interface of a http request that send for get JSON
  */
-public interface HttpListener {
+public interface HttpJSONListener {
 
     /**
      * call when http request finish
-     * @param result the result from web server
+     * @param JSONString the JSONString from web server
      */
-    public void onFinish(String result);
+    public void onFinish(String JSONString);
 
     /**
      * call when http request occur error
@@ -18,8 +18,4 @@ public interface HttpListener {
      */
     public void onError(String error);
 
-    /**
-     * call when web server no response the http request
-     */
-    public void onNoResponse();
 }
