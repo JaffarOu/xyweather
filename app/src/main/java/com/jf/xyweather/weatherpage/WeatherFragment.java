@@ -129,27 +129,38 @@ public class WeatherFragment extends BaseViewPagerFragment implements CustomTitl
 
         @Override
         protected void onPostExecute(List<CityName> cityNames) {
-            if(cityNames == null){
-                return;
-            }
             WeatherFragment weatherFragment = weakReference.get();
             if(weatherFragment == null){
                 return;
             }
-            //add the first fragment to the list,the weather information of this fragment determined by "GaoDe" locate
-            List<Fragment> fragmentList = new ArrayList<>(cityNames.size()+1);
-            fragmentList.add(new CityWeatherFragment());
-
-            //initial the list of fragment according the names of cities
-            CityWeatherFragment cityWeatherFragment;
-            Bundle bundle;
-            for(CityName cityName:cityNames){
-                bundle = new Bundle();
-                bundle.putSerializable("cityName", cityName);
-                cityWeatherFragment = new CityWeatherFragment();
-                cityWeatherFragment.setArguments(bundle);
-                fragmentList.add(cityWeatherFragment);
+            //set the list of fragment for the BaseViewPagerAdapter and keep the name of city
+            List<Fragment> fragmentList;
+            if(cityNames == null){
+                //if there is not thing in database,just load one fragment for the default city
+                fragmentList = new ArrayList<>(1);
+                fragmentList.add(new CityWeatherFragment());
+                //keep the data of cityNameList
+                weatherFragment.cityNameList = new ArrayList<>(1);
+                weatherFragment.cityNameList.add(new CityName("广州", "guangzhou"));//"guangzhou" is the default city
+            }else{
+                fragmentList = new ArrayList<>(cityNames.size()+1);
+                fragmentList.add(new CityWeatherFragment());
+                //initial the list of fragment according the names of cities
+                CityWeatherFragment cityWeatherFragment;
+                Bundle bundle;
+                for(CityName cityName:cityNames){
+                    bundle = new Bundle();
+                    bundle.putSerializable("cityName", cityName);
+                    cityWeatherFragment = new CityWeatherFragment();
+                    cityWeatherFragment.setArguments(bundle);
+                    fragmentList.add(cityWeatherFragment);
+                }
+                weatherFragment.cityNameList = new ArrayList<>(cityNames.size()+1);
+                //keep the data of cityNameList
+                weatherFragment.cityNameList.add(new CityName("广州", "guangzhou"));
+                weatherFragment.cityNameList.addAll(cityNames);
             }
+
             //hide the CirclePageIndicator if it just one Fragment in ViewPager
             if(fragmentList.size() == 1){
                 weatherFragment.circlePageIndicator.setVisibility(View.GONE);
@@ -157,11 +168,6 @@ public class WeatherFragment extends BaseViewPagerFragment implements CustomTitl
             //update adapter of Viewpager
             weatherFragment.baseViewPagerAdapter.setFragmentList(fragmentList);
             weatherFragment.baseViewPagerAdapter.notifyDataSetChanged();
-
-            //keep the data of cityNameList
-            weatherFragment.cityNameList = new ArrayList<>(cityNames.size()+1);
-            weatherFragment.cityNameList.add(new CityName("广州", "guangzhou"));
-            weatherFragment.cityNameList.addAll(cityNames);
         }//onPostExecute()
 
     }//MyAsyncTask
