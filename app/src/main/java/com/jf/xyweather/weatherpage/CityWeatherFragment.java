@@ -2,10 +2,10 @@ package com.jf.xyweather.weatherpage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ProgressBar;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -20,11 +20,11 @@ import com.jf.xyweather.model.AirQualityIndex;
 import com.jf.xyweather.model.CityName;
 import com.jf.xyweather.model.DailyWeatherForecast;
 import com.jf.xyweather.model.RealTimeWeather;
+import com.jf.xyweather.model.Wind;
 import com.jf.xyweather.util.HttpJSONListener;
 import com.jf.xyweather.util.HttpRequestUtils;
 import com.jf.xyweather.util.WeatherInfoJsonParseUtil;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**

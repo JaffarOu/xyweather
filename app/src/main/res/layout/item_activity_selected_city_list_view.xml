@@ -4,35 +4,24 @@
     android:layout_height="wrap_content" android:padding="8dp"
     android:gravity="center_vertical">
 
-    <!-- An icon to show the weather information of city-->
-    <ImageView
-        android:id="@+id/iv_item_activity_selected_city_weather_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <!-- An icon to identity if this city is our stay in-->
     <ImageView
-        android:id="@+id/iv_item_activity_selected_city_location"
+        android:id="@+id/iv_item_activity_selected_city_list_view_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_location"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:visibility="gone"/>
 
     <!-- City name-->
     <TextView
-        android:id="@+id/tv_item_activity_selected_city_city_name"
-        android:layout_width="0dp"
+        android:id="@+id/tv_item_activity_selected_city_list_view_city_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:textSize="24sp"
-        android:layout_weight="1" />
+        android:textColor="@color/black_translucent"/>
 
-    <!-- Temperature of city-->
-    <TextView
-        android:id="@+id/tv_item_activity_selected_city_temperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"/>
 </LinearLayout>

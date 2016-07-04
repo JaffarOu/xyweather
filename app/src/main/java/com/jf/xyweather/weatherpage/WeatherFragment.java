@@ -1,25 +1,24 @@
 package com.jf.xyweather.weatherpage;
 
+import android.app.Activity;
+import android.app.SharedElementCallback;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.jf.xyweather.R;
-import com.jf.xyweather.base.fragment.BaseFragment;
 import com.jf.xyweather.base.fragment.BaseViewPagerFragment;
 import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
 import com.jf.xyweather.customview.CustomTitles;
 import com.jf.xyweather.model.CityName;
+import com.jf.xyweather.model.SelectedCity;
 import com.jf.xyweather.selectedcity.SelectedCityActivity;
 import com.jf.xyweather.util.SelectedCityHelper;
-import com.viewpagerindicator.CirclePageIndicator;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +26,21 @@ import java.util.List;
 /**
  * Created by jf on 2016/6/16
  * The "weather page" Fragment in the MainActivity.
+ * Its two primary functions:
+ * 1>locating which city that we stay in.
+ * 2>By reading the database to obtain all the cities that selected by user
+ * Two functions on above will determined how many CityWeatherFragment should be loaded on this WeatherFragment
  */
-public class WeatherFragment extends BaseViewPagerFragment
-        implements CustomTitles.OnTitleClickListener, ViewPager.OnPageChangeListener{
+public class WeatherFragment extends BaseViewPagerFragment implements CustomTitles.OnTitleClickListener{
 
     //adapter for ViewPager to load Fragment
     private BaseViewPagerAdapter baseViewPagerAdapter;
-
     //An AsyncTask to read the list of city that we should query the weather information
     private MyAsyncTasks myAsyncTasks;
-
     //other variables
-    private static final int REQUEST_CODE_WHICH_CITY = 1;
+    private static final int REQUEST_CODE_START_SELECTED_CITY_ACTIVITY = 1;
     private String currentCity = "广州市";
+    private List<CityName> cityNameList;//used to send selected city to the
 
     @Override
     protected void initView(View layoutView) {
@@ -47,7 +48,6 @@ public class WeatherFragment extends BaseViewPagerFragment
 
         //initial the title
         customTitles.setTitleText(currentCity);
-        customTitles.setTitleTextColor(getResources().getColor(R.color.white));
         customTitles.setImageViewResource(CustomTitles.LEFT_FIRST, R.drawable.ic_home_page);
         customTitles.setImageViewResource(CustomTitles.RIGHT_FIRST, R.drawable.ic_refresh);
         customTitles.setOnTitleClickListener(this);
@@ -71,7 +71,8 @@ public class WeatherFragment extends BaseViewPagerFragment
         //if click the home button,start the Activity to select city
         if(which == CustomTitles.LEFT_FIRST){
             Intent intent = new Intent(getActivity(), SelectedCityActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_WHICH_CITY);
+            intent.putExtra(SelectedCityActivity.KEY_SELECTED_CITY_LIST, (Serializable)cityNameList);
+            startActivityForResult(intent, REQUEST_CODE_START_SELECTED_CITY_ACTIVITY);
             return;
         }
 
@@ -96,6 +97,21 @@ public class WeatherFragment extends BaseViewPagerFragment
         myAsyncTasks.cancel(true);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_START_SELECTED_CITY_ACTIVITY){
+            if(resultCode == Activity.RESULT_OK){
+                //show the city that selected by user
+                if(data.getAction().equals(SelectedCityActivity.ACTION_SELECT_CITY)){
+                    circlePageIndicator.setCurrentItem(data.getIntExtra(SelectedCityActivity.SELECT_POSITION, viewPager.getCurrentItem()));
+                }else if(data.getAction().equals(SelectedCityActivity.ACTION_DELETE_CITY)){
+                    //delete the Fragment of city that selected by user
+                }
+            }
+        }
+    }
+
     //An AsyncTask to read the list of city
     private static class MyAsyncTasks extends AsyncTask<Void,Void,List<CityName>>{
 
@@ -107,7 +123,7 @@ public class WeatherFragment extends BaseViewPagerFragment
 
         @Override
         protected List<CityName> doInBackground(Void... params) {
-            //get the names of all cities we need to query weather information
+            //get the names of all cities that we need to query weather information
             return new SelectedCityHelper().getCityNameList();
         }
 
@@ -141,6 +157,11 @@ public class WeatherFragment extends BaseViewPagerFragment
             //update adapter of Viewpager
             weatherFragment.baseViewPagerAdapter.setFragmentList(fragmentList);
             weatherFragment.baseViewPagerAdapter.notifyDataSetChanged();
+
+            //keep the data of cityNameList
+            weatherFragment.cityNameList = new ArrayList<>(cityNames.size()+1);
+            weatherFragment.cityNameList.add(new CityName("广州", "guangzhou"));
+            weatherFragment.cityNameList.addAll(cityNames);
         }//onPostExecute()
 
     }//MyAsyncTask

@@ -9,29 +9,29 @@ import android.widget.TextView;
 
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
-import com.jf.xyweather.model.SelectedCity;
 
 import java.util.List;
 
 /**
  * Created by jf on 2016/7/1.
+ * The Adapter of ListView of SelectedCityActivity
  */
 public class SelectedCityAdapter extends BaseAdapter{
 
-    private List<SelectedCity> selectedCityList;
+    private List<String> selectedCityNameList;
 
-    public SelectedCityAdapter(List<SelectedCity> selectedCityList){
-        this.selectedCityList = selectedCityList;
+    public SelectedCityAdapter(List<String> selectedCityNameList){
+        this.selectedCityNameList = selectedCityNameList;
     }
 
     @Override
     public int getCount() {
-        return selectedCityList.size();
+        return selectedCityNameList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return selectedCityList.get(position);
+        return selectedCityNameList.get(position);
     }
 
     @Override
@@ -40,10 +40,8 @@ public class SelectedCityAdapter extends BaseAdapter{
     }
 
     private class ViewHolder {
-        ImageView weatherIv;
         ImageView locationIv;
         TextView cityNameTv;
-        TextView temperatureTv;
     }
 
     @Override
@@ -51,17 +49,13 @@ public class SelectedCityAdapter extends BaseAdapter{
         ViewHolder viewHolder;
         if(convertView == null){
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(MyApplications.getContext()).inflate(R.layout.item_activity_selected_city, null);
-            viewHolder.weatherIv = (ImageView)convertView.findViewById(R.id.iv_item_activity_selected_city_weather_icon);
-            viewHolder.locationIv = (ImageView)convertView.findViewById(R.id.iv_item_activity_selected_city_location);
-            viewHolder.cityNameTv = (TextView)convertView.findViewById(R.id.tv_item_activity_selected_city_city_name);
-            viewHolder.temperatureTv = (TextView)convertView.findViewById(R.id.tv_item_activity_selected_city_temperature);
+            convertView = LayoutInflater.from(MyApplications.getContext()).inflate(R.layout.item_activity_selected_city_list_view, null);
+            viewHolder.locationIv = (ImageView)convertView.findViewById(R.id.iv_item_activity_selected_city_list_view_location);
+            viewHolder.cityNameTv = (TextView)convertView.findViewById(R.id.tv_item_activity_selected_city_list_view_city_name);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
-        //Set weather icon according the weather condition of city
-        viewHolder.weatherIv.setImageResource(getWeatherIcon(selectedCityList.get(position).getCityWeatherCondition()));
         //Showing the location icon if it is the first city
         if(position == 0){
             viewHolder.locationIv.setImageResource(R.drawable.ic_location);
@@ -69,8 +63,7 @@ public class SelectedCityAdapter extends BaseAdapter{
         }else{
             viewHolder.locationIv.setVisibility(View.GONE);
         }
-        viewHolder.cityNameTv.setText(selectedCityList.get(position).getCityName());
-        viewHolder.temperatureTv.setText(selectedCityList.get(position).getTemperature()+"℃");
+        viewHolder.cityNameTv.setText(selectedCityNameList.get(position));
         return convertView;
     }
 

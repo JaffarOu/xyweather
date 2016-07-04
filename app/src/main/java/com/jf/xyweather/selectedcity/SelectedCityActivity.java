@@ -1,5 +1,6 @@
 package com.jf.xyweather.selectedcity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -8,7 +9,7 @@ import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.customview.CustomTitles;
-import com.jf.xyweather.model.SelectedCity;
+import com.jf.xyweather.model.CityName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,12 @@ import java.util.List;
 public class SelectedCityActivity extends BaseActivity
         implements CustomTitles.OnTitleClickListener, AdapterView.OnItemClickListener{
 
-    private List<SelectedCity> selectedCityList;
+    private List<CityName> cityNameList;
     public static final String KEY_SELECTED_CITY_LIST = "keySelectedCityList";
+
+    public static final String ACTION_SELECT_CITY = "action_select_city";
+    public static final String ACTION_DELETE_CITY = "action_delete_city";
+    public static final String SELECT_POSITION = "selectPosition";
 
     @Override
     protected int getContentViewId() {
@@ -30,13 +35,7 @@ public class SelectedCityActivity extends BaseActivity
 
     @Override
     protected void initExtra() {
-        selectedCityList = (List<SelectedCity>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
-        //make some data for test
-        selectedCityList = new ArrayList<>(4);
-        selectedCityList.add(new SelectedCity("天气晴朗", "广州", "32/24"));
-        selectedCityList.add(new SelectedCity("晴转多云", "深圳", "44/16"));
-        selectedCityList.add(new SelectedCity("有雷阵雨", "珠海", "32/18"));
-        selectedCityList.add(new SelectedCity("下冰雹啦", "江门", "32/-4"));
+        cityNameList = (List<CityName>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
     }
 
     @Override
@@ -50,9 +49,13 @@ public class SelectedCityActivity extends BaseActivity
 
         //initial the "ListView"
         ListView listView = (ListView)findViewById(R.id.lv_activity_selected_city_city_list);
-        if(selectedCityList != null){
+        if(cityNameList != null){
             listView.setOnItemClickListener(this);
-            listView.setAdapter(new SelectedCityAdapter(selectedCityList));
+            List<String> cityNames = new ArrayList<>(cityNameList.size());
+            for(CityName cityName:cityNameList){
+                cityNames.add(cityName.getCityChineseName());
+            }
+            listView.setAdapter(new SelectedCityAdapter(cityNames));
         }
     }
 
@@ -77,6 +80,10 @@ public class SelectedCityActivity extends BaseActivity
     //override the method of OnItemClickListener
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        //telling the WeatherFragment that which city used by user
+        Intent intent = new Intent(ACTION_SELECT_CITY);
+        intent.putExtra(SELECT_POSITION, position);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
