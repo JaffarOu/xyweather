@@ -14,18 +14,27 @@ public class BaseViewPagerAdapter extends FragmentStatePagerAdapter{
 
     private List<Fragment> fragmentList;
 
+    public BaseViewPagerAdapter(FragmentManager fm){
+        super(fm);
+    }
+
     public BaseViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList){
         super(fm);
         this.fragmentList = fragmentList;
     }
 
     @Override
-    public Fragment getItem(int position) {
-        return fragmentList.get(position);
+    public int getCount() {
+        return fragmentList == null? 0: fragmentList.size();
     }
 
     @Override
-    public int getCount() {
-        return fragmentList.size();
+    public Fragment getItem(int position) {
+        return fragmentList == null? null : fragmentList.get(position);
     }
+
+    public void setFragmentList(List<Fragment> fragmentList){
+        this.fragmentList = fragmentList;
+    }
+
 }

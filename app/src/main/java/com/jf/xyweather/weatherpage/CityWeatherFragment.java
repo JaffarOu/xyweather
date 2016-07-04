@@ -144,7 +144,7 @@ public class CityWeatherFragment extends BaseFragment
     public void onFinish(String result) {
 //        progressBar.setVisibility(View.GONE);
         refreshHint.setVisibility(View.GONE);
-        MyApplications.showToast((BaseActivity)getActivity(), "已获取到最新天气信息");
+//        MyApplications.showToast((BaseActivity)getActivity(), "已获取到最新天气信息");
         setWeatherInformation(result);
         isHttpFinished = true;
     }
