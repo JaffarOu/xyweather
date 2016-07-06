@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--the layout of the custom view "DailyWeather"-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:padding="8dp">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
 
     <!--which day?today or tomorrow or other-->
     <TextView
@@ -37,4 +36,4 @@
         android:layout_below="@id/tv_layout_daily_weather_max_and_min_temperature"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
-</RelativeLayout>
+</merge>

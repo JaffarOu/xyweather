@@ -7,15 +7,16 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jf.xyweather.R;
 
 /**
  * Created by jf on 2016/6/16.
- * 应用所用的自定义标题
+ * The Custom title of this app
  */
-public class CustomTitles extends FrameLayout implements View.OnClickListener{
+public class CustomTitles extends RelativeLayout implements View.OnClickListener{
 
     private TextView titleTv;//title text
     private ImageView leftFirstIv;//the first ImageView from left

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--The layout of the custom title-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--The layout of the custom title,this layout used RelativeLayout as ViewGroup-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <!-- the first icon from the left-->
@@ -37,4 +37,4 @@
         style="@style/custom_view_custom_titles_image_view"
         android:layout_toLeftOf="@id/iv_custom_titles_right_first"
         android:layout_toStartOf="@id/iv_custom_titles_right_first" />
-</RelativeLayout>
+</merge>

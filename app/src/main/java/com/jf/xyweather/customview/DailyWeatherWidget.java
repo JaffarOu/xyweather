@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jf.xyweather.R;
@@ -13,7 +14,7 @@ import com.jf.xyweather.model.DailyWeatherForecast;
  * Created by JF on 2016/6/25.
  * daily weather information widget on the "CityWeatherFragment"
  */
-public class DailyWeatherWidget extends FrameLayout{
+public class DailyWeatherWidget extends RelativeLayout{
 
     private TextView whichTv;
     private TextView maxAndMinTemperatureTv;
@@ -24,6 +25,7 @@ public class DailyWeatherWidget extends FrameLayout{
 
     public DailyWeatherWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setPadding(8, 8, 8, 8);
         inflate(context, R.layout.layout_daily_weather, this);
         //find view
         whichTv = (TextView) findViewById(R.id.tv_layout_daily_weather_which_day);

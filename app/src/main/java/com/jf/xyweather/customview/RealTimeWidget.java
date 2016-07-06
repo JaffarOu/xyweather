@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jf.xyweather.R;
@@ -14,7 +15,7 @@ import com.jf.xyweather.R;
  * Created by JF on 2016/6/24.
  * A short-term-forecast widget in the "CityWeatherFragment"
  */
-public class RealTimeWidget extends FrameLayout
+public class RealTimeWidget extends LinearLayout
         implements Animation.AnimationListener, Runnable{
 
     private TextView weatherTypeTv;//TextView to show weather type(such as sunny or cloudy)
@@ -40,6 +41,7 @@ public class RealTimeWidget extends FrameLayout
 
     public RealTimeWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setOrientation(VERTICAL);
         inflate(context, R.layout.layout_real_time_weather, this);
 
         weatherTypeTv = (TextView) findViewById(R.id.tv_custom_view_real_time_weather_weather_type);
