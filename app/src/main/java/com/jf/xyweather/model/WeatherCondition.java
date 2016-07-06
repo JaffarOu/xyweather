@@ -1,10 +1,12 @@
 package com.jf.xyweather.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jf on 2016/6/21.
  * the weather of a day
  */
-public class WeatherCondition {
+public class WeatherCondition implements Serializable{
 
     private int code_d;//weather code of the day
     private int code_n;//weather code of the night

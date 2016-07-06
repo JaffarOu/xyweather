@@ -74,11 +74,12 @@ public class HttpRequestUtils {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        MyApplications.showLog(HttpRequestUtils.class.getSimpleName()+"--sendHttpGetForJSON()方法异常");
+                        MyApplications.showLog(HttpRequestUtils.class.getSimpleName()+"--sendHttpGetForJSON()方法异常--message:"+volleyError.getMessage());
                         httpListener.onError(volleyError.getMessage());
                     }
                 }
         );
+        MyApplications.showLog(finalUrl);
         requestQueue.add(jsonObjectRequest);
     }
 

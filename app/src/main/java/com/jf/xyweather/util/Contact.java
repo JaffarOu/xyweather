@@ -18,7 +18,7 @@ public class Contact {
     /*http access__start*/
 
 
-    /*the code that describe the result of query weather information from "He Feng weather"__start*/
+    /*The code that described the weather query results returned from "He Feng weather"__start*/
     /**means request successfully*/
     public static final String OK = "ok";
 
@@ -36,5 +36,9 @@ public class Contact {
 
     /**means we have not permission to request weather information*/
     public static final String PERMISSION_DENIED = "permission denied";
-    /*the code that describe the result of query weather information from "He Feng weather"__end*/
+    /*The code that described the weather query results returned from "He Feng weather"__end*/
+
+    /*The String that described the condition of weather__start*/
+
+    /*The String that described the condition of weather__end*/
 }

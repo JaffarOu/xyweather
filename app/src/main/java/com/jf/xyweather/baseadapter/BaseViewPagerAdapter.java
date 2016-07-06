@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class BaseViewPagerAdapter extends FragmentStatePagerAdapter{
 
-    private List<Fragment> fragmentList;
+    protected List<Fragment> fragmentList;
 
     public BaseViewPagerAdapter(FragmentManager fm){
         super(fm);

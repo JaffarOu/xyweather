@@ -2,22 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jf.xyweather">
 
-    <!-- add the network access-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- add the network access -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.jf.xyweather.base.MyApplications"
+        android:name=".base.MyApplications"
         android:allowBackup="true"
         android:icon="@drawable/ic_xyweather_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- main module__start-->
-        <!-- main interface-->
-        <activity android:name="com.jf.xyweather.main.MainActivity"/>
+        <!-- main module__start -->
+        <!-- main interface -->
+        <activity android:name=".main.MainActivity" />
 
-        <!-- welcome interface-->
+        <!-- welcome interface -->
         <activity android:name=".main.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,14 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- main module__end-->
+        <!-- main module__end -->
 
+        <activity android:name=".weatherpage.RealTimeWeatherActivity" />
 
-        <activity android:name=".weatherpage.RealTimeWeatherActivity"/>
+        <!-- select city_start -->
+        <activity android:name=".selectedcity.SelectedCityActivity" />
+        <!-- select city_end -->
 
-        <!-- select city_start-->
-        <activity android:name=".selectedcity.SelectedCityActivity"/>
-        <!-- select city_end-->
+        <activity
+            android:name=".dailyweather.SevenDayWeatherActivity"
+            android:theme="@style/AppTheme.DailyWeatherVpi"/>
     </application>
 
 </manifest>

@@ -35,7 +35,7 @@
     </style>
     <!-- main_end-->
 
-    <!--weather page__start-->
+    <!--weather page_start-->
     <!-- style of the "FrameLayout" in _activity_real_time layout-->
     <style name="activity_short_term_forecast_frame_layout">
         <item name="android:layout_width">match_parent</item>
@@ -60,7 +60,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <!-- style of the dividing line in the _activity_real_time layout-->
+    <!-- style of the dividing line in the activity_real_time layout-->
     <style name="activity_short_term_forecast_dividing_line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2dp</item>
@@ -68,6 +68,32 @@
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
     </style>
-    <!-- weather page__end-->
+    <!-- weather page_end-->
 
+
+    <!-- daily weather__start-->
+    <!-- Theme of SevenDayWeatherActivity-->
+    <style name="AppTheme.DailyWeatherVpi" parent="AppTheme">
+        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
+    </style>
+    <style name="Widget">
+    </style>
+
+    <style name="Widget.TabPageIndicator" parent="Widget">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/vpi__tab_indicator</item>
+        <item name="android:paddingLeft">22dip</item>
+        <item name="android:paddingRight">22dip</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.TabPageIndicator</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="TextAppearance.TabPageIndicator" parent="Widget">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@drawable/vpi_light_theme</item>
+    </style>
+    <!-- daily weather__end-->
 </resources>

@@ -70,9 +70,6 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public CityBasicInformation getCityBasicInfo(){
-//        if(realJSONObject == null || !status.equals(Contact.OK)){
-//            return null;
-//        }
         if( !status.equals(Contact.OK) ){
             return null;
         }
@@ -88,9 +85,6 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public RealTimeWeather getRealTimeWeather(){
-//        if(realJSONObject == null || !status.equals(Contact.OK)){
-//            return null;
-//        }
         if( !status.equals(Contact.OK) ){
             return null;
         }
@@ -106,13 +100,9 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public List<DailyWeatherForecast> getDailyWeatherForecast(){
-//        if(realJSONObject == null || !status.equals(Contact.OK)){
-//            return null;
-//        }
         if( !status.equals(Contact.OK) ){
             return null;
         }
-
         List<DailyWeatherForecast> dailyWeatherForecastList = null;
         try{
             JSONArray jsonArray = realJSONObject.getJSONArray("daily_forecast");

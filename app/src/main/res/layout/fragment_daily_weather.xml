@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jf.xyweather.dailyweather.DailyWeatherFragment">
+
+    <!-- Simple information of daily-weather forecast_start-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="32dp">
+        <!-- weather icon-->
+        <ImageView
+            android:id="@+id/iv_fragment_daily_weather_weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_test"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- temperature-->
+            <TextView
+                android:id="@+id/tv_fragment_daily_weather_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+            <!-- description of weather-->
+            <TextView
+                android:id="@+id/tv_fragment_daily_weather_weather_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Simple information of daily-weather forecast_end-->
+
+    <!-- details of daily-weather forecast__start-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <!-- details words-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details"/>
+        <!-- dividing line-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f00080ff"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+        <!--This GridView used to show details of weather information-->
+        <GridView
+            android:id="@+id/gv_fragment_daily_weather_details"
+            android:numColumns="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:verticalSpacing="48dp"
+            android:layout_marginTop="32dp">
+        </GridView>
+    </LinearLayout>
+    <!-- details of daily-weather forecast__end-->
+
+</LinearLayout>

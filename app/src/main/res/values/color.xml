@@ -12,5 +12,6 @@
     <!-- main-->
     <color name="hui_se">#80202020</color><!--"CityWeatherFragment" search button background-->
     <!--<color name="c0000000">#c0000000</color>&lt;!&ndash;"activity_main" radioGroup&ndash;&gt;-->
-    <color name="ff3299cc">#ff3299CC</color><!--sky blue-->
+    <color name="ff87cefa">#ff87cefa</color><!--sky blue-->
+    <color name="sky_blue">@color/ff87cefa</color><!--sky blue-->
 </resources>

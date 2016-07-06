@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--A layout used as item in GridView in fragment_daily_weather.xml-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:gravity="center_vertical">
+
+    <!-- An icon-->
+    <ImageView
+        android:id="@+id/iv_item_fragment_daily_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- TextView on top-->
+        <TextView
+            android:id="@+id/tv_item_fragment_daily_weather_top_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
+
+        <!-- TextView on bottom-->
+        <TextView
+            android:id="@+id/tv_item_fragment_daily_weather_bottom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

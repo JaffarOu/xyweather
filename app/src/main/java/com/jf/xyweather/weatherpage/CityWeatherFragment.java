@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.base.fragment.BaseFragment;
 import com.jf.xyweather.customview.DailyWeatherWidget;
 import com.jf.xyweather.customview.RealTimeWidget;
+import com.jf.xyweather.dailyweather.SevenDayWeatherActivity;
 import com.jf.xyweather.model.AirQualityIndex;
 import com.jf.xyweather.model.CityName;
 import com.jf.xyweather.model.DailyWeatherForecast;
@@ -25,6 +27,12 @@ import com.jf.xyweather.util.HttpJSONListener;
 import com.jf.xyweather.util.HttpRequestUtils;
 import com.jf.xyweather.util.WeatherInfoJsonParseUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +55,7 @@ public class CityWeatherFragment extends BaseFragment
     private boolean isHttpFinished = true;//To identity whether http request is finished or not
     private CityName cityName;//name of city that this fragment will query the weather information
 
+    private List<DailyWeatherForecast> dailyWeatherList;
     @Override
     protected int getLayoutViewId() {
         return R.layout.fragment_city_weather;
@@ -102,13 +111,19 @@ public class CityWeatherFragment extends BaseFragment
                     return;
                 }
                 //start a new activity to show real-time weather forecast
-                Intent intent = new Intent(getActivity(), RealTimeWeatherActivity.class);
-                intent.putExtra(RealTimeWeatherActivity.KEY_REAL_TIME_WEATHER_FORECAST, realTimeWeather);
-                startActivity(intent);
+                Intent realTimeWeatherIntent = new Intent(getActivity(), RealTimeWeatherActivity.class);
+                realTimeWeatherIntent.putExtra(RealTimeWeatherActivity.KEY_REAL_TIME_WEATHER_FORECAST, realTimeWeather);
+                startActivity(realTimeWeatherIntent);
                 break;
             case R.id.tv_fragment_city_weather_air_quality_index:
                 break;
             case R.id.daily_weather_fragment_city_weather_today:
+                //Start SevenDaiWeatherActivity and pass the data we need
+                Intent dailyWeatherIntent = new Intent(getActivity(), SevenDayWeatherActivity.class);
+                //pass the name of city and seven-day weather information
+                dailyWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, cityName.getCityChineseName());
+                dailyWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable)dailyWeatherList);
+                startActivity(dailyWeatherIntent);
                 break;
             case R.id.daily_weather_fragment_city_weather_tomorrow:
                 break;
@@ -116,6 +131,27 @@ public class CityWeatherFragment extends BaseFragment
                 break;
         }
     }
+
+
+//    private List<DailyWeatherForecast> getDailyWeatherList(JSONArray jsonArray){
+//        if(jsonArray == null){
+//            return null;
+//        }
+//        int length = jsonArray.length();
+//        List<DailyWeatherForecast> dailyWeatherList = new ArrayList<>(length);
+//        DailyWeatherForecast dailyWeather;
+//        Gson gson = new Gson();
+//        for(int i = 0; i<length; i++){
+//            try {
+//                dailyWeather = gson.fromJson(jsonArray.getJSONObject(i).toString(), DailyWeatherForecast.class);
+//                dailyWeatherList.add(dailyWeather);
+//            }catch (JSONException e){
+//                MyApplications.showLog(CityWeatherFragment.class.getSimpleName()+"--getDailyWeatherList()方法解析JSON异常");
+//                return null;
+//            }
+//        }
+//        return dailyWeatherList;
+//    }
 
     /**
      * refresh the weather information on this page
@@ -132,7 +168,8 @@ public class CityWeatherFragment extends BaseFragment
     }
 
     /**
-     * return the name of city that this fragment is showing
+     * return the name of city that this fragment is showing,
+     * this method used by parent of this Fragment
      * @return name of city
      */
     public CityName getCityName(){
@@ -185,12 +222,19 @@ public class CityWeatherFragment extends BaseFragment
             airQualityIndexTv.setText(aqi.getAqi() + " " + aqi.getQlty());
         }
         //get the daily weather forecast
-        List<DailyWeatherForecast> dailyWeatherForecasts = weatherInfoJsonParseUtil.getDailyWeatherForecast();
-        if (dailyWeatherForecasts != null) {
+//        List<DailyWeatherForecast> dailyWeatherForecasts = weatherInfoJsonParseUtil.getDailyWeatherForecast();
+//        if (dailyWeatherForecasts != null) {
+//            todayDailyWeatherWidget.setWhichDay("今天");
+//            todayDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(0));
+//            tomorrowDailyWeatherWidget.setWhichDay("明天");
+//            tomorrowDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(1));
+//        }
+        dailyWeatherList = weatherInfoJsonParseUtil.getDailyWeatherForecast();
+        if (dailyWeatherList != null) {
             todayDailyWeatherWidget.setWhichDay("今天");
-            todayDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(0));
+            todayDailyWeatherWidget.setDailyWeather(dailyWeatherList.get(0));
             tomorrowDailyWeatherWidget.setWhichDay("明天");
-            tomorrowDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(1));
+            tomorrowDailyWeatherWidget.setDailyWeather(dailyWeatherList.get(1));
         }
     }//setWeatherInformation()
 }

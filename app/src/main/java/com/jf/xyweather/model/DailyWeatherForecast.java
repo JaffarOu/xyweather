@@ -1,10 +1,12 @@
 package com.jf.xyweather.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jf on 2016/6/21.
  * Daily weather forecast（一天的天气预报）
  */
-public class DailyWeatherForecast {
+public class DailyWeatherForecast implements Serializable{
 
     private Astronomy astro;//_astronomy numerical（天文数值）
     private WeatherCondition cond;//weather condition（天气状况）
