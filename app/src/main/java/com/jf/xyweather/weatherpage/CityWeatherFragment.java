@@ -43,11 +43,11 @@ public class CityWeatherFragment extends BaseFragment
         implements View.OnClickListener, HttpJSONListener {
 
     //variables of view
-    private View refreshHint;////it will be show during the work thread running
-    private TextView airQualityIndexTv;//air quality index of city
+    private View refreshHint;//it will be show during the work thread running
+    private TextView airQualityIndexTv;
     private RealTimeWidget realTimeWidget;//real-time weather forecast widget
-    private DailyWeatherWidget todayDailyWeatherWidget;//daily weather forecast of today
-    private DailyWeatherWidget tomorrowDailyWeatherWidget;//daily weather forecast of tomorrow
+    private DailyWeatherWidget todayDailyWeatherWidget;
+    private DailyWeatherWidget tomorrowDailyWeatherWidget;
 
     //other variables
     private RealTimeWeather realTimeWeather;
@@ -56,6 +56,7 @@ public class CityWeatherFragment extends BaseFragment
     private CityName cityName;//name of city that this fragment will query the weather information
 
     private List<DailyWeatherForecast> dailyWeatherList;
+
     @Override
     protected int getLayoutViewId() {
         return R.layout.fragment_city_weather;
@@ -132,27 +133,6 @@ public class CityWeatherFragment extends BaseFragment
         }
     }
 
-
-//    private List<DailyWeatherForecast> getDailyWeatherList(JSONArray jsonArray){
-//        if(jsonArray == null){
-//            return null;
-//        }
-//        int length = jsonArray.length();
-//        List<DailyWeatherForecast> dailyWeatherList = new ArrayList<>(length);
-//        DailyWeatherForecast dailyWeather;
-//        Gson gson = new Gson();
-//        for(int i = 0; i<length; i++){
-//            try {
-//                dailyWeather = gson.fromJson(jsonArray.getJSONObject(i).toString(), DailyWeatherForecast.class);
-//                dailyWeatherList.add(dailyWeather);
-//            }catch (JSONException e){
-//                MyApplications.showLog(CityWeatherFragment.class.getSimpleName()+"--getDailyWeatherList()方法解析JSON异常");
-//                return null;
-//            }
-//        }
-//        return dailyWeatherList;
-//    }
-
     /**
      * refresh the weather information on this page
      */
@@ -179,9 +159,7 @@ public class CityWeatherFragment extends BaseFragment
     /*override the method of HttpListener_start*/
     @Override
     public void onFinish(String result) {
-//        progressBar.setVisibility(View.GONE);
         refreshHint.setVisibility(View.GONE);
-//        MyApplications.showToast((BaseActivity)getActivity(), "已获取到最新天气信息");
         setWeatherInformation(result);
         isHttpFinished = true;
     }
@@ -221,14 +199,8 @@ public class CityWeatherFragment extends BaseFragment
         if (aqi != null) {
             airQualityIndexTv.setText(aqi.getAqi() + " " + aqi.getQlty());
         }
-        //get the daily weather forecast
-//        List<DailyWeatherForecast> dailyWeatherForecasts = weatherInfoJsonParseUtil.getDailyWeatherForecast();
-//        if (dailyWeatherForecasts != null) {
-//            todayDailyWeatherWidget.setWhichDay("今天");
-//            todayDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(0));
-//            tomorrowDailyWeatherWidget.setWhichDay("明天");
-//            tomorrowDailyWeatherWidget.setDailyWeather(dailyWeatherForecasts.get(1));
-//        }
+
+        //Set daily-weather forecast for today and tomorrow
         dailyWeatherList = weatherInfoJsonParseUtil.getDailyWeatherForecast();
         if (dailyWeatherList != null) {
             todayDailyWeatherWidget.setWhichDay("今天");

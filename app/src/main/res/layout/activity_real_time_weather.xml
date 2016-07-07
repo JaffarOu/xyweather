@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical" android:id="@+id/ll_activity_short_term_forecast_layout"
     android:padding="40dp" android:gravity="center"
-    android:background="@color/black">
+    android:background="#D0000000">
 
     <!-- temperature-->
     <TextView

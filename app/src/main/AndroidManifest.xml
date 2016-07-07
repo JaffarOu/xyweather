@@ -18,7 +18,9 @@
         <activity android:name=".main.MainActivity" />
 
         <!-- welcome interface -->
-        <activity android:name=".main.WelcomeActivity">
+        <activity
+            android:name=".main.WelcomeActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +29,11 @@
         </activity>
         <!-- main module__end -->
 
-        <activity android:name=".weatherpage.RealTimeWeatherActivity" />
+        <!-- weatherpage-->
+        <activity
+            android:name=".weatherpage.RealTimeWeatherActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
 
         <!-- select city_start -->
         <activity android:name=".selectedcity.SelectedCityActivity" />

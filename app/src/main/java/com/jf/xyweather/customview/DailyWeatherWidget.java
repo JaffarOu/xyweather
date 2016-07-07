@@ -2,7 +2,6 @@ package com.jf.xyweather.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,12 +25,12 @@ public class DailyWeatherWidget extends RelativeLayout{
     public DailyWeatherWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
         setPadding(8, 8, 8, 8);
-        inflate(context, R.layout.layout_daily_weather, this);
+        inflate(context, R.layout.layout_daily_weather_widget, this);
         //find view
         whichTv = (TextView) findViewById(R.id.tv_layout_daily_weather_which_day);
-        maxAndMinTemperatureTv = (TextView)findViewById(R.id.tv_layout_daily_weather_max_and_min_temperature);
-        weatherTypeTv = (TextView)findViewById(R.id.tv_layout_daily_weather_weather_type);
-        weatherIconIv = (ImageView)findViewById(R.id.iv_layout_daily_weather_weather_icon);
+        maxAndMinTemperatureTv = (TextView)findViewById(R.id.tv_layout_daily_weather_widget_max_and_min_temperature);
+        weatherTypeTv = (TextView)findViewById(R.id.tv_layout_daily_weather_widget_weather_type);
+        weatherIconIv = (ImageView)findViewById(R.id.iv_layout_daily_weather_widget_weather_icon);
     }
 
     public void setDailyWeather(DailyWeatherForecast dailyWeatherForecast){

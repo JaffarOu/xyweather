@@ -69,21 +69,4 @@ public class SelectedCityHelper extends SQLiteOpenHelper{
         cursor.close();
         return cityNameList;
     }
-//    /**
-//     * get the name of city according the id of city
-//     * @param cityId id of city
-//     * @return name of city,it will return null if the id is not exists
-//     */
-//    public String getCityName(int cityId){
-//        String select = "SELECT "+ COLUMN_CITY_CHINESE_NAME +" FROM "+SELECTED_CITY_TABLE_NAME+" where "+COLUMN_CITY_ID+"="+cityId;
-//        Cursor cityNameCursor = getReadableDatabase().rawQuery(select, null);
-//        if(cityNameCursor.getCount() == 0){
-//            cityNameCursor.close();
-//            return null;
-//        }
-//        cityNameCursor.moveToFirst();
-//        String cityName = cityNameCursor.getString(cityNameCursor.getColumnIndex(COLUMN_CITY_CHINESE_NAME));
-//        cityNameCursor.close();
-//        return cityName;
-//    }
 }
