@@ -48,7 +48,7 @@ public class SevenDayWeatherActivity extends BaseViewPagerActivity implements Cu
         customTitles.setOnTitleClickListener(this);
 
         //set background
-        rootView.setBackgroundResource(R.color.sky_blue);
+        rootView.setBackgroundResource(R.color.ff00aaff);
 
     }
 

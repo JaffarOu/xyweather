@@ -20,9 +20,9 @@ public class DailyWeatherFragment extends BaseFragment{
 
     //variables of view
     private ImageView weatherIconIv;//An icon express weather condition
-    private TextView temperatureTv;//To show temperature
-    private TextView weatherDescriptionTv;//To show the description of weather
-    private GridView detailsGv;//To show details of the weather condition
+    private TextView temperatureTv;
+    private TextView weatherDescriptionTv;
+    private GridView detailsGv;//
 
     //Object with data
     private DailyWeatherForecast dailyWeatherForecast;

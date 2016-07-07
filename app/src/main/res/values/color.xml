@@ -3,6 +3,7 @@
 
     <!-- non-transparent color-->
     <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
 
     <!-- translucent colors-->
     <color name="white_translucent">#80ffffff</color>
@@ -14,4 +15,7 @@
     <!--<color name="c0000000">#c0000000</color>&lt;!&ndash;"activity_main" radioGroup&ndash;&gt;-->
     <color name="ff87cefa">#ff87cefa</color><!--sky blue-->
     <color name="sky_blue">@color/ff87cefa</color><!--sky blue-->
+
+    <!-- dailyweather-->
+    <color name="ff00aaff">#ff00aaff</color>
 </resources>
