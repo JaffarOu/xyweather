@@ -188,10 +188,11 @@ public class CityWeatherFragment extends BaseFragment
         //get the real-time weather information
         realTimeWeather = weatherInfoJsonParseUtil.getRealTimeWeather();
         if (realTimeWidget != null) {
-            this.realTimeWidget.setTemperature(realTimeWeather.getTmp());
-            this.realTimeWidget.setWeatherType(realTimeWeather.getCond().getTxt());
-            //set the short-term-forecast
-            this.realTimeWidget.setRealTimeWeather(realTimeWeather.getWind().getSc(), realTimeWeather.getHum(), realTimeWeather.getFl(), realTimeWeather.getPres());
+//            this.realTimeWidget.setTemperature(realTimeWeather.getTmp());
+//            this.realTimeWidget.setWeatherType(realTimeWeather.getCond().getTxt());
+//            //set the short-term-forecast
+//            this.realTimeWidget.setRealTimeWeather(realTimeWeather.getWind().getSc(), realTimeWeather.getHum(), realTimeWeather.getFl(), realTimeWeather.getPres());
+            realTimeWidget.setRealTimeWeather(realTimeWeather);
         }
 
         //get the air quality index

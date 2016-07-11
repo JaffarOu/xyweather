@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jf.xyweather.R;
+import com.jf.xyweather.model.RealTimeWeather;
 
 /**
  * Created by JF on 2016/6/24.
@@ -18,19 +19,24 @@ import com.jf.xyweather.R;
 public class RealTimeWidget extends LinearLayout
         implements Animation.AnimationListener, Runnable{
 
+    /*View widgets in "RealTimeWidget"__start*/
     private TextView weatherTypeTv;//TextView to show weather type(such as sunny or cloudy)
-    private TextView temperatureTv;//TextView to show real-time temperature
+    private TextView temperatureTv;
 
-    /*viewGroup include the "windOrBodyFeelingTv" and "humilityOrAirPressureTv"
+    /*viewGroup include the "windOrBodyFeelingTv" and "humilityOrAirPressureTv",
       viewGroup has an animation*/
     private ViewGroup viewGroup;
     private TextView windOrBodyFeelingTv;
     private TextView humilityOrAirPressureTv;
+    /*View widgets in "RealTimeWidget"__end*/
 
+    /*data of RealTimeWeather_start*/
+    private RealTimeWeather realTimeWeather;
     private String wind;
     private float humility;
     private float bodyFeelingTemperature;
     private float airPressure;
+    /*data of RealTimeWeather_end*/
 
     private AlphaAnimation becomeTransparent;
     private AlphaAnimation becomeNoTransparent;
@@ -44,44 +50,70 @@ public class RealTimeWidget extends LinearLayout
         setOrientation(VERTICAL);
         inflate(context, R.layout.layout_real_time_weather, this);
 
+        //find view
         weatherTypeTv = (TextView) findViewById(R.id.tv_custom_view_real_time_weather_weather_type);
         temperatureTv = (TextView) findViewById(R.id.tv_layout_real_time_weather_temperature);
-
         viewGroup = (ViewGroup)findViewById(R.id.rl_layout_real_time_weather);
         windOrBodyFeelingTv = (TextView) findViewById(R.id.tv_layout_real_time_weather_wind_or_body_feeling_temperature);
         humilityOrAirPressureTv = (TextView)findViewById(R.id.tv_layout_real_time_weather_humility_or_air_pressure);
     }
 
-    /**
-     * set the weather type
-     * @param weatherType weather type
-     */
-    public void setWeatherType(String weatherType){
-        weatherTypeTv.setText(weatherType);
-    }
+//    /**
+//     * set the weather type
+//     * @param weatherType weather type
+//     */
+//    public void setWeatherType(String weatherType){
+//        weatherTypeTv.setText(weatherType);
+//    }
+//
+//    /**
+//     * set the temperature
+//     * @param temperature temperature
+//     */
+//    public void setTemperature(double temperature){
+//        temperatureTv.setText((int)temperature+"°");
+//    }
+//
+//    /**
+//     * set the wind, humility,body feeling temperature and air pressure
+//     * @param wind
+//     * @param humility
+//     * @param bodyFeelingTemperature
+//     * @param airPressure
+//     */
+//    public void setRealTimeWeather(String wind, float humility, float bodyFeelingTemperature, float airPressure){
+//        this.wind = wind;
+//        this.humility = humility;
+//        this.bodyFeelingTemperature = bodyFeelingTemperature;
+//        this.airPressure = airPressure;
+////        setWindText(wind);
+////        setHumilityText(humility);
+//        if(becomeTransparent == null){
+//            setWindText(wind);
+//            setHumilityText(humility);
+//            initAnimation();
+//            viewGroup.startAnimation(becomeTransparent);
+//        }
+//    }
 
     /**
-     * set the temperature
-     * @param temperature temperature
+     * Set real-time weather for "RealTimeWidget"
+     * @param realTimeWeather
      */
-    public void setTemperature(double temperature){
-        temperatureTv.setText((int)temperature+"°");
-    }
+    public void setRealTimeWeather(RealTimeWeather realTimeWeather){
+        if(realTimeWeather == null){
+            return;
+        }
+        //store the data
+        this.realTimeWeather = realTimeWeather;
+        this.wind = realTimeWeather.getWind().getSc();
+        this.humility = realTimeWeather.getHum();
+        this.bodyFeelingTemperature = realTimeWeather.getFl();
+        this.airPressure = realTimeWeather.getPres();
 
-    /**
-     * set the wind, humility,body feeling temperature and air pressure
-     * @param wind
-     * @param humility
-     * @param bodyFeelingTemperature
-     * @param airPressure
-     */
-    public void setRealTimeWeather(String wind, float humility, float bodyFeelingTemperature, float airPressure){
-        this.wind = wind;
-        this.humility = humility;
-        this.bodyFeelingTemperature = bodyFeelingTemperature;
-        this.airPressure = airPressure;
-//        setWindText(wind);
-//        setHumilityText(humility);
+        //show data
+        weatherTypeTv.setText(realTimeWeather.getCond().getTxt());
+        temperatureTv.setText(realTimeWeather.getTmp()+"°");
         if(becomeTransparent == null){
             setWindText(wind);
             setHumilityText(humility);
@@ -148,6 +180,7 @@ public class RealTimeWidget extends LinearLayout
     }
     /*override the method of "AnimationListener"_end*/
 
+    //override the method of interface Runnable
     @Override
     public void run() {
         viewGroup.startAnimation(becomeTransparent);
