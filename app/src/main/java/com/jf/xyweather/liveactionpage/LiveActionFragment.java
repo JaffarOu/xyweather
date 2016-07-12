@@ -17,7 +17,7 @@ public class LiveActionFragment extends BaseFragment{
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
 
     }
 

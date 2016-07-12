@@ -15,7 +15,7 @@ public class Contact {
 
     /**the url that used to get one type of city*/
     public static final String CITY_TYPE_URL = "https://api.heweather.com/x3/citylist";
-    /*http access__start*/
+    /*http access__end*/
 
 
     /*The code that described the weather query results returned from "He Feng weather"__start*/

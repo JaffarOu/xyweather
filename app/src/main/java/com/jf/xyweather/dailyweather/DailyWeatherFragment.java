@@ -35,7 +35,7 @@ public class DailyWeatherFragment extends BaseFragment{
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
         //From the Arguments to get the data we need to show
         Bundle arguments = getArguments();
         if(arguments == null){

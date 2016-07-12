@@ -45,14 +45,14 @@ public class CityWeatherFragment extends BaseFragment
     //variables of view
     private View refreshHint;//it will be show during the work thread running
     private TextView airQualityIndexTv;
-    private RealTimeWidget realTimeWidget;//real-time weather forecast widget
+    private RealTimeWidget realTimeWidget;
     private DailyWeatherWidget todayDailyWeatherWidget;
     private DailyWeatherWidget tomorrowDailyWeatherWidget;
 
     //other variables
-    private RealTimeWeather realTimeWeather;
+    private RealTimeWeather realTimeWeather;//A variables to store the information of real-time weather
     private RequestQueue requestQueue;//request queue of volley
-    private boolean isHttpFinished = true;//To identity whether http request is finished or not
+    private boolean isHttpFinished = true;//To identity whether http request is finished or not before start http request
     private CityName cityName;//name of city that this fragment will query the weather information
 
     private List<DailyWeatherForecast> dailyWeatherList;
@@ -63,7 +63,7 @@ public class CityWeatherFragment extends BaseFragment
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
         //determined which city we need to query the weather information,,the default city is "guangzhou"
         Bundle arguments = getArguments();
         if(arguments != null){
@@ -120,13 +120,19 @@ public class CityWeatherFragment extends BaseFragment
                 break;
             case R.id.daily_weather_fragment_city_weather_today:
                 //Start SevenDaiWeatherActivity and pass the data we need
-                Intent dailyWeatherIntent = new Intent(getActivity(), SevenDayWeatherActivity.class);
+                Intent todayWeatherIntent = new Intent(getActivity(), SevenDayWeatherActivity.class);
                 //pass the name of city and seven-day weather information
-                dailyWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, cityName.getCityChineseName());
-                dailyWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable)dailyWeatherList);
-                startActivity(dailyWeatherIntent);
+                todayWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, cityName.getCityChineseName());
+                todayWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable) dailyWeatherList);
+                startActivity(todayWeatherIntent);
                 break;
             case R.id.daily_weather_fragment_city_weather_tomorrow:
+                //Start SevenDaiWeatherActivity and pass the data we need
+                Intent tomorrowWeatherIntent = new Intent(getActivity(), SevenDayWeatherActivity.class);
+                //pass the name of city and seven-day weather information
+                tomorrowWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, cityName.getCityChineseName());
+                tomorrowWeatherIntent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable) dailyWeatherList);
+                startActivity(tomorrowWeatherIntent);
                 break;
             default:
                 break;
@@ -168,7 +174,7 @@ public class CityWeatherFragment extends BaseFragment
     public void onError(String error) {
         isHttpFinished = true;
         refreshHint.setVisibility(View.GONE);
-        MyApplications.showToast((BaseActivity)getActivity(), "网络异常");
+        MyApplications.showToast((BaseActivity)getActivity(), "网络异常，请稍后再尝试刷新");
     }
     /*override the method of HttpListener_end*/
 
@@ -188,10 +194,6 @@ public class CityWeatherFragment extends BaseFragment
         //get the real-time weather information
         realTimeWeather = weatherInfoJsonParseUtil.getRealTimeWeather();
         if (realTimeWidget != null) {
-//            this.realTimeWidget.setTemperature(realTimeWeather.getTmp());
-//            this.realTimeWidget.setWeatherType(realTimeWeather.getCond().getTxt());
-//            //set the short-term-forecast
-//            this.realTimeWidget.setRealTimeWeather(realTimeWeather.getWind().getSc(), realTimeWeather.getHum(), realTimeWeather.getFl(), realTimeWeather.getPres());
             realTimeWidget.setRealTimeWeather(realTimeWeather);
         }
 
@@ -204,10 +206,13 @@ public class CityWeatherFragment extends BaseFragment
         //Set daily-weather forecast for today and tomorrow
         dailyWeatherList = weatherInfoJsonParseUtil.getDailyWeatherForecast();
         if (dailyWeatherList != null) {
-            todayDailyWeatherWidget.setWhichDay("今天");
-            todayDailyWeatherWidget.setDailyWeather(dailyWeatherList.get(0));
-            tomorrowDailyWeatherWidget.setWhichDay("明天");
-            tomorrowDailyWeatherWidget.setDailyWeather(dailyWeatherList.get(1));
+            DailyWeatherForecast today = dailyWeatherList.get(0);
+            DailyWeatherForecast tomorrow = dailyWeatherList.get(1);
+
+            todayDailyWeatherWidget.setWhichDay(DailyWeatherWidget.TODAY);
+            todayDailyWeatherWidget.setDailyWeather(today);
+            tomorrowDailyWeatherWidget.setWhichDay(DailyWeatherWidget.TOMORROW);
+            tomorrowDailyWeatherWidget.setDailyWeather(tomorrow);
         }
     }//setWeatherInformation()
 }

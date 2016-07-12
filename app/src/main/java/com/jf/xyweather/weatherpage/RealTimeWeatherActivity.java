@@ -32,7 +32,7 @@ public class RealTimeWeatherActivity extends BaseActivity{
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
         //get data from previous intent
         realTimeWeather = (RealTimeWeather)getIntent().getSerializableExtra(KEY_REAL_TIME_WEATHER_FORECAST);
         if(realTimeWeather == null){

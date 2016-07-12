@@ -58,44 +58,6 @@ public class RealTimeWidget extends LinearLayout
         humilityOrAirPressureTv = (TextView)findViewById(R.id.tv_layout_real_time_weather_humility_or_air_pressure);
     }
 
-//    /**
-//     * set the weather type
-//     * @param weatherType weather type
-//     */
-//    public void setWeatherType(String weatherType){
-//        weatherTypeTv.setText(weatherType);
-//    }
-//
-//    /**
-//     * set the temperature
-//     * @param temperature temperature
-//     */
-//    public void setTemperature(double temperature){
-//        temperatureTv.setText((int)temperature+"°");
-//    }
-//
-//    /**
-//     * set the wind, humility,body feeling temperature and air pressure
-//     * @param wind
-//     * @param humility
-//     * @param bodyFeelingTemperature
-//     * @param airPressure
-//     */
-//    public void setRealTimeWeather(String wind, float humility, float bodyFeelingTemperature, float airPressure){
-//        this.wind = wind;
-//        this.humility = humility;
-//        this.bodyFeelingTemperature = bodyFeelingTemperature;
-//        this.airPressure = airPressure;
-////        setWindText(wind);
-////        setHumilityText(humility);
-//        if(becomeTransparent == null){
-//            setWindText(wind);
-//            setHumilityText(humility);
-//            initAnimation();
-//            viewGroup.startAnimation(becomeTransparent);
-//        }
-//    }
-
     /**
      * Set real-time weather for "RealTimeWidget"
      * @param realTimeWeather

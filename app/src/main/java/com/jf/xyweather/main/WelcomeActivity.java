@@ -25,7 +25,7 @@ public class WelcomeActivity extends BaseActivity implements Animation.Animation
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
     }
 
     @Override

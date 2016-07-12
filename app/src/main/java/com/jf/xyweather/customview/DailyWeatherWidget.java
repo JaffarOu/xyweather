@@ -15,10 +15,13 @@ import com.jf.xyweather.model.DailyWeatherForecast;
  */
 public class DailyWeatherWidget extends RelativeLayout{
 
-    private TextView whichTv;
+    private TextView whichTv;//Which day? Today or tomorrow
     private TextView maxAndMinTemperatureTv;
     private TextView weatherTypeTv;
     private ImageView weatherIconIv;
+
+    public static final String TODAY = "今天";
+    public static final String TOMORROW = "明天";
 
 //    private DailyWeatherForecast dailyWeatherForecast;
 
@@ -33,9 +36,11 @@ public class DailyWeatherWidget extends RelativeLayout{
         weatherIconIv = (ImageView)findViewById(R.id.iv_layout_daily_weather_widget_weather_icon);
     }
 
+    /**
+     * Set daily weather forecast for "DailyWeatherWidget"
+     * @param dailyWeatherForecast
+     */
     public void setDailyWeather(DailyWeatherForecast dailyWeatherForecast){
-//        this.dailyWeatherForecast = dailyWeatherForecast;
-        //set the max temperature and the minimum temperature
         maxAndMinTemperatureTv.setText((int)dailyWeatherForecast.getTmp().getMax()+"/"+(int)dailyWeatherForecast.getTmp().getMin()+"℃");
         weatherTypeTv.setText(dailyWeatherForecast.getCond().getTxt_d());
     }

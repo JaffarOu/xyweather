@@ -29,7 +29,7 @@ abstract public class BaseViewPagerFragment extends BaseFragment implements View
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
     }
 
     /**

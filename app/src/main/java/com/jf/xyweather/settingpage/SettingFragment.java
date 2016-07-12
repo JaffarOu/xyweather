@@ -16,7 +16,7 @@ public class SettingFragment extends BaseFragment {
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
 
     }
 

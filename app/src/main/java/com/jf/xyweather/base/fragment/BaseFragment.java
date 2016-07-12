@@ -11,10 +11,11 @@ import com.jf.xyweather.base.MyApplications;
 
 /**
  * Created by jf on 2016/6/16.
- * 基类"Fragment"_应用里面所有"Fragment"的基类
+ * The basic Fragment of all Fragments in this App
  */
 abstract public class BaseFragment extends Fragment {
 
+    //The View returned in onCreateView() method
     protected View layoutView;
 
     @Override
@@ -26,7 +27,7 @@ abstract public class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        initExtra();
+        initOther();
         layoutView = inflater.inflate(getLayoutViewId(), container, false);
         initView(layoutView);
         return layoutView;
@@ -39,9 +40,9 @@ abstract public class BaseFragment extends Fragment {
     abstract protected int getLayoutViewId();
 
     /**
-     * initial some before initial view
+     * initial something before initial view
      */
-    abstract protected void initExtra();
+    abstract protected void initOther();
 
     /**
      * initial view before the "onCreateView" method return

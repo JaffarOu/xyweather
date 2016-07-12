@@ -16,10 +16,11 @@ import com.viewpagerindicator.TitlePageIndicator;
  */
 abstract public class BaseViewPagerActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
 
-    protected View rootView;
     protected CustomTitles customTitles;
     protected TabPageIndicator tabPageIndicator;
     protected ViewPager viewPager;
+    //the root view of the current interface layout file
+    protected View rootView;
 
     @Override
     protected int getContentViewId() {
@@ -27,8 +28,7 @@ abstract public class BaseViewPagerActivity extends BaseActivity implements View
     }
 
     @Override
-    protected void initExtra() {
-
+    protected void initOther() {
     }
 
     @Override

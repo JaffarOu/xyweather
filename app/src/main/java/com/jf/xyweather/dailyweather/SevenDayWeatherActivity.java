@@ -1,12 +1,10 @@
 package com.jf.xyweather.dailyweather;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.jf.xyweather.R;
-import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseViewPagerActivity;
 import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
 import com.jf.xyweather.customview.CustomTitles;
@@ -31,8 +29,8 @@ public class SevenDayWeatherActivity extends BaseViewPagerActivity implements Cu
     private List<DailyWeatherForecast> dailyWeatherList;
 
     @Override
-    protected void initExtra() {
-        super.initExtra();
+    protected void initOther() {
+        super.initOther();
         //Get the title of this Activity
         cityName = getIntent().getStringExtra(KEY_CITY_NAME);
         //Get data from Intent

@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
     }
 
     @Override

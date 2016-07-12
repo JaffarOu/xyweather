@@ -34,7 +34,7 @@ public class SelectedCityActivity extends BaseActivity
     }
 
     @Override
-    protected void initExtra() {
+    protected void initOther() {
         cityNameList = (List<CityName>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
     }
 

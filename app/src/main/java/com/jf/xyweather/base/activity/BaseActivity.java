@@ -7,7 +7,7 @@ import com.jf.xyweather.base.MyApplications;
 
 /**
  * Created by jf on 2016/6/16.
- * 基类"Activity"_应用里面所有"Activity"的超类
+ * The basic Activity of all Activities in this App
  */
 abstract public class BaseActivity extends FragmentActivity{
 
@@ -17,13 +17,23 @@ abstract public class BaseActivity extends FragmentActivity{
         //打印当前"Activity"名字，方便调试
         MyApplications.showLog("which_activity", this.getClass().getSimpleName());
         setContentView(getContentViewId());
-        initExtra();
+        initOther();
         initView();
     }
 
+    /**
+     * Get the id of layout file in Activity
+     * @return The id of layout file inActivity
+     */
     abstract protected int getContentViewId();
 
-    abstract protected void initExtra();
+    /**
+     * Initial something before call setContentView() method
+     */
+    abstract protected void initOther();
 
+    /**
+     * Initial view in here
+     */
     abstract protected void initView();
 }

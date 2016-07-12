@@ -9,6 +9,7 @@ import com.jf.xyweather.base.activity.BaseActivity;
 
 /**
  * Created by jf on 2016/6/16.
+ * Custom Application to replace systems Application
  */
 public class MyApplications extends Application{
 
@@ -21,25 +22,35 @@ public class MyApplications extends Application{
         context = this;
     }
 
+    /**
+     * Get MyApplications object
+     * @return
+     */
     public static Context getContext() {
         return context;
     }
 
-    public static void showLog(String tag, String content){
-        Log.i(tag, content);
-    }
     /**
-     * 打印Log的信息
-     * @param content 待打印的字符串
+     * To print a log
+     * @param tag The tag of your log
+     * @param message The message of your log
      */
-    public static void showLog(String content){
-        showLog(LOG_TAG, content);
+    public static void showLog(String tag, String message){
+        Log.i(tag, message);
     }
 
     /**
-     * 弹出"Toast"
-     * @param baseActivity 基类"BaseActivity"
-     * @param content 所弹出的"Toast"内容
+     * To print a log
+     * @param message The message of your log
+     */
+    public static void showLog(String message){
+        showLog(LOG_TAG, message);
+    }
+
+    /**
+     * Show a Toast
+     * @param baseActivity "BaseActivity" class
+     * @param content The text that showed on Toast
      */
     public static void showToast(BaseActivity baseActivity, String content){
         Toast.makeText(baseActivity, content, Toast.LENGTH_SHORT).show();

@@ -24,6 +24,7 @@ public class CustomTitles extends RelativeLayout implements View.OnClickListener
     private ImageView rightFirstIv;//the first ImageView from right
     private ImageView rightSecondIv;//the second ImageView from right
 
+    //To identify which ImageView that selected by user
     public static final int LEFT_FIRST = 1;
     public static final int LEFT_SECOND = 1<<1;
     public static final int RIGHT_FIRST = 1<<2;
@@ -59,14 +60,6 @@ public class CustomTitles extends RelativeLayout implements View.OnClickListener
     }
 
     /**
-     * set title text color
-     * @param color resource id of color
-     */
-    public void setTitleTextColor(int color){
-        titleTv.setTextColor(color);
-    }
-
-    /**
      * set the icon of the title's ImageView
      * @param leftFirst the resource id of the first ImageView from left
      * @param leftSecond the resource id of the second ImageView from left
@@ -91,41 +84,32 @@ public class CustomTitles extends RelativeLayout implements View.OnClickListener
      * @param resourceId the resource id of the icon
      */
     public void setImageViewResource(int which, int resourceId){
-        switch (which){
-            case LEFT_FIRST:
-                leftFirstIv.setImageResource(resourceId);
-                leftFirstIv.setVisibility(VISIBLE);
-                break;
-            case LEFT_SECOND:
-                leftSecondIv.setImageResource(resourceId);
-                leftSecondIv.setVisibility(VISIBLE);
-                break;
-            case RIGHT_FIRST:
-                rightFirstIv.setImageResource(resourceId);
-                rightFirstIv.setVisibility(VISIBLE);
-                break;
-            case RIGHT_SECOND://RIGHT_SECOND
-                rightSecondIv.setImageResource(resourceId);
-                rightSecondIv.setVisibility(VISIBLE);
-                break;
-            default:break;
+        if(which == LEFT_FIRST){
+            leftFirstIv.setImageResource(resourceId);
+            leftFirstIv.setVisibility(VISIBLE);
+            return;
+        }
+        if(which == LEFT_SECOND){
+            leftSecondIv.setImageResource(resourceId);
+            leftSecondIv.setVisibility(VISIBLE);
+            return;
+        }
+        if(which == RIGHT_FIRST){
+            rightFirstIv.setImageResource(resourceId);
+            rightFirstIv.setVisibility(VISIBLE);
+            return;
+        }
+        if(which == RIGHT_SECOND){
+            rightSecondIv.setImageResource(resourceId);
+            rightSecondIv.setVisibility(VISIBLE);
         }
     }
 
-//    /**
-//     * set the visibility for the ImageView in the CustomTitles
-//     * @param leftFirst set the visibility for the ImageView on the left first
-//     * @param leftSecond set the visibility for the ImageView on the left second
-//     * @param rightFirst set the visibility for the ImageView on the right first
-//     * @param rightSecond set the visibility for the ImageView on the right second
-//     */
-//    public void setImageViewVisibility(int leftFirst, int leftSecond, int rightFirst, int rightSecond){
-//        leftSecondIv.setVisibility(leftFirst);
-//        leftSecondIv.setVisibility(leftSecond);
-//        rightFirstIv.setVisibility(rightFirst);
-//        rightSecondIv.setVisibility(rightSecond);
-//    }
-
+    /**
+     * Set OnTitleClickListener Listener for title,
+     * The ImageView won't response the click event except you set icon to it before you call OnTitleClickListener
+     * @param listener
+     */
     public void setOnTitleClickListener(OnTitleClickListener listener){
         if(listener == null){
             return;
@@ -146,6 +130,12 @@ public class CustomTitles extends RelativeLayout implements View.OnClickListener
     }
 
     public interface OnTitleClickListener{
+        /**
+         * The call back method of OnTitleClickListener
+         * @param view The view object that was clicked
+         * @param which A integer variables to identify which ImageView that was clicked,
+         *              it only may be LEFT_FIRST,LEFT_SECOND,RIGHT_FIRST or RIGHT_SECOND
+         */
         public void onTitleClick(View view, int which);
     }
 
@@ -155,22 +145,21 @@ public class CustomTitles extends RelativeLayout implements View.OnClickListener
             return;
         }
         int id = v.getId();
-        int which = -1;
-        switch (id){
-            case R.id.iv_custom_titles_left_first:
-                which = LEFT_FIRST;
-                break;
-            case R.id.iv_custom_titles_left_second:
-                which = LEFT_SECOND;
-                break;
-            case R.id.iv_custom_titles_right_first:
-                which = RIGHT_FIRST;
-                break;
-            case R.id.iv_custom_titles_right_second:
-                which = RIGHT_SECOND;
-                break;
-            default:break;
+//        int which = -1;
+        if(id == R.id.iv_custom_titles_left_first){
+            listener.onTitleClick(v, LEFT_FIRST);
+            return;
         }
-        listener.onTitleClick(v, which);
+        if(id == R.id.iv_custom_titles_left_second){
+            listener.onTitleClick(v, LEFT_SECOND);
+            return;
+        }
+        if(id == R.id.iv_custom_titles_right_first){
+            listener.onTitleClick(v, RIGHT_FIRST);
+            return;
+        }
+        if(id == R.id.iv_custom_titles_right_second){
+            listener.onTitleClick(v, RIGHT_SECOND);
+        }
     }
 }
