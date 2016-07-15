@@ -2,19 +2,17 @@ package com.jf.xyweather.base.activity;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.jf.xyweather.R;
 import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
 import com.jf.xyweather.customview.CustomTitles;
 import com.viewpagerindicator.TabPageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
 
 /**
  * Created by jf on 2016/7/5.
- * This is a basic class for Activity that use ViewPager
+ * This is a basic class of Activity that with ViewPager and use TabPageIndicator as Indicator
  */
-abstract public class BaseViewPagerActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
+abstract public class TabViewPagerActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
 
     protected CustomTitles customTitles;
     protected TabPageIndicator tabPageIndicator;
@@ -24,7 +22,7 @@ abstract public class BaseViewPagerActivity extends BaseActivity implements View
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_base_view_pager;
+        return R.layout.activity_tab_view_pager;
     }
 
     @Override
@@ -34,17 +32,17 @@ abstract public class BaseViewPagerActivity extends BaseActivity implements View
     @Override
     protected void initView() {
         //find root view
-        rootView = findViewById(R.id.ll_activity_base_view_pager_root_view);
+        rootView = findViewById(R.id.ll_activity_tab_view_pager_root_view);
 
         //initial title
-        customTitles = (CustomTitles)findViewById(R.id.custom_titles_activity_base_view_pager);
+        customTitles = (CustomTitles)findViewById(R.id.custom_titles_activity_tab_view_pager);
 
         //initial ViewPager
-        viewPager = (ViewPager)findViewById(R.id.vp_activity_base_view_pager);
+        viewPager = (ViewPager)findViewById(R.id.vp_activity_tab_view_pager);
         viewPager.setAdapter(getViewPagerAdapter());
 
         //initial TabPageIndicator
-        tabPageIndicator = (TabPageIndicator)findViewById(R.id.tab_page_indicator_activity_base_view_pager);
+        tabPageIndicator = (TabPageIndicator)findViewById(R.id.tab_page_indicator_activity_b_view_pager);
         tabPageIndicator.setViewPager(viewPager);
         tabPageIndicator.setOnPageChangeListener(this);
     }

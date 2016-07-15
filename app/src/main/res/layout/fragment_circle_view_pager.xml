@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--layout of "BaseViewPagerFragment" class-->
+<!--layout of "CircleViewPagerFragment" class-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!--title-->
     <com.jf.xyweather.customview.CustomTitles
-        android:id="@+id/custom_titles_fragment_base_view_pager"
+        android:id="@+id/custom_titles_fragment_circle_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </com.jf.xyweather.customview.CustomTitles>
 
     <!--ViewPager indicator-->
     <com.viewpagerindicator.CirclePageIndicator
-        android:id="@+id/circle_page_indicator_fragment_base_view_pager"
+        android:id="@+id/circle_page_indicator_fragment_circle_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <!--ViewPager-->
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_fragment_base_view_pager"
+        android:id="@+id/vp_fragment_circle_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp">

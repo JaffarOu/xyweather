@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by jf on 2016/6/22.
- * The base adapter for ViewPager that load fragment
+ * The basic adapter for ViewPager that load fragment
  */
 public class BaseViewPagerAdapter extends FragmentStatePagerAdapter{
 

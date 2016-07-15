@@ -19,6 +19,9 @@
 
     <!-- seven-day weather forecast-->
     <string name="details">详情</string>
+
+    <!-- air quality index-->
+    <string name="the_trend_of_the_air_quality_index">城市空气质量指数（Aqi）详情</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

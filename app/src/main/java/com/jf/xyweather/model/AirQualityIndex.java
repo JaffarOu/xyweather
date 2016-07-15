@@ -1,10 +1,12 @@
 package com.jf.xyweather.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jf on 2016/6/21.
  * The JavaBean of city air quality index（城市空气质量指数的JavaBean）
  */
-public class AirQualityIndex {
+public class AirQualityIndex implements Serializable{
 
     private int aqi;//air quality index（城市空气质量指数）
     private int co;//average carbon monoxide for an hour（一氧化碳一小时平均值）

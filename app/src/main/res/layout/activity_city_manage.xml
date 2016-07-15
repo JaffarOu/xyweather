@@ -4,14 +4,14 @@
     android:layout_height="match_parent">
 
     <com.jf.xyweather.customview.CustomTitles
-        android:id="@+id/custom_titles_activity_selected_city"
+        android:id="@+id/custom_titles_activity_city_manage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black_translucent">
     </com.jf.xyweather.customview.CustomTitles>
 
     <ListView
-        android:id="@+id/lv_activity_selected_city_city_list"
+        android:id="@+id/lv_activity_city_manage_city_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>

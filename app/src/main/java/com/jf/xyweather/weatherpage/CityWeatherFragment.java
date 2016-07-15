@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.jf.xyweather.R;
+import com.jf.xyweather.airqualityindex.AqiActivity;
 import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.base.fragment.BaseFragment;
@@ -51,6 +52,7 @@ public class CityWeatherFragment extends BaseFragment
 
     //other variables
     private RealTimeWeather realTimeWeather;//A variables to store the information of real-time weather
+    private AirQualityIndex airQualityIndex;//A variables to store the information of air quality index
     private RequestQueue requestQueue;//request queue of volley
     private boolean isHttpFinished = true;//To identity whether http request is finished or not before start http request
     private CityName cityName;//name of city that this fragment will query the weather information
@@ -88,7 +90,7 @@ public class CityWeatherFragment extends BaseFragment
         tomorrowDailyWeatherWidget = (DailyWeatherWidget) layoutView.findViewById(R.id.daily_weather_fragment_city_weather_tomorrow);
 
         //set "OnclickListener"
-        layoutView.findViewById(R.id.rl_fragment_city_weather_search).setOnClickListener(this);
+//        layoutView.findViewById(R.id.rl_fragment_city_weather_search).setOnClickListener(this);
         airQualityIndexTv.setOnClickListener(this);
         todayDailyWeatherWidget.setOnClickListener(this);
         tomorrowDailyWeatherWidget.setOnClickListener(this);
@@ -101,9 +103,15 @@ public class CityWeatherFragment extends BaseFragment
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.rl_fragment_city_weather_search:
-                //starting a new activity to search more content about weather if user click search button
-                MyApplications.showToast((BaseActivity) getActivity(), "该功能还没完成");
+//            case R.id.rl_fragment_city_weather_search:
+//                //starting a new activity to search more content about weather if user click search button
+//                MyApplications.showToast((BaseActivity) getActivity(), "该功能还没完成");
+//                break;
+            case R.id.tv_fragment_city_weather_air_quality_index:
+                //start an Activity to show the details of the air quality index
+                Intent aqiIntent = new Intent(getActivity(), AqiActivity.class);
+                aqiIntent.putExtra(AqiActivity.KEY_CITY_NAME, cityName).putExtra(AqiActivity.KEY_AIR_QUALITY_INDEX, airQualityIndex);
+                startActivity(aqiIntent);
                 break;
             case R.id.real_time_forecast_fragment_city_weather:
                 //return immediately if no data
@@ -115,8 +123,6 @@ public class CityWeatherFragment extends BaseFragment
                 Intent realTimeWeatherIntent = new Intent(getActivity(), RealTimeWeatherActivity.class);
                 realTimeWeatherIntent.putExtra(RealTimeWeatherActivity.KEY_REAL_TIME_WEATHER_FORECAST, realTimeWeather);
                 startActivity(realTimeWeatherIntent);
-                break;
-            case R.id.tv_fragment_city_weather_air_quality_index:
                 break;
             case R.id.daily_weather_fragment_city_weather_today:
                 //Start SevenDaiWeatherActivity and pass the data we need
@@ -198,9 +204,9 @@ public class CityWeatherFragment extends BaseFragment
         }
 
         //get the air quality index
-        AirQualityIndex aqi = weatherInfoJsonParseUtil.getAirQualityIndex();
-        if (aqi != null) {
-            airQualityIndexTv.setText(aqi.getAqi() + " " + aqi.getQlty());
+        airQualityIndex = weatherInfoJsonParseUtil.getAirQualityIndex();
+        if (airQualityIndex != null) {
+            airQualityIndexTv.setText(airQualityIndex.getAqi() + " " + airQualityIndex.getQlty());
         }
 
         //Set daily-weather forecast for today and tomorrow

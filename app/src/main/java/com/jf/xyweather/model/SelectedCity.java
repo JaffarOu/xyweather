@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * Created by jf on 2016/7/1.
- * This is a java bean used as an item of ListView in SelectedCityActivity
+ * This is a java bean used as an item of ListView in CityManageActivity
  */
 public class SelectedCity implements Serializable{
 

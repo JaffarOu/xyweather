@@ -17,8 +17,9 @@ import java.util.List;
 /**
  * Created by jf on 2016/6/30.
  * This Activity will display all of city that selected by user
+ * and user can manager(add or remove) city in this Activity
  */
-public class SelectedCityActivity extends BaseActivity
+public class CityManageActivity extends BaseActivity
         implements CustomTitles.OnTitleClickListener, AdapterView.OnItemClickListener{
 
     private List<CityName> cityNameList;
@@ -30,7 +31,7 @@ public class SelectedCityActivity extends BaseActivity
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_selected_city;
+        return R.layout.activity_city_manage;
     }
 
     @Override
@@ -41,21 +42,21 @@ public class SelectedCityActivity extends BaseActivity
     @Override
     protected void initView() {
         //initial the title
-        CustomTitles customTitles = (CustomTitles)findViewById(R.id.custom_titles_activity_selected_city);
+        CustomTitles customTitles = (CustomTitles)findViewById(R.id.custom_titles_activity_city_manage);
         customTitles.setImageViewResource(CustomTitles.LEFT_FIRST, R.drawable.ic_return);
         customTitles.setImageViewResource(CustomTitles.RIGHT_FIRST, R.drawable.ic_selected_city_activity_add);
         customTitles.setImageViewResource(CustomTitles.RIGHT_SECOND, R.drawable.ic_selected_city_activity_edit);
         customTitles.setOnTitleClickListener(this);
 
         //initial the "ListView"
-        ListView listView = (ListView)findViewById(R.id.lv_activity_selected_city_city_list);
+        ListView listView = (ListView)findViewById(R.id.lv_activity_city_manage_city_list);
         if(cityNameList != null){
             listView.setOnItemClickListener(this);
             List<String> cityNames = new ArrayList<>(cityNameList.size());
             for(CityName cityName:cityNameList){
                 cityNames.add(cityName.getCityChineseName());
             }
-            listView.setAdapter(new SelectedCityAdapter(cityNames));
+            listView.setAdapter(new CityManageAdapter(cityNames));
         }
     }
 

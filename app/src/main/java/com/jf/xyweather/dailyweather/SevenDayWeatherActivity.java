@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.jf.xyweather.R;
-import com.jf.xyweather.base.activity.BaseViewPagerActivity;
+import com.jf.xyweather.base.activity.TabViewPagerActivity;
 import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
 import com.jf.xyweather.customview.CustomTitles;
 import com.jf.xyweather.model.DailyWeatherForecast;
@@ -18,7 +18,7 @@ import java.util.List;
  * An Activity to show recent seven-day weather forecast.
  * This Activity will load seven DailyWeatherFragment,every DailyWeatherFragment will show one-day weather forecast
  */
-public class SevenDayWeatherActivity extends BaseViewPagerActivity implements CustomTitles.OnTitleClickListener{
+public class SevenDayWeatherActivity extends TabViewPagerActivity implements CustomTitles.OnTitleClickListener{
 
     //key of the name of city from Intent
     public static final String KEY_CITY_NAME = "keyCityName";
@@ -46,8 +46,7 @@ public class SevenDayWeatherActivity extends BaseViewPagerActivity implements Cu
         customTitles.setOnTitleClickListener(this);
 
         //set background
-        rootView.setBackgroundResource(R.color.ff00aaff);
-
+        rootView.setBackgroundResource(R.drawable.bg_weather_fragment);
     }
 
     @Override

@@ -14,13 +14,13 @@ import java.util.List;
 
 /**
  * Created by jf on 2016/7/1.
- * The Adapter of ListView of SelectedCityActivity
+ * The Adapter of ListView of CityManageActivity
  */
-public class SelectedCityAdapter extends BaseAdapter{
+public class CityManageAdapter extends BaseAdapter{
 
     private List<String> selectedCityNameList;
 
-    public SelectedCityAdapter(List<String> selectedCityNameList){
+    public CityManageAdapter(List<String> selectedCityNameList){
         this.selectedCityNameList = selectedCityNameList;
     }
 

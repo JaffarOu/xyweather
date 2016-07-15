@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/activity_aqi_root_view">
+
+    <com.jf.xyweather.customview.CustomTitles
+        android:id="@+id/custom_titles_activity_aqi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.jf.xyweather.customview.CustomTitles>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/the_trend_of_the_air_quality_index"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:padding="8dp"/>
+
+    <!-- air quality index condition-->
+    <TextView
+        android:id="@+id/tv_activity_aqi_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="24sp"/>
+
+    <!-- detailed information about air quality index-->
+    <GridView
+        android:id="@+id/gv_activity_aqi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2">
+    </GridView>
+</LinearLayout>

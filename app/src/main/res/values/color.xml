@@ -4,6 +4,8 @@
     <!-- non-transparent color-->
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
+    <color name="green">#ff00ff00</color>
+    <color name="yellow">#ffffff00</color>
 
     <!-- translucent colors-->
     <color name="white_translucent">#80ffffff</color>
