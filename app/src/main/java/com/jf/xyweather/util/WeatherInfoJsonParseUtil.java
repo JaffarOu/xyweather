@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * Created by jf on 2016/6/22.
- * A tool class to parse JSON string that describe weather information
+ * A tool class to parse JSON string that describe weather information from He Feng weather
  */
 public class WeatherInfoJsonParseUtil {
 
@@ -41,8 +41,8 @@ public class WeatherInfoJsonParseUtil {
     }
 
     /**
-     * get the status code from the He Feng web server
-     * @return the status code from He Feng web server to describe the result of our request
+     * Get the status code from the He Feng web server
+     * @return The status code from He Feng web server to describe the result of our request
      *          （用来描述我们的请求结果的状态码）
      */
     public String getStatus(){

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\Android_text\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
+        "source": "E:\\Android_text\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
+    },
+    {
         "merged": "E:\\AndroidApp\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\vpi__tab_indicator.xml",
         "source": "E:\\AndroidApp\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vpi__tab_indicator.xml"
     }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jf.xyweather.base.MyApplications;
+import com.jf.xyweather.util.LogUtil;
 
 /**
  * Created by jf on 2016/6/16.
@@ -21,7 +22,7 @@ abstract public class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplications.showLog("which_fragment", getClass().getSimpleName());
+        LogUtil.i("which_fragment", getClass().getSimpleName());
     }
 
     @Nullable
@@ -39,14 +40,12 @@ abstract public class BaseFragment extends Fragment {
      */
     abstract protected int getLayoutViewId();
 
-    /**
-     * initial something before initial view
-     */
-    abstract protected void initOther();
+    /**initial something before initial view*/
+    protected void initOther(){}
 
     /**
      * initial view before the "onCreateView" method return
      * @param layoutView the view inflated according the id that from "getLayoutViewId()" method
      */
-    abstract protected void initView(View layoutView);
+    protected void initView(View layoutView){}
 }

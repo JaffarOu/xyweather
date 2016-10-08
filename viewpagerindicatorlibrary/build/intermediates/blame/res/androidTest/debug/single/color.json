@@ -1,10 +1,18 @@
 [
     {
+        "merged": "E:\\Android_text\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
+        "source": "E:\\Android_text\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
+    },
+    {
         "merged": "E:\\AndroidApp\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
         "source": "E:\\AndroidApp\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
     },
     {
         "merged": "E:\\AndroidApp\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
         "source": "E:\\AndroidApp\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
+    },
+    {
+        "merged": "E:\\Android_text\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
+        "source": "E:\\Android_text\\xyweather\\viewpagerindicatorlibrary\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
     }
 ]

@@ -31,10 +31,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     @Override
-    protected void initOther() {
-    }
-
-    @Override
     protected void initView() {
         //initial "RadioGroup"
         radioGroup = (RadioGroup)findViewById(R.id.rg_activity_base_view_pager);

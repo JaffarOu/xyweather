@@ -26,6 +26,7 @@ import com.jf.xyweather.model.RealTimeWeather;
 import com.jf.xyweather.model.Wind;
 import com.jf.xyweather.util.HttpJSONListener;
 import com.jf.xyweather.util.HttpRequestUtils;
+import com.jf.xyweather.util.LogUtil;
 import com.jf.xyweather.util.WeatherInfoJsonParseUtil;
 
 import org.json.JSONArray;
@@ -116,7 +117,7 @@ public class CityWeatherFragment extends BaseFragment
             case R.id.real_time_forecast_fragment_city_weather:
                 //return immediately if no data
                 if (realTimeWeather == null) {
-                    MyApplications.showLog("没有天气数据不能启动界面");
+                    LogUtil.i("没有天气数据不能启动界面");
                     return;
                 }
                 //start a new activity to show real-time weather forecast
@@ -191,7 +192,7 @@ public class CityWeatherFragment extends BaseFragment
 
         //return directory if the parse of JSON is not successfully
         if (!weatherInfoJsonParseUtil.getStatus().equals("ok")) {
-            MyApplications.showLog(getClass().getSimpleName() + "--the JSON string is incorrect or the pares is failed");
+            LogUtil.i(getClass().getSimpleName() + "--the JSON string is incorrect or the pares is failed");
 //            httpThread = null;
             return;
         }
