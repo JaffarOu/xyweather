@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile project(':viewpagerindicatorlibrary')
+    compile project(':viewpagerindicator')
     compile 'com.google.code.gson:gson:2.7'
     compile project(':Volley')
     compile project(':AMap_Location_V2.6.0_20160628')

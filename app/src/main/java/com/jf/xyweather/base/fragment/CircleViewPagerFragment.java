@@ -1,11 +1,15 @@
 package com.jf.xyweather.base.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.jf.xyweather.R;
-import com.jf.xyweather.customview.CustomTitles;
+import com.jf.xyweather.view.CustomTitles;
 import com.viewpagerindicator.CirclePageIndicator;
 
 /**
@@ -18,13 +22,12 @@ abstract public class CircleViewPagerFragment extends BaseFragment implements Vi
     protected ViewPager viewPager;
     protected CirclePageIndicator circlePageIndicator;
 
+    @Nullable
     @Override
-    protected int getLayoutViewId() {
-        return R.layout.fragment_circle_view_pager;
-    }
-
-    @Override
-    protected void initOther() {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View layoutView = inflater.inflate(R.layout.fragment_circle_view_pager, container, false);
+        initView(layoutView);
+        return layoutView;
     }
 
     /**
@@ -33,8 +36,7 @@ abstract public class CircleViewPagerFragment extends BaseFragment implements Vi
      * you can override this method and do what you want to after call super.initView()
      * @param layoutView the Id of layout that return by "getLayoutViewId()" method
      */
-    @Override
-    protected void initView(View layoutView) {
+    private void initView(View layoutView) {
         //initial the title
         customTitles = (CustomTitles)layoutView.findViewById(R.id.custom_titles_fragment_circle_view_pager);
 

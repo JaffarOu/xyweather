@@ -8,9 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="width_height_wrap_content">
+    <!--Most of TextView use this style-->
+    <style name="common_text_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--Used as the divider line's style-->
+    <style name="divider_line">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#eeeeee</item>
     </style>
 
     <!-- custom view_start-->
@@ -22,18 +31,6 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
     <!-- custom view_end-->
-
-    <!-- main_start-->
-    <!-- used on RadioButton in the _activity_main-->
-    <style name="activity_main_radio_button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:button">@null</item>
-        <item name="android:textColor">@color/white_translucent</item>
-    </style>
-    <!-- main_end-->
 
     <!--weather page_start-->
     <!-- style of the "FrameLayout" in _activity_real_time layout-->

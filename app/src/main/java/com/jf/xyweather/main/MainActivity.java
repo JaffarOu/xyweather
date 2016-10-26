@@ -1,85 +1,96 @@
 package com.jf.xyweather.main;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.RadioGroup;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.jf.xyweather.R;
-import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
-import com.jf.xyweather.liveactionpage.LiveActionFragment;
-import com.jf.xyweather.settingpage.SettingFragment;
-import com.jf.xyweather.weatherpage.WeatherFragment;
+import com.jf.xyweather.cityweather.CityWeatherFragmentPageAdapter;
+import com.jf.xyweather.model.CityName;
+import com.jf.xyweather.cityweather.CityWeatherFragment;
+import com.jf.xyweather.cityweather.RealTimeWeatherActivity;
+import com.viewpagerindicator.CirclePageIndicator;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
+import java.util.ArrayList;
+import java.util.List;
 
-    private RadioGroup radioGroup;
-    private String currentFragmentTag;//The fragment that interact with the user now
-    private String[] fragmentsTag;//All fragments' tags in this Activity
-    private FragmentManager fragmentManager;
+/**
+ * Created by jf on 2016/7/1.
+ * The main activity in this App,It used ViewPager with Fragment to show various city's weather information.
+ * It also has some other function
+ */
+public class MainActivity extends BaseActivity
+        implements View.OnClickListener, ViewPager.OnPageChangeListener {
+
+    private TextView mCityNameTv;           //To show the city's name of current page
+    private TextView mLastUpdateTimeTv;     //To show the last time that information was update
+    private ViewPager viewPager;            //Hold different CityWeatherFragment
+    private CityWeatherFragmentPageAdapter cityWeatherFragmentPageAdapter;
+    private List<CityName> cityNameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+    }
+
+    private void init() {
+        //Initial the title
+        findViewById(R.id.tv_main_more_index).setOnClickListener(this);
+        findViewById(R.id.tv_main_manage_city).setOnClickListener(this);
+        mCityNameTv = (TextView) findViewById(R.id.tv_main_city_name);
+        mLastUpdateTimeTv = (TextView) findViewById(R.id.tv_main_last_update_time);
+        //Get city list from database,this is some date used to test
+        cityNameList = new ArrayList<>();
+        cityNameList.add(new CityName("广州", "guangzhou"));
+        cityNameList.add(new CityName("深圳", "shenzhen"));
+        cityNameList.add(new CityName("惠州", "huizhou"));
+        cityNameList.add(new CityName("珠海", "zhuhai"));
+
+        //Initial the ViewPager
+        viewPager = (ViewPager) findViewById(R.id.vp_main_city_weather);
+        cityWeatherFragmentPageAdapter = new CityWeatherFragmentPageAdapter(this, getSupportFragmentManager(), cityNameList);
+        viewPager.setAdapter(cityWeatherFragmentPageAdapter);
+        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator_main_city_weather);
+        circlePageIndicator.setViewPager(viewPager);
+        circlePageIndicator.setOnPageChangeListener(this);
+        if (cityNameList.size() < 2) {
+            circlePageIndicator.setVisibility(View.INVISIBLE);
+        }
+        //Set the first city's name as title
+        mCityNameTv.setText(cityNameList.get(0).getCityChineseName());
     }
 
     @Override
-    protected int getContentViewId() {
-        return R.layout.activity_main;
+    public void onClick(View v) {
+        int id = v.getId();
+        if(id == R.id.tv_main_more_index){
+            //Start An Activity to show more real-time-weather information
+            Intent intent = new Intent(this, RealTimeWeatherActivity.class);
+            CityWeatherFragment fragment = cityWeatherFragmentPageAdapter.getFragment(viewPager.getCurrentItem());
+            intent.putExtra(RealTimeWeatherActivity.KEY_REAL_TIME_WEATHER_FORECAST, fragment.getRealTimeWeather());
+            startActivity(intent);
+        }else if(id == R.id.tv_main_manage_city){
+
+        }
     }
 
     @Override
-    protected void initView() {
-        //initial "RadioGroup"
-        radioGroup = (RadioGroup)findViewById(R.id.rg_activity_base_view_pager);
-        radioGroup.setOnCheckedChangeListener(this);
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        //initial "Fragment"
-        fragmentManager = getSupportFragmentManager();
-        fragmentsTag = new String[]{WeatherFragment.class.getSimpleName(), LiveActionFragment.class.getSimpleName(), SettingFragment.class.getSimpleName()};
-        fragmentManager.beginTransaction().add(R.id.fl_activity_main_fragment_group, new WeatherFragment(), fragmentsTag[0]).commit();
-        currentFragmentTag = fragmentsTag[0];
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId){
-            case R.id.rb_activity_main_weather:
-                changeFragment(fragmentsTag[0]);
-                break;
-            case R.id.rb_activity_main_live_action:
-                changeFragment(fragmentsTag[1]);
-                break;
-            case R.id.rb_activity_main_me:
-                changeFragment(fragmentsTag[2]);
-                break;
-            default:break;
-        }
+    public void onPageSelected(int position) {
+        mCityNameTv.setText(cityWeatherFragmentPageAdapter.getFragment(position).getCityName().getCityChineseName());
     }
 
-    //change fragment according fragmentTag
-    private void changeFragment(String fragmentTag){
-        if(currentFragmentTag.equals(fragmentTag)){
-            return;
-        }
-        //hide current fragment
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.hide(fragmentManager.findFragmentByTag(currentFragmentTag));
-        Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
-        //show the fragment that point by fragmentTag
-        if(fragment != null){
-            transaction.show(fragment).commit();
-            currentFragmentTag = fragmentTag;
-            return;
-        }
-        if(fragmentTag.equals(fragmentsTag[1])){
-            fragment = new LiveActionFragment();
-        }else if(fragmentTag.equals(fragmentsTag[2])){
-            fragment = new SettingFragment();
-        }
-        transaction.add(R.id.fl_activity_main_fragment_group, fragment, fragmentTag).commit();
-        currentFragmentTag = fragmentTag;
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

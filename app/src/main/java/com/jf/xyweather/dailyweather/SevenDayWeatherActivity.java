@@ -2,13 +2,14 @@ package com.jf.xyweather.dailyweather;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
+import android.support.v4.view.ViewPager;
+import android.widget.TextView;
 
 import com.jf.xyweather.R;
-import com.jf.xyweather.base.activity.TabViewPagerActivity;
+import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
-import com.jf.xyweather.customview.CustomTitles;
 import com.jf.xyweather.model.DailyWeatherForecast;
+import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,63 +19,33 @@ import java.util.List;
  * An Activity to show recent seven-day weather forecast.
  * This Activity will load seven DailyWeatherFragment,every DailyWeatherFragment will show one-day weather forecast
  */
-public class SevenDayWeatherActivity extends TabViewPagerActivity implements CustomTitles.OnTitleClickListener{
+public class SevenDayWeatherActivity extends BaseActivity{
 
-    //key of the name of city from Intent
+    /**Key in Intent Object,city's name*/
     public static final String KEY_CITY_NAME = "keyCityName";
+    /**Key in Intent Object,seven daily weather*/
     public static final String KEY_SEVEN_DAY_WEATHER = "keySevenDayWeather";
 
-    //name of city that showed on title
-    private String cityName = "";
-    private List<DailyWeatherForecast> dailyWeatherList;
-
     @Override
-    protected void initOther() {
-        super.initOther();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_seven_day_weather);
+        init();
+    }
+
+    private void init(){
         //Get the title of this Activity
-        cityName = getIntent().getStringExtra(KEY_CITY_NAME);
+        String cityName = getIntent().getStringExtra(KEY_CITY_NAME);
+        if(cityName == null){
+            cityName = "";
+        }
+        ((TextView)findViewById(R.id.tv_daily_weather_city_name)).setText(cityName);
         //Get data from Intent
-        dailyWeatherList = (List<DailyWeatherForecast>)getIntent().getSerializableExtra(KEY_SEVEN_DAY_WEATHER);
+        List<DailyWeatherForecast> dailyWeatherList = (List<DailyWeatherForecast>)getIntent().getSerializableExtra(KEY_SEVEN_DAY_WEATHER);
+        //Initial ViewPager
+        ViewPager viewPager = (ViewPager)findViewById(R.id.vp_daily_weather);
+        TabPageIndicator tabPageIndicator = (TabPageIndicator)findViewById(R.id.tab_page_indicator_daily_weather);
+        viewPager.setAdapter(new DailyWeatherFragmentPagerAdapter(this, getSupportFragmentManager(), dailyWeatherList));
+        tabPageIndicator.setViewPager(viewPager);
     }
-
-    @Override
-    protected void initView() {
-        super.initView();
-        //initial title
-        customTitles.setImageViewResource(CustomTitles.LEFT_FIRST, R.drawable.ic_return);
-        customTitles.setTitleText(cityName);
-        customTitles.setOnTitleClickListener(this);
-
-        //set background
-        rootView.setBackgroundResource(R.drawable.bg_weather_fragment);
-    }
-
-    @Override
-    protected BaseViewPagerAdapter getViewPagerAdapter() {
-        //initial all fragments
-        int size = dailyWeatherList.size();
-        List<Fragment> fragmentList = new ArrayList<>(size);
-        DailyWeatherFragment dailyWeatherFragment;
-        Bundle arguments;
-        for(int i = 0; i<size; i++){
-            arguments = new Bundle();
-            arguments.putSerializable(DailyWeatherFragment.KEY_DAILY_WEATHER, dailyWeatherList.get(i));
-            dailyWeatherFragment = new DailyWeatherFragment();
-            dailyWeatherFragment.setArguments(arguments);
-            fragmentList.add(dailyWeatherFragment);
-        }
-        String[] dateString = new String[size];
-        for(int i = 0; i<size; i++){
-            dateString[i] = dailyWeatherList.get(i).getDate();
-        }
-//        return new BaseViewPagerAdapter(getSupportFragmentManager(), fragmentList);
-        return new SevenDayPagerAdapter(getSupportFragmentManager(), fragmentList, dateString);
-    }
-
-    /*override the method of OnTitleClickListener*/
-    @Override
-    public void onTitleClick(View view, int which) {
-        finish();
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.jf.xyweather.selectedcity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -8,7 +9,7 @@ import android.widget.ListView;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
-import com.jf.xyweather.customview.CustomTitles;
+import com.jf.xyweather.view.CustomTitles;
 import com.jf.xyweather.model.CityName;
 
 import java.util.ArrayList;
@@ -30,17 +31,18 @@ public class CityManageActivity extends BaseActivity
     public static final String SELECT_POSITION = "selectPosition";
 
     @Override
-    protected int getContentViewId() {
-        return R.layout.activity_city_manage;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_city_manage);
+        initOther();
+        initView();
     }
 
-    @Override
-    protected void initOther() {
+    private void initOther() {
         cityNameList = (List<CityName>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
     }
 
-    @Override
-    protected void initView() {
+    private void initView() {
         //initial the title
         CustomTitles customTitles = (CustomTitles)findViewById(R.id.custom_titles_activity_city_manage);
         customTitles.setImageViewResource(CustomTitles.LEFT_FIRST, R.drawable.ic_return);
@@ -81,7 +83,7 @@ public class CityManageActivity extends BaseActivity
     //override the method of OnItemClickListener
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //telling the WeatherFragment that which city used by user
+        //telling the starter that which city used by user
         Intent intent = new Intent(ACTION_SELECT_CITY);
         intent.putExtra(SELECT_POSITION, position);
         setResult(RESULT_OK, intent);

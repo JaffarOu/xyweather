@@ -8,8 +8,8 @@ import java.io.Serializable;
  */
 public class Astronomy implements Serializable{
 
-    private String sr;//sunrise time（日出时间）
-    private String ss;//sunset time（日落时间）
+    private String sr;      //sunrise time（日出时间）
+    private String ss;      //sunset time（日落时间）
 
     public String getSr() {
         return sr;

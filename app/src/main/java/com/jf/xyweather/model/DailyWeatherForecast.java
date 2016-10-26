@@ -8,16 +8,16 @@ import java.io.Serializable;
  */
 public class DailyWeatherForecast implements Serializable{
 
-    private Astronomy astro;//_astronomy numerical（天文数值）
-    private WeatherCondition cond;//weather condition（天气状况）
-    private String date;//_location date（当地时间）
-    private float hum;//humidity（湿度）
-    private float pcpn;//precipitation rainfall capacity（降雨量）
-    private float pop;//the probability of precipitation（降水概率）
-    private float pres;//air pressure
-    private Temperature tmp;//temperature
-    private int vis;//visibility（能见度）
-    private Wind wind;//The state of the wind
+    private Astronomy astro;            //_astronomy numerical（天文数值）
+    private WeatherCondition cond;      //weather condition（天气状况）
+    private String date;                //_location date（当地时间）
+    private float hum;                  //humidity（湿度）
+    private float pcpn;                 //precipitation rainfall capacity（降雨量）
+    private float pop;                  //the probability of precipitation（降水概率）
+    private float pres;                 //air pressure
+    private Temperature tmp;            //temperature
+    private int vis;                    //visibility（能见度）
+    private Wind wind;                  //The state of the wind
 
     public DailyWeatherForecast(){
 

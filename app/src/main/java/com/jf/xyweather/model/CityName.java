@@ -9,29 +9,29 @@ import java.io.Serializable;
  */
 public class CityName implements Serializable{
 
-    private String cityChineseName;//城市名字汉字形式
-    private String cityPinYinName;//城市名字拼音形式
+    private String mCityChineseName; //城市名字汉字形式
+    private String mCityPinYinName;  //城市名字拼音形式
 
     public CityName(){
 
     }
 
     public CityName(String cityChineseName, String cityPinYinName) {
-        this.cityChineseName = cityChineseName;
-        this.cityPinYinName = cityPinYinName;
+        mCityChineseName = cityChineseName;
+        mCityPinYinName = cityPinYinName;
     }
 
     public String getCityChineseName() {
-        return cityChineseName;
+        return mCityChineseName;
     }
     public void setCityChineseName(String cityChineseName) {
-        this.cityChineseName = cityChineseName;
+        mCityChineseName = cityChineseName;
     }
 
     public String getCityPinYinName() {
-        return cityPinYinName;
+        return mCityPinYinName;
     }
     public void setCityPinYinName(String cityPinYinName) {
-        this.cityPinYinName = cityPinYinName;
+        mCityPinYinName = cityPinYinName;
     }
 }

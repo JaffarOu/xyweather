@@ -1,6 +1,7 @@
 package com.jf.xyweather.main;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -20,16 +21,13 @@ public class WelcomeActivity extends BaseActivity implements Animation.Animation
     private static final int durationTime = 2000;
 
     @Override
-    protected int getContentViewId() {
-        return R.layout.activity_welcome;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_welcome);
+        init();
     }
 
-    @Override
-    protected void initOther() {
-    }
-
-    @Override
-    protected void initView() {
+    private void init(){
         //set a alpha animation for welcome activity
         AlphaAnimation alphaAnimation = new AlphaAnimation(fromAlpha, toAlpha);
         alphaAnimation.setDuration(durationTime);

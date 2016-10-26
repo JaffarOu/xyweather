@@ -31,7 +31,7 @@
 
         <!-- weather page-->
         <activity
-            android:name=".weatherpage.RealTimeWeatherActivity"
+            android:name=".cityweather.RealTimeWeatherActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
 

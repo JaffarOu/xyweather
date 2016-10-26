@@ -8,14 +8,14 @@ import java.io.Serializable;
  */
 public class AirQualityIndex implements Serializable{
 
-    private int aqi;//air quality index（城市空气质量指数）
-    private int co;//average carbon monoxide for an hour（一氧化碳一小时平均值）
-    private int no2;//the average nitrogen dioxide an hour（二氧化氮一小时平均值）
-    private int o3;//average ozone for an hour(臭氧一小时平均值）
-    private int pm10;//average pm10 for an hour
-    private int pm25;//average pm2.5 for an hour
-    private String qlty;//air quality category（空气质量类别）
-    private int so2;//average sulfur dioxide an hour（二氧化硫一小时平均值）
+    private int aqi;        //air quality index（城市空气质量指数）
+    private int co;         //average carbon monoxide for an hour（一氧化碳一小时平均值）
+    private int no2;        //the average nitrogen dioxide an hour（二氧化氮一小时平均值）
+    private int o3;         //average ozone for an hour(臭氧一小时平均值）
+    private int pm10;       //average pm10 for an hour
+    private int pm25;       //average pm2.5 for an hour
+    private String qlty;    //air quality category（空气质量类别）
+    private int so2;        //average sulfur dioxide an hour（二氧化硫一小时平均值）
 
     public AirQualityIndex(){
 

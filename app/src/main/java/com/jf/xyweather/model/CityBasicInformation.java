@@ -6,12 +6,12 @@ package com.jf.xyweather.model;
  */
 public class CityBasicInformation {
 
-    private String city;//city's name（城市名字）
-    private String cnty;//country's name（城市所在国家名字）
-    private String id;//city's id（城市ID）
-    private double lat;//the latitude of the city（纬度）
-    private double lon;//the longitude of the city（经度）
-    private Update update;//the time of the data update
+    private String city;        //city's name（城市名字）
+    private String cnty;        //country's name（城市所在国家名字）
+    private String id;          //city's id（城市ID）
+    private double lat;         //the latitude of the city（纬度）
+    private double lon;         //the longitude of the city（经度）
+    private Update update;      //the time of the data update
 
     public CityBasicInformation(){
 

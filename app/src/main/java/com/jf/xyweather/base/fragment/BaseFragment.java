@@ -24,28 +24,4 @@ abstract public class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         LogUtil.i("which_fragment", getClass().getSimpleName());
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        initOther();
-        layoutView = inflater.inflate(getLayoutViewId(), container, false);
-        initView(layoutView);
-        return layoutView;
-    }
-
-    /**
-     * get the id of the layout file
-     * @return the resource id of the layout file that child class want to inflate
-     */
-    abstract protected int getLayoutViewId();
-
-    /**initial something before initial view*/
-    protected void initOther(){}
-
-    /**
-     * initial view before the "onCreateView" method return
-     * @param layoutView the view inflated according the id that from "getLayoutViewId()" method
-     */
-    protected void initView(View layoutView){}
 }

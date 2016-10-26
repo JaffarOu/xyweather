@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <!--title-->
-    <com.jf.xyweather.customview.CustomTitles
+    <com.jf.xyweather.view.CustomTitles
         android:id="@+id/custom_titles_fragment_circle_view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.jf.xyweather.customview.CustomTitles>
+    </com.jf.xyweather.view.CustomTitles>
 
     <!--ViewPager indicator-->
     <com.viewpagerindicator.CirclePageIndicator

@@ -2,35 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/activity_aqi_root_view">
+    android:id="@+id/activity_aqi_root_view"
+    android:background="@drawable/bg_main">
 
-    <com.jf.xyweather.customview.CustomTitles
-        android:id="@+id/custom_titles_activity_aqi"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="空气质量"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"/>
+
+    <ListView
+        android:id="@+id/lv_air_quality_index"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.jf.xyweather.customview.CustomTitles>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/the_trend_of_the_air_quality_index"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:padding="8dp"/>
-
-    <!-- air quality index condition-->
-    <TextView
-        android:id="@+id/tv_activity_aqi_condition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textSize="24sp"/>
-
-    <!-- detailed information about air quality index-->
-    <GridView
-        android:id="@+id/gv_activity_aqi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2">
-    </GridView>
+    </ListView>
 </LinearLayout>

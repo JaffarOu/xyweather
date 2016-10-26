@@ -17,20 +17,6 @@ abstract public class BaseActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         //Print the current Activity's name for debug
         LogUtil.i("which_activity", getClass().getSimpleName());
-        setContentView(getContentViewId());
-        initOther();
-        initView();
     }
 
-    /**
-     * Get the id of layout file in Activity
-     * @return The id of layout file in Activity
-     */
-    abstract protected int getContentViewId();
-
-    /**Initial something before view*/
-    protected void initOther(){}
-
-    /**Initial view in here*/
-    protected void initView(){}
 }

@@ -1,115 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Layout of the "CityWeatherFragment" class-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#00000000">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="8dp">
 
-    <!--it will be showed during the work thread running-->
-    <LinearLayout
-        android:id="@+id/ll_fragment_city_weather_refresh_hint"
-        android:layout_width="match_parent"
+    <com.jf.xyweather.view.CircleTemperatureView
+        android:id="@+id/circle_temperature_view_city_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--weather icon-->
+    <ImageView
+        android:id="@+id/iv_city_weather_weather_icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:gravity="center_horizontal">
-        <ProgressBar
-            android:id="@+id/pb_fragment_city_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:layout_marginTop="8dp"/>
+
+    <!--weather description-->
+    <TextView
+        android:id="@+id/tv_city_weather_weather_condition"
+        style="@style/common_text_view"
+        android:layout_marginTop="8dp"/>
+
+    <!--weekday-->
+    <TextView
+        android:id="@+id/tv_city_weather_week"
+        style="@style/common_text_view"
+        android:layout_marginTop="8dp"/>
+
+    <!--air quality index-->
+    <LinearLayout
+        android:id="@+id/ll_city_weather_air_quality_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:text="@string/refreshing"/>
+            style="@style/common_text_view"
+            android:text="空气质量"/>
+        <!--Air quality condition-->
+        <TextView
+            android:id="@+id/tv_city_weather_air_quality_condition"
+            style="@style/common_text_view"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="良好"/>
+        <!--air quality index-->
+        <TextView
+            android:id="@+id/tv_city_weather_air_quality_index"
+            style="@style/common_text_view"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="40"/>
     </LinearLayout>
 
-    <!--&lt;!&ndash; search button&ndash;&gt;-->
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/rl_fragment_city_weather_search"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:padding="8dp"-->
-        <!--android:background="@color/hui_se">-->
-        <!--<TextView-->
-            <!--android:id="@+id/tv_fragment_city_weather"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textColor="@color/white_translucent"-->
-            <!--android:text="@string/search_more_about_weather"-->
-            <!--android:layout_centerInParent="true"/>-->
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/ic_search"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_toLeftOf="@id/tv_fragment_city_weather"-->
-            <!--android:layout_toStartOf="@id/tv_fragment_city_weather"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--android:layout_marginEnd="8dp"/>-->
-    <!--</RelativeLayout>-->
-
-    <!-- air quality index-->
-    <TextView
-        android:id="@+id/tv_fragment_city_weather_air_quality_index"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:gravity="center_vertical"
-        android:layout_margin="8dp"
-        android:layout_marginTop="24dp"
-        android:textSize="16sp"/>
-
-    <!-- use to account position,no thing to show in it-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:visibility="invisible"/>
-
-    <!--short-term weather forecast module at the lower left corner-->
-    <com.jf.xyweather.customview.RealTimeWidget
-        android:id="@+id/real_time_forecast_fragment_city_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-    </com.jf.xyweather.customview.RealTimeWidget>
-
-    <!-- dividing line-->
+    <!--divider line-->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white_translucent"/>
+        style="@style/divider_line"/>
 
-    <!-- bottom layout-->
+    <!--Brief weather information forecast in four days in future-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
-        <!-- the view to show today's weather information-->
-        <com.jf.xyweather.customview.DailyWeatherWidget
-            android:id="@+id/daily_weather_fragment_city_weather_today"
+        <com.jf.xyweather.view.DailyWeatherWidget
+            android:id="@+id/daily_weather_widget_first"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-        </com.jf.xyweather.customview.DailyWeatherWidget>
+        </com.jf.xyweather.view.DailyWeatherWidget>
 
-        <!-- dividing line-->
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="@color/white_translucent"/>
-
-        <!-- The view to show tomorrow's weather information-->
-        <com.jf.xyweather.customview.DailyWeatherWidget
-            android:id="@+id/daily_weather_fragment_city_weather_tomorrow"
+        <com.jf.xyweather.view.DailyWeatherWidget
+            android:id="@+id/daily_weather_widget_second"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-        </com.jf.xyweather.customview.DailyWeatherWidget>
+        </com.jf.xyweather.view.DailyWeatherWidget>
+
+        <com.jf.xyweather.view.DailyWeatherWidget
+            android:id="@+id/daily_weather_widget_third"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </com.jf.xyweather.view.DailyWeatherWidget>
+
+        <com.jf.xyweather.view.DailyWeatherWidget
+            android:id="@+id/daily_weather_widget_forth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </com.jf.xyweather.view.DailyWeatherWidget>
     </LinearLayout>
 </LinearLayout>
