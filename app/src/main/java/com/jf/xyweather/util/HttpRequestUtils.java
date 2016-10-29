@@ -29,21 +29,21 @@ public class HttpRequestUtils {
         //put the name of city and developer's key of "He Feng weather"
         parameter.put("city", cityName);
         parameter.put("key", Contact.API_KEY);
-        sendHttpGetForJSON(Contact.CITY_WEATHER_URL, parameter, httpJSONListener, requestQueue);
+        sendHttpGetForJSON(Contact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
     }
 
     public static void queryWeatherByCityIp(String cityIp, HttpJSONListener httpJSONListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("cityip",cityIp);
         parameter.put("key", Contact.API_KEY);
-        sendHttpGetForJSON(Contact.CITY_WEATHER_URL, parameter, httpJSONListener, requestQueue);
+        sendHttpGetForJSON(Contact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
     }
 
     public static void queryCityByType(String cityType, HttpJSONListener httpListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("search", cityType);
         parameter.put("key" ,Contact.API_KEY);
-        sendHttpGetForJSON(Contact.CITY_TYPE_URL, parameter, httpListener, requestQueue);
+        sendHttpGetForJSON(Contact.URL_CITY_TYPE, parameter, httpListener, requestQueue);
     }
 
     public static void sendHttpPostForJSON(String url, HttpJSONListener httpListener, Map<String, String> requestParameter){
@@ -79,7 +79,8 @@ public class HttpRequestUtils {
                     }
                 }
         );
-        MyApplications.showLog(finalUrl);
+        //Print the request url
+        LogUtil.i(finalUrl);
         requestQueue.add(jsonObjectRequest);
     }
 

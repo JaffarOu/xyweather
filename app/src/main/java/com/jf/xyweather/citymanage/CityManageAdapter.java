@@ -1,4 +1,4 @@
-package com.jf.xyweather.selectedcity;
+package com.jf.xyweather.citymanage;
 
 import android.view.LayoutInflater;
 import android.view.View;

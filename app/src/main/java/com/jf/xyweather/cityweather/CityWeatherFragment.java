@@ -15,9 +15,11 @@ import com.jf.xyweather.R;
 import com.jf.xyweather.airqualityindex.AqiActivity;
 import com.jf.xyweather.base.fragment.BaseFragment;
 import com.jf.xyweather.dailyweather.SevenDayWeatherActivity;
+import com.jf.xyweather.lifesuggestion.LifeSuggestionActivity;
 import com.jf.xyweather.model.AirQualityIndex;
-import com.jf.xyweather.model.CityName;
+import com.jf.xyweather.model.CityInfo;
 import com.jf.xyweather.model.DailyWeatherForecast;
+import com.jf.xyweather.model.LifeSuggestion;
 import com.jf.xyweather.model.RealTimeWeather;
 import com.jf.xyweather.model.Temperature;
 import com.jf.xyweather.util.DateUtil;
@@ -44,16 +46,17 @@ public class CityWeatherFragment extends BaseFragment
     public static final String KEY_CITY_NAME = "cityName";
 
     //view
-    private CircleTemperatureView circleTemperatureView;    //An circle view used to show temperature(max,now,min)
+    private CircleTemperatureView mCircleTemperatureView;   //An circle view used to show temperature(max,now,min)
     private ImageView mWeatherIconIv;                       //An icon used to describe the weather condition
-    private TextView mWeatherConditionTv;                 //sunny or windy
+    private TextView mWeatherConditionTv;                   //sunny or windy
     private TextView mWeekTv;                               //week
-    private TextView mAirQualityDescriptionTv;              //air quality condition
+    private TextView mAirQualityConditionTv;                //air quality condition
     private TextView mAirQualityIndexTv;                    //air quality index
     private DailyWeatherWidget[] mDailyWeatherWidgets;      //Show four days weather information in future
+//    private ListView mLifeSuggestionLv;                      //A listView to show the suggestion of life
 
     //other
-    private CityName mCityName;
+    private CityInfo mCityInfo;
     //To identity whether http request is finished or not before start http request
     private boolean mIsHttpFinished = true;
     //request queue of volley
@@ -63,6 +66,7 @@ public class CityWeatherFragment extends BaseFragment
     private AirQualityIndex mAirQualityIndex;           //Air quality index
     private RealTimeWeather mRealTimeWeather;           //Real-time-weather information
     private List<DailyWeatherForecast> mDailyWeatherForecastList; //A list with daily weather forecast
+    private LifeSuggestion mLifeSuggestion;
 
     @Nullable
     @Override
@@ -79,26 +83,27 @@ public class CityWeatherFragment extends BaseFragment
          */
         Bundle arguments = getArguments();
         if(arguments != null){
-            mCityName = (CityName)arguments.getSerializable(KEY_CITY_NAME);
+            mCityInfo = (CityInfo)arguments.getSerializable(KEY_CITY_NAME);
         }
-        if(mCityName == null){
+        if(mCityInfo == null){
             //Get city's name from location service
         }
-        if(mCityName == null){
-            mCityName = new CityName("广州", "guangzhou");
+        if(mCityInfo == null){
+            mCityInfo = new CityInfo("广州", "guangzhou");
         }
         //initial the Volley in this Fragment
         mRequestQueue = Volley.newRequestQueue(getActivity());
     }
 
+    //Find view and set listener and others
     private void initView(View layoutView) {
         //initiate view
         layoutView.findViewById(R.id.ll_city_weather_air_quality_index).setOnClickListener(this);
-        circleTemperatureView = (CircleTemperatureView)layoutView.findViewById(R.id.circle_temperature_view_city_weather);
+        mCircleTemperatureView = (CircleTemperatureView)layoutView.findViewById(R.id.circle_temperature_view_city_weather);
         mWeatherIconIv = (ImageView)layoutView.findViewById(R.id.iv_city_weather_weather_icon);
         mWeatherConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_weather_condition);
         mWeekTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_week);
-        mAirQualityDescriptionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_condition);
+        mAirQualityConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_condition);
         mAirQualityIndexTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_index);
         //Four days in the future
         mDailyWeatherWidgets = new DailyWeatherWidget[4];
@@ -110,6 +115,7 @@ public class CityWeatherFragment extends BaseFragment
         mDailyWeatherWidgets[1].setOnClickListener(this);
         mDailyWeatherWidgets[2].setOnClickListener(this);
         mDailyWeatherWidgets[3].setOnClickListener(this);
+        layoutView.findViewById(R.id.tv_city_weather_life_suggestion).setOnClickListener(this);
         //Get new data
         refreshWeather();
     }
@@ -121,7 +127,7 @@ public class CityWeatherFragment extends BaseFragment
         if (mIsHttpFinished) {
 //            refreshHint.setVisibility(View.VISIBLE);
             mIsHttpFinished = false;//change the flag
-            HttpRequestUtils.queryWeatherByCityName(mCityName.getCityPinYinName(), this, mRequestQueue);
+            HttpRequestUtils.queryWeatherByCityName(mCityInfo.getCityPinYinName(), this, mRequestQueue);
         }else{
             ToastUtil.showShortToast(getActivity(), "正在拼命拉取天气信息，稍等哦亲");
         }
@@ -153,21 +159,29 @@ public class CityWeatherFragment extends BaseFragment
                 || id == R.id.daily_weather_widget_third || id == R.id.daily_weather_widget_forth){
             //Start an Activity to show seven daily weather,send city's Chinese name and a list with seven daily weather
             Intent intent = new Intent(getActivity(), SevenDayWeatherActivity.class);
-            intent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, mCityName.getCityChineseName());
+            intent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, mCityInfo.getCityChineseName());
             intent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable)mDailyWeatherForecastList);
+            startActivity(intent);
+        }else if(id == R.id.tv_city_weather_life_suggestion){
+            Intent intent = new Intent(getActivity(), LifeSuggestionActivity.class);
+            intent.putExtra(LifeSuggestionActivity.KEY_LIFE_SUGGESTION, mLifeSuggestion);
             startActivity(intent);
         }
     }
-//
+
     /**
      * return the name of city that this fragment is showing,
      * this method used by parent of this Fragment
      * @return name of city
      */
-    public CityName getCityName(){
-        return mCityName;
+    public CityInfo getCityInfo(){
+        return mCityInfo;
     }
 
+    /**
+     * Return real-time-weather of current city
+     * @return RealTimeWeather Object
+     */
     public RealTimeWeather getRealTimeWeather(){
         return mRealTimeWeather;
     }
@@ -195,7 +209,8 @@ public class CityWeatherFragment extends BaseFragment
         //Get the air quality index
         mAirQualityIndex = weatherInfoJsonParseUtil.getAirQualityIndex();
         if (mAirQualityIndex != null) {
-            mAirQualityDescriptionTv.setText(mAirQualityIndex.getQlty());
+            getView().findViewById(R.id.tv_city_weather_air_quality_hint).setVisibility(View.VISIBLE);
+            mAirQualityConditionTv.setText(mAirQualityIndex.getQlty());
             mAirQualityIndexTv.setText(mAirQualityIndex.getAqi()+"");
         }
 
@@ -218,9 +233,13 @@ public class CityWeatherFragment extends BaseFragment
             mDailyWeatherWidgets[3].setDailyWeather(mDailyWeatherForecastList.get(4));
         }
 
-        if(mRealTimeWeather!=null && mDailyWeatherWidgets!=null){
+        //Set current temperature,max temperature,min temperature for the CircleTemperatureView
+        if(mRealTimeWeather!=null && mDailyWeatherForecastList!=null){
             Temperature todayTemperature = mDailyWeatherForecastList.get(0).getTmp();
-            circleTemperatureView.setTemperature((int)todayTemperature.getMax(), mRealTimeWeather.getTmp(), (int)todayTemperature.getMin());
+            mCircleTemperatureView.setTemperature((int)todayTemperature.getMax(), mRealTimeWeather.getTmp(), (int)todayTemperature.getMin());
         }
+
+        //Get and keep the life suggestion
+        mLifeSuggestion = weatherInfoJsonParseUtil.getLifeSuggestion();
     }//setWeatherInformation()
 }

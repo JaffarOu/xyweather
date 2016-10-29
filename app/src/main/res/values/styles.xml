@@ -19,7 +19,7 @@
     <style name="divider_line">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">#eeeeee</item>
+        <item name="android:background">#aeaeae</item>
     </style>
 
     <!-- custom view_start-->

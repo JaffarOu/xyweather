@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.cityweather.CityWeatherFragmentPageAdapter;
-import com.jf.xyweather.model.CityName;
+import com.jf.xyweather.model.CityInfo;
 import com.jf.xyweather.cityweather.CityWeatherFragment;
 import com.jf.xyweather.cityweather.RealTimeWeatherActivity;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity
     private TextView mLastUpdateTimeTv;     //To show the last time that information was update
     private ViewPager viewPager;            //Hold different CityWeatherFragment
     private CityWeatherFragmentPageAdapter cityWeatherFragmentPageAdapter;
-    private List<CityName> cityNameList;
+    private List<CityInfo> cityNameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +46,10 @@ public class MainActivity extends BaseActivity
         mLastUpdateTimeTv = (TextView) findViewById(R.id.tv_main_last_update_time);
         //Get city list from database,this is some date used to test
         cityNameList = new ArrayList<>();
-        cityNameList.add(new CityName("广州", "guangzhou"));
-        cityNameList.add(new CityName("深圳", "shenzhen"));
-        cityNameList.add(new CityName("惠州", "huizhou"));
-        cityNameList.add(new CityName("珠海", "zhuhai"));
+        cityNameList.add(new CityInfo("广州", "guangzhou"));
+        cityNameList.add(new CityInfo("深圳", "shenzhen"));
+        cityNameList.add(new CityInfo("惠州", "huizhou"));
+        cityNameList.add(new CityInfo("珠海", "zhuhai"));
 
         //Initial the ViewPager
         viewPager = (ViewPager) findViewById(R.id.vp_main_city_weather);
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onPageSelected(int position) {
-        mCityNameTv.setText(cityWeatherFragmentPageAdapter.getFragment(position).getCityName().getCityChineseName());
+        mCityNameTv.setText(cityWeatherFragmentPageAdapter.getFragment(position).getCityInfo().getCityChineseName());
     }
 
     @Override

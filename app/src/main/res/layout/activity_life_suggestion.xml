@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@mipmap/bg_all_app_background"
+    android:orientation="vertical" android:gravity="center_horizontal"
+    tools:context="com.jf.xyweather.lifesuggestion.LifeSuggestionActivity">
+
+    <TextView
+        style="@style/common_text_view"
+        android:layout_marginTop="16dp"
+        android:text="生活指数"/>
+
+    <View
+        style="@style/divider_line"
+        android:layout_margin="8dp"/>
+
+    <ListView
+        android:id="@+id/lv_life_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:divider="#aeaeae"
+        android:dividerHeight="1dp">
+    </ListView>
+</LinearLayout>

@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 /**
  * Created by jf on 2016/7/3.
- * A JavaBean to describe the name of one city
- * it include various forms of name of one city
+ * A JavaBean to describe the information of one city
+ * it include various forms of name of one city,and other information
  */
-public class CityName implements Serializable{
+public class CityInfo implements Serializable{
 
     private String mCityChineseName; //城市名字汉字形式
     private String mCityPinYinName;  //城市名字拼音形式
 
-    public CityName(){
+    public CityInfo(){
 
     }
 
-    public CityName(String cityChineseName, String cityPinYinName) {
+    public CityInfo(String cityChineseName, String cityPinYinName) {
         mCityChineseName = cityChineseName;
         mCityPinYinName = cityPinYinName;
     }

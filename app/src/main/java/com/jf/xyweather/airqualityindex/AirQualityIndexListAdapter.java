@@ -53,7 +53,7 @@ public class AirQualityIndexListAdapter extends BaseAdapter{
         ViewHolder viewHolder;
         if(convertView == null){
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(MyApplications.getContext()).inflate(R.layout.item_air_quality_index_list_view, null);
+            convertView = LayoutInflater.from(MyApplications.getContext()).inflate(R.layout.item_air_quality_index_list, null);
             viewHolder.nameTv = (TextView)convertView.findViewById(R.id.tv_air_quality_index_name);
             viewHolder.valueTv = (TextView)convertView.findViewById(R.id.tv_air_quality_index_value);
             convertView.setTag(viewHolder);

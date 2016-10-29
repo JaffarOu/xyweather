@@ -1,4 +1,4 @@
-package com.jf.xyweather.selectedcity;
+package com.jf.xyweather.citymanage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.view.CustomTitles;
-import com.jf.xyweather.model.CityName;
+import com.jf.xyweather.model.CityInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 public class CityManageActivity extends BaseActivity
         implements CustomTitles.OnTitleClickListener, AdapterView.OnItemClickListener{
 
-    private List<CityName> cityNameList;
+    private List<CityInfo> cityNameList;
     public static final String KEY_SELECTED_CITY_LIST = "keySelectedCityList";
 
     public static final String ACTION_SELECT_CITY = "action_select_city";
@@ -39,7 +39,7 @@ public class CityManageActivity extends BaseActivity
     }
 
     private void initOther() {
-        cityNameList = (List<CityName>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
+        cityNameList = (List<CityInfo>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
     }
 
     private void initView() {
@@ -55,7 +55,7 @@ public class CityManageActivity extends BaseActivity
         if(cityNameList != null){
             listView.setOnItemClickListener(this);
             List<String> cityNames = new ArrayList<>(cityNameList.size());
-            for(CityName cityName:cityNameList){
+            for(CityInfo cityName:cityNameList){
                 cityNames.add(cityName.getCityChineseName());
             }
             listView.setAdapter(new CityManageAdapter(cityNames));

@@ -16,9 +16,6 @@ public class AqiActivity extends BaseActivity{
     public static final String KEY_AIR_QUALITY_INDEX = "keyAirQualityIndex";
     public static final String KEY_CITY_NAME = "keyCityName";
 
-//    private AirQualityIndex airQualityIndex;
-//    private CityName cityName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +28,6 @@ public class AqiActivity extends BaseActivity{
         AirQualityIndex airQualityIndex = (AirQualityIndex)getIntent().getSerializableExtra(KEY_AIR_QUALITY_INDEX);
         ListView aqiListView = (ListView)findViewById(R.id.lv_air_quality_index);
         aqiListView.setAdapter(new AirQualityIndexListAdapter(airQualityIndex));
-//        cityName = (CityName)intent.getSerializableExtra(KEY_CITY_NAME);
     }
 
 }

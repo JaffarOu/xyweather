@@ -11,14 +11,12 @@
     <!--weather type,such as sunny or cloudy-->
     <TextView
         android:id="@+id/tv_daily_weather_widget_weather_condition"
-        style="@style/common_text_view"
-        android:text="晴"/>
+        style="@style/common_text_view"/>
 
     <!--the max temperature and the min temperature-->
     <TextView
         android:id="@+id/tv_daily_weather_widget_max_and_min_temperature"
-        style="@style/common_text_view"
-        android:textColor="@color/white"/>
+        style="@style/common_text_view"/>
 
     <!--week-->
     <TextView

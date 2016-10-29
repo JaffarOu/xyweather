@@ -7,8 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
-import com.jf.xyweather.model.CityName;
-import com.jf.xyweather.cityweather.CityWeatherFragment;
+import com.jf.xyweather.model.CityInfo;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,12 +20,12 @@ import java.util.Map;
 public class CityWeatherFragmentPageAdapter extends FragmentStatePagerAdapter{
 
     private Context mContext;
-    //The CityName object will be send to CityWeatherFragment
-    private List<CityName> mCityNameList;
+    //The CityInfo object will be send to CityWeatherFragment
+    private List<CityInfo> mCityNameList;
     //Return the CityWeatherFragment instance to the Activity according the position
     private Map<Integer, CityWeatherFragment> mFragmentMap;
 
-    public CityWeatherFragmentPageAdapter(Context context, FragmentManager fm, List<CityName> cityNameList) {
+    public CityWeatherFragmentPageAdapter(Context context, FragmentManager fm, List<CityInfo> cityNameList) {
         super(fm);
         this.mContext = context;
         this.mCityNameList = cityNameList;

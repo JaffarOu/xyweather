@@ -11,10 +11,10 @@ public class Contact {
     public static final String API_KEY = "c3c63e854e2b4faa85fec3cb6ccfefa8";
 
     /**url that used to query weather information of one city*/
-    public static final String CITY_WEATHER_URL = "https://api.heweather.com/x3/weather";
+    public static final String URL_CITY_WEATHER_INFO = "https://api.heweather.com/x3/weather";
 
     /**the url that used to get one type of city*/
-    public static final String CITY_TYPE_URL = "https://api.heweather.com/x3/citylist";
+    public static final String URL_CITY_TYPE = "https://api.heweather.com/x3/citylist";
     /*http access__end*/
 
 

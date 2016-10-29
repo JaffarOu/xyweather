@@ -3,10 +3,9 @@ package com.jf.xyweather.util;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.SyncStateContract;
 
 import com.jf.xyweather.base.MyApplications;
-import com.jf.xyweather.model.CityName;
+import com.jf.xyweather.model.CityInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,17 +52,17 @@ public class SelectedCityHelper extends SQLiteOpenHelper{
         getWritableDatabase().execSQL(insert);
     }
 
-    public List<CityName> getCityNameList(){
+    public List<CityInfo> getCityNameList(){
         String query = "SELECT * FROM "+SELECTED_CITY_TABLE_NAME;
         Cursor cursor = getReadableDatabase().rawQuery(query, null);
         if(cursor.getCount() == 0){
             cursor.close();
             return null;
         }
-        List<CityName> cityNameList = new ArrayList<>(cursor.getCount());
-        CityName cityName;
+        List<CityInfo> cityNameList = new ArrayList<>(cursor.getCount());
+        CityInfo cityName;
         while (cursor.moveToNext()){
-            cityName = new CityName(cursor.getString(cursor.getColumnIndex(COLUMN_CITY_CHINESE_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_CITY_PIN_YIN_NAME)));
+            cityName = new CityInfo(cursor.getString(cursor.getColumnIndex(COLUMN_CITY_CHINESE_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_CITY_PIN_YIN_NAME)));
             cityNameList.add(cityName);
         }
         cursor.close();

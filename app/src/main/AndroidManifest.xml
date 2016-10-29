@@ -29,23 +29,23 @@
         </activity>
         <!-- main module__end -->
 
-        <!-- weather page-->
+
+        <!-- weather page -->
         <activity
             android:name=".cityweather.RealTimeWeatherActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
-        <!-- city manage-->
-        <activity android:name=".selectedcity.CityManageActivity" />
-
+        <!-- city manage -->
+        <activity android:name=".citymanage.CityManageActivity" />
         <activity
             android:name=".dailyweather.SevenDayWeatherActivity"
-            android:theme="@style/AppTheme.DailyWeatherVpi">
-        </activity>
+            android:theme="@style/AppTheme.DailyWeatherVpi"></activity>
 
-        <!-- air quality index-->
-        <activity android:name=".airqualityindex.AqiActivity"/>
-
+        <!-- air quality index -->
+        <activity android:name=".airqualityindex.AqiActivity" />
+        <activity
+            android:name=".lifesuggestion.LifeSuggestionActivity"
+            android:label="@string/title_activity_life_suggestion"></activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.model.AirQualityIndex;
 import com.jf.xyweather.model.CityBasicInformation;
 import com.jf.xyweather.model.DailyWeatherForecast;
+import com.jf.xyweather.model.LifeSuggestion;
 import com.jf.xyweather.model.RealTimeWeather;
 
 import org.json.JSONArray;
@@ -21,46 +22,42 @@ import java.util.List;
 public class WeatherInfoJsonParseUtil {
 
 //    private String weatherInfoJson;//the json string that will be parse
-    private JSONObject realJSONObject;
+    private JSONObject mRealJsonObject;
     private String status = "";//let the status never equals null
 
     public WeatherInfoJsonParseUtil(String weatherInfoJson){
-        if(weatherInfoJson == null){
-//            this.weatherInfoJson = null;
-            return;
-        }
+        if(weatherInfoJson == null) return;
         try{
             //get the valid JSON string from the "weatherInfoJson"
-            realJSONObject = new JSONObject(weatherInfoJson).getJSONArray("HeWeather data service 3.0").getJSONObject(0);
+            mRealJsonObject = new JSONObject(weatherInfoJson).getJSONArray("HeWeather data service 3.0").getJSONObject(0);
             //the "status" will equals the status that from JSON string,or it will equals "" char
-            status = realJSONObject.getString("status");
+            status = mRealJsonObject.getString("status");
         }catch (JSONException e) {
-            realJSONObject = null;
-            MyApplications.showLog("异常--" + getClass().getSimpleName() + "--构造方法发生异常--" + e.toString());
+            mRealJsonObject = null;
+            LogUtil.i(getClass().getSimpleName() + "--构造方法发生异常--" + e.toString());
         }
     }
 
     /**
-     * Get the status code from the He Feng web server
-     * @return The status code from He Feng web server to describe the result of our request
-     *          （用来描述我们的请求结果的状态码）
+     * Get the status code that used described the result of our request
+     * @return (1)ok：接口正常、(2)invalid key：错误的用户key、 (3)unknown city：未知城市
+     *          (4)no more requests：超过访问次数、(5)anr：服务无响应或超时、(6)permission denied：没有访问权限
+     *          (7)""：其他
      */
     public String getStatus(){
         return status;
     }
 
     /**
-     * get urban air quality index（获取城市空气质量指数）
-     * @return AirQualityIndex object that describe the urban air quality index,null if the json parse has error
+     * get air quality index of city（获取城市空气质量指数）
+     * @return AirQualityIndex Object that describe the air quality index of city,null if the json parse has error
      *          （返回空气质量指数对象，如果JSON解析出错，将返回null）
      */
     public AirQualityIndex getAirQualityIndex(){
-        if( !status.equals(Contact.OK) ){
-            return null;
-        }
+        if( !status.equals(Contact.OK) ) return null;
         AirQualityIndex airQualityIndex = null;
         try{
-            JSONObject aqiJsonObject = realJSONObject.getJSONObject("aqi").getJSONObject("city");
+            JSONObject aqiJsonObject = mRealJsonObject.getJSONObject("aqi").getJSONObject("city");
             airQualityIndex = new Gson().fromJson(aqiJsonObject.toString(), AirQualityIndex.class);
         }catch (JSONException e){
             MyApplications.showLog(getClass().getSimpleName()+"--getCityAqi()方法异常-"+e.toString());
@@ -70,27 +67,23 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public CityBasicInformation getCityBasicInfo(){
-        if( !status.equals(Contact.OK) ){
-            return null;
-        }
-        CityBasicInformation cityBasicInformation = null;
+        if( !status.equals(Contact.OK) ) return null;
+        CityBasicInformation cityBasicInformation;
         try{
-            JSONObject aqiJsonObject = realJSONObject.getJSONObject("basic");
+            JSONObject aqiJsonObject = mRealJsonObject.getJSONObject("basic");
             cityBasicInformation = new Gson().fromJson(aqiJsonObject.toString(), CityBasicInformation.class);
         }catch (JSONException e){
-            MyApplications.showLog("异常--"+getClass().getSimpleName()+"--getCityBasicInfo()方法异常-"+e.toString());
+            MyApplications.showLog(getClass().getSimpleName()+"--getCityBasicInfo()方法异常-"+e.toString());
             return null;
         }
         return cityBasicInformation;
     }
 
     public RealTimeWeather getRealTimeWeather(){
-        if( !status.equals(Contact.OK) ){
-            return null;
-        }
-        RealTimeWeather realTimeWeather = null;
+        if( !status.equals(Contact.OK) ) return null;
+        RealTimeWeather realTimeWeather;
         try{
-            JSONObject aqiJsonObject = realJSONObject.getJSONObject("now");
+            JSONObject aqiJsonObject = mRealJsonObject.getJSONObject("now");
             realTimeWeather = new Gson().fromJson(aqiJsonObject.toString(), RealTimeWeather.class);
         }catch (JSONException e){
             MyApplications.showLog("异常--"+getClass().getSimpleName()+"--getRealTimeWeather()方法异常-"+e.toString());
@@ -100,12 +93,10 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public List<DailyWeatherForecast> getDailyWeatherForecast(){
-        if( !status.equals(Contact.OK) ){
-            return null;
-        }
-        List<DailyWeatherForecast> dailyWeatherForecastList = null;
+        if( !status.equals(Contact.OK) ) return null;
+        List<DailyWeatherForecast> dailyWeatherForecastList;
         try{
-            JSONArray jsonArray = realJSONObject.getJSONArray("daily_forecast");
+            JSONArray jsonArray = mRealJsonObject.getJSONArray("daily_forecast");
             int length = jsonArray.length();
             dailyWeatherForecastList = new ArrayList<>(length);
             Gson gson = new Gson();
@@ -114,10 +105,26 @@ public class WeatherInfoJsonParseUtil {
                 dailyWeatherForecastList.add(gson.fromJson(jsonObject.toString(), DailyWeatherForecast.class));
             }
         }catch (JSONException e){
-            MyApplications.showLog("异常--"+getClass().getSimpleName()+"--\"getDailyWeatherForecast\"方法");
+            LogUtil.i(getClass().getSimpleName()+"--getDailyWeatherForecast()方法异常-"+e.toString());
             dailyWeatherForecastList = null;
         }
         return dailyWeatherForecastList;
     }
 
+    /**
+     * Get suggestion of life
+     * @return
+     */
+    public LifeSuggestion getLifeSuggestion(){
+        if( !status.equals(Contact.OK) ) return null;
+        LifeSuggestion lifeSuggestion;
+        try{
+            JSONObject jsonObject = mRealJsonObject.getJSONObject("suggestion");
+            lifeSuggestion = new Gson().fromJson(jsonObject.toString(), LifeSuggestion.class);
+        }catch (JSONException e){
+            LogUtil.i(getClass().getSimpleName()+"--getLifeSuggestion()方法异常"+e.toString());
+            lifeSuggestion = null;
+        }
+        return lifeSuggestion;
+    }
 }
