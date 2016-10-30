@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.model.CityInfo;
+import com.jf.xyweather.util.LogUtil;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -22,11 +23,12 @@ import java.util.List;
 public class CityWeatherActivity extends BaseActivity
         implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
+    public static final String KEY_CITY_NAME = "keyCityName";
     private TextView mCityNameTv;           //To show the city's name of current page
     private TextView mLastUpdateTimeTv;     //To show the last time that information was update
     private ViewPager viewPager;            //Hold different CityWeatherFragment
     private CityWeatherFragmentPageAdapter cityWeatherFragmentPageAdapter;
-    private List<CityInfo> cityNameList;
+    private List<CityInfo> mCityInfoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,30 +38,35 @@ public class CityWeatherActivity extends BaseActivity
     }
 
     private void init() {
+        //Get city name from Intent Object
+        String cityName = getIntent().getStringExtra(KEY_CITY_NAME);
+        if(cityName == null) {
+            LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
+            return;
+        }
+
+        mCityInfoList = new ArrayList<>();
+        mCityInfoList.add(new CityInfo(cityName, cityName));
+
         //Initial the title
         findViewById(R.id.tv_city_weather_more_index).setOnClickListener(this);
         findViewById(R.id.tv_city_weather_manage_city).setOnClickListener(this);
         mCityNameTv = (TextView) findViewById(R.id.tv_city_weather_city_name);
         mLastUpdateTimeTv = (TextView) findViewById(R.id.tv_city_weather_last_update_time);
-        //Get city list from database,this is some date used to test
-        cityNameList = new ArrayList<>();
-        cityNameList.add(new CityInfo("广州", "guangzhou"));
-        cityNameList.add(new CityInfo("深圳", "shenzhen"));
-        cityNameList.add(new CityInfo("惠州", "huizhou"));
-        cityNameList.add(new CityInfo("珠海", "zhuhai"));
 
         //Initial the ViewPager
         viewPager = (ViewPager) findViewById(R.id.vp_city_weather_city_weather);
-        cityWeatherFragmentPageAdapter = new CityWeatherFragmentPageAdapter(this, getSupportFragmentManager(), cityNameList);
+        cityWeatherFragmentPageAdapter =
+                new CityWeatherFragmentPageAdapter(this, getSupportFragmentManager(), mCityInfoList);
         viewPager.setAdapter(cityWeatherFragmentPageAdapter);
         CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator_city_weather);
         circlePageIndicator.setViewPager(viewPager);
         circlePageIndicator.setOnPageChangeListener(this);
-        if (cityNameList.size() < 2) {
+        if (mCityInfoList.size() < 2) {
             circlePageIndicator.setVisibility(View.INVISIBLE);
         }
         //Set the first city's name as title
-        mCityNameTv.setText(cityNameList.get(0).getCityChineseName());
+        mCityNameTv.setText(mCityInfoList.get(0).getCityChineseName());
     }
 
     @Override

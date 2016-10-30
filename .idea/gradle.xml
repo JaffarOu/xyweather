@@ -10,7 +10,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AMap_Location_V2.6.0_20160628" />
             <option value="$PROJECT_DIR$/Volley" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/viewpagerindicator" />
@@ -19,7 +18,6 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AMap_Location_V2.6.0_20160628" />
             <option value="$PROJECT_DIR$/Volley" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/viewpagerindicator" />

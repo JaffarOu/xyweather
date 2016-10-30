@@ -28,22 +28,22 @@ public class HttpRequestUtils {
         Map<String,String> parameter = new HashMap<>(2);
         //put the name of city and developer's key of "He Feng weather"
         parameter.put("city", cityName);
-        parameter.put("key", Contact.API_KEY);
-        sendHttpGetForJSON(Contact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
+        parameter.put("key", WeatherContact.API_KEY);
+        sendHttpGetForJSON(WeatherContact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
     }
 
     public static void queryWeatherByCityIp(String cityIp, HttpJSONListener httpJSONListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("cityip",cityIp);
-        parameter.put("key", Contact.API_KEY);
-        sendHttpGetForJSON(Contact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
+        parameter.put("key", WeatherContact.API_KEY);
+        sendHttpGetForJSON(WeatherContact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
     }
 
     public static void queryCityByType(String cityType, HttpJSONListener httpListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("search", cityType);
-        parameter.put("key" ,Contact.API_KEY);
-        sendHttpGetForJSON(Contact.URL_CITY_TYPE, parameter, httpListener, requestQueue);
+        parameter.put("key" , WeatherContact.API_KEY);
+        sendHttpGetForJSON(WeatherContact.URL_CITY_TYPE, parameter, httpListener, requestQueue);
     }
 
     public static void sendHttpPostForJSON(String url, HttpJSONListener httpListener, Map<String, String> requestParameter){

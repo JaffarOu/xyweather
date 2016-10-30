@@ -21,26 +21,26 @@ public class CityWeatherFragmentPageAdapter extends FragmentStatePagerAdapter{
 
     private Context mContext;
     //The CityInfo object will be send to CityWeatherFragment
-    private List<CityInfo> mCityNameList;
+    private List<CityInfo> mCityInfoList;
     //Return the CityWeatherFragment instance to the Activity according the position
     private Map<Integer, CityWeatherFragment> mFragmentMap;
 
     public CityWeatherFragmentPageAdapter(Context context, FragmentManager fm, List<CityInfo> cityNameList) {
         super(fm);
         this.mContext = context;
-        this.mCityNameList = cityNameList;
+        this.mCityInfoList = cityNameList;
         mFragmentMap = new HashMap<>();
     }
 
     @Override
     public int getCount() {
-        return mCityNameList == null ? 0 : mCityNameList.size();
+        return mCityInfoList == null ? 0 : mCityInfoList.size();
     }
 
     @Override
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(CityWeatherFragment.KEY_CITY_NAME, mCityNameList.get(position));
+        bundle.putSerializable(CityWeatherFragment.KEY_CITY_NAME, mCityInfoList.get(position));
         CityWeatherFragment fragment = (CityWeatherFragment)Fragment.instantiate(mContext, CityWeatherFragment.class.getName(), bundle);
         mFragmentMap.put(position, fragment);
         return fragment;

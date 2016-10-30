@@ -2,9 +2,9 @@ package com.jf.xyweather.util;
 
 /**
  * Created by jf on 2016/6/21.
- * the contact in this project
+ * The contact about weather request
  */
-public class Contact {
+public class WeatherContact {
 
     /*http access__start*/
     /**developer key of He Feng weather*/
@@ -22,7 +22,7 @@ public class Contact {
     /**means request successfully*/
     public static final String OK = "ok";
 
-    /**the API_KEY is incorrect*/
+    /**the he ht feng weather api key is incorrect*/
     public static final String INVAILD_KEY = "invalid key";
 
     /**means the city code or the city name is incorrect*/
@@ -37,8 +37,4 @@ public class Contact {
     /**means we have not permission to request weather information*/
     public static final String PERMISSION_DENIED = "permission denied";
     /*The code that described the weather query results returned from "He Feng weather"__end*/
-
-    /*The String that described the condition of weather__start*/
-
-    /*The String that described the condition of weather__end*/
 }

@@ -1,5 +1,6 @@
 package com.jf.xyweather.base.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -17,6 +18,7 @@ abstract public class BaseActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         //Print the current Activity's name for debug
         LogUtil.i("which_activity", getClass().getSimpleName());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
 }

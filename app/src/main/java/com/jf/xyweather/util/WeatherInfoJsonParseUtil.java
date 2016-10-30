@@ -54,7 +54,7 @@ public class WeatherInfoJsonParseUtil {
      *          （返回空气质量指数对象，如果JSON解析出错，将返回null）
      */
     public AirQualityIndex getAirQualityIndex(){
-        if( !status.equals(Contact.OK) ) return null;
+        if( !status.equals(WeatherContact.OK) ) return null;
         AirQualityIndex airQualityIndex = null;
         try{
             JSONObject aqiJsonObject = mRealJsonObject.getJSONObject("aqi").getJSONObject("city");
@@ -67,7 +67,7 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public CityBasicInformation getCityBasicInfo(){
-        if( !status.equals(Contact.OK) ) return null;
+        if( !status.equals(WeatherContact.OK) ) return null;
         CityBasicInformation cityBasicInformation;
         try{
             JSONObject aqiJsonObject = mRealJsonObject.getJSONObject("basic");
@@ -80,7 +80,7 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public RealTimeWeather getRealTimeWeather(){
-        if( !status.equals(Contact.OK) ) return null;
+        if( !status.equals(WeatherContact.OK) ) return null;
         RealTimeWeather realTimeWeather;
         try{
             JSONObject aqiJsonObject = mRealJsonObject.getJSONObject("now");
@@ -93,7 +93,7 @@ public class WeatherInfoJsonParseUtil {
     }
 
     public List<DailyWeatherForecast> getDailyWeatherForecast(){
-        if( !status.equals(Contact.OK) ) return null;
+        if( !status.equals(WeatherContact.OK) ) return null;
         List<DailyWeatherForecast> dailyWeatherForecastList;
         try{
             JSONArray jsonArray = mRealJsonObject.getJSONArray("daily_forecast");
@@ -116,7 +116,7 @@ public class WeatherInfoJsonParseUtil {
      * @return
      */
     public LifeSuggestion getLifeSuggestion(){
-        if( !status.equals(Contact.OK) ) return null;
+        if( !status.equals(WeatherContact.OK) ) return null;
         LifeSuggestion lifeSuggestion;
         try{
             JSONObject jsonObject = mRealJsonObject.getJSONObject("suggestion");

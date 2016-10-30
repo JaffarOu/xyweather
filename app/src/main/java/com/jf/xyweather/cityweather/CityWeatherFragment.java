@@ -80,9 +80,15 @@ public class CityWeatherFragment extends BaseFragment
         It will initial the UI and request the weather information after get CityInfo Object,
         or it will do nothing if the CityInfo == null*/
         Bundle arguments = getArguments();
-        if (arguments == null) return;
+        if (arguments == null) {
+            LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
+            return;
+        }
         mCityInfo = (CityInfo) arguments.getSerializable(KEY_CITY_NAME);
-        if (mCityInfo == null) return;
+        if (mCityInfo == null) {
+            LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
+            return;
+        }
 
         //initial the Volley in this Fragment
         mRequestQueue = Volley.newRequestQueue(getActivity());

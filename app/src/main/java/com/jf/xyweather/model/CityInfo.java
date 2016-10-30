@@ -9,11 +9,11 @@ import java.io.Serializable;
  */
 public class CityInfo implements Serializable{
 
-    private String mCityChineseName; //城市名字汉字形式
-    private String mCityPinYinName;  //城市名字拼音形式
+    private String mCityChineseName;    //城市名字汉字形式
+    private String mCityPinYinName;     //城市名字拼音形式
+    private String mLastUpdateTime;     //最后一次更新天气信息时间
 
     public CityInfo(){
-
     }
 
     public CityInfo(String cityChineseName, String cityPinYinName) {
