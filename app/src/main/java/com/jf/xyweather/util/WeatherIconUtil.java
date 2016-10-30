@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public class WeatherIconUtil {
 
+    //The first Integer is weather code and the second is resource id
     private static Map<Integer, Integer> sWeatherIconMap;
 
     //Initial the map

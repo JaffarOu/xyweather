@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Created by JF on 2016/10/24.
- * Return the CityWeatherFragment instance to the ViewPager in MainActivity
+ * Return the CityWeatherFragment instance
  */
 public class CityWeatherFragmentPageAdapter extends FragmentStatePagerAdapter{
 

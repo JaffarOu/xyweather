@@ -9,47 +9,44 @@
         android:layout_height="wrap_content">
         <!--more real-time-weather-->
         <TextView
-            android:id="@+id/tv_main_more_index"
+            android:id="@+id/tv_city_weather_more_index"
             style="@style/common_text_view"
-            android:layout_centerVertical="true"
             android:padding="8dp"
             android:text="更多指标"/>
         <!--name of city-->
         <TextView
-            android:id="@+id/tv_main_city_name"
+            android:id="@+id/tv_city_weather_city_name"
             style="@style/common_text_view"
             android:paddingTop="8dp"
             android:layout_centerHorizontal="true"/>
         <!--last update time-->
         <TextView
-            android:id="@+id/tv_main_last_update_time"
+            android:id="@+id/tv_city_weather_last_update_time"
             style="@style/common_text_view"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/tv_main_city_name"
+            android:layout_below="@id/tv_city_weather_city_name"
             android:paddingBottom="8dp"
-            android:text="40分钟前"
             android:textSize="12sp"/>
         <!--manage city-->
         <TextView
-            android:id="@+id/tv_main_manage_city"
+            android:id="@+id/tv_city_weather_manage_city"
             style="@style/common_text_view"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:padding="8dp"
             android:text="管理城市"/>
     </RelativeLayout>
 
     <!--A ViewPager with CityWeatherFragment-->
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_main_city_weather"
+        android:id="@+id/vp_city_weather_city_weather"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     </android.support.v4.view.ViewPager>
 
     <com.viewpagerindicator.CirclePageIndicator
-        android:id="@+id/circle_page_indicator_main_city_weather"
+        android:id="@+id/circle_page_indicator_city_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"/>

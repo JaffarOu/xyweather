@@ -13,11 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- main module__start -->
-        <!-- main interface -->
-        <activity android:name=".main.MainActivity" />
+        <!-- main Activity -->
+        <activity android:name=".cityweather.CityWeatherActivity" />
 
-        <!-- welcome interface -->
+        <!-- welcome Activity -->
         <activity
             android:name=".main.WelcomeActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -27,25 +26,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- main module__end -->
 
 
         <!-- weather page -->
         <activity
             android:name=".cityweather.RealTimeWeatherActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
 
         <!-- city manage -->
         <activity android:name=".citymanage.CityManageActivity" />
+
+        <!--seven day weather forecast-->
         <activity
             android:name=".dailyweather.SevenDayWeatherActivity"
-            android:theme="@style/AppTheme.DailyWeatherVpi"></activity>
+            android:theme="@style/AppTheme.DailyWeatherVpi">
+        </activity>
 
         <!-- air quality index -->
         <activity android:name=".airqualityindex.AqiActivity" />
+
+        <!--life suggestions-->
         <activity
             android:name=".lifesuggestion.LifeSuggestionActivity"
-            android:label="@string/title_activity_life_suggestion"></activity>
+            android:label="@string/title_activity_life_suggestion">
+        </activity>
     </application>
 
 </manifest>

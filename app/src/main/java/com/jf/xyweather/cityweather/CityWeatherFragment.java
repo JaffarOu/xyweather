@@ -48,12 +48,11 @@ public class CityWeatherFragment extends BaseFragment
     //view
     private CircleTemperatureView mCircleTemperatureView;   //An circle view used to show temperature(max,now,min)
     private ImageView mWeatherIconIv;                       //An icon used to describe the weather condition
-    private TextView mWeatherConditionTv;                   //sunny or windy
+    private TextView mWeatherConditionTv;                   //Weather condition such as sunny,windy or other
     private TextView mWeekTv;                               //week
     private TextView mAirQualityConditionTv;                //air quality condition
     private TextView mAirQualityIndexTv;                    //air quality index
     private DailyWeatherWidget[] mDailyWeatherWidgets;      //Show four days weather information in future
-//    private ListView mLifeSuggestionLv;                      //A listView to show the suggestion of life
 
     //other
     private CityInfo mCityInfo;
@@ -72,27 +71,23 @@ public class CityWeatherFragment extends BaseFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layoutView = inflater.inflate(R.layout.fragment_city_weather, container, false);
-        initOther();
-        initView(layoutView);
+        init(layoutView);
         return layoutView;
     }
 
-    private void initOther() {
-        /*Get city's name,we will get city's name from location service if we can't get it from arguments,
-        we will use "guangzhou" as the city's name if we can't get it from location service.
-         */
+    private void init(View layoutView) {
+        /*Get CityInfo Object from the arguments,
+        It will initial the UI and request the weather information after get CityInfo Object,
+        or it will do nothing if the CityInfo == null*/
         Bundle arguments = getArguments();
-        if(arguments != null){
-            mCityInfo = (CityInfo)arguments.getSerializable(KEY_CITY_NAME);
-        }
-        if(mCityInfo == null){
-            //Get city's name from location service
-        }
-        if(mCityInfo == null){
-            mCityInfo = new CityInfo("广州", "guangzhou");
-        }
+        if (arguments == null) return;
+        mCityInfo = (CityInfo) arguments.getSerializable(KEY_CITY_NAME);
+        if (mCityInfo == null) return;
+
         //initial the Volley in this Fragment
         mRequestQueue = Volley.newRequestQueue(getActivity());
+
+        initView(layoutView);
     }
 
     //Find view and set listener and others
@@ -170,7 +165,7 @@ public class CityWeatherFragment extends BaseFragment
     }
 
     /**
-     * return the name of city that this fragment is showing,
+     * return the information of city that this fragment is showing,
      * this method used by parent of this Fragment
      * @return name of city
      */

@@ -16,9 +16,6 @@ import com.jf.xyweather.util.LogUtil;
  */
 abstract public class BaseFragment extends Fragment {
 
-    //The View returned in onCreateView() method
-    protected View layoutView;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

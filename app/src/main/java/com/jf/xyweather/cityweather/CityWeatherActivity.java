@@ -1,4 +1,4 @@
-package com.jf.xyweather.main;
+package com.jf.xyweather.cityweather;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,7 @@ import android.widget.TextView;
 
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
-import com.jf.xyweather.cityweather.CityWeatherFragmentPageAdapter;
 import com.jf.xyweather.model.CityInfo;
-import com.jf.xyweather.cityweather.CityWeatherFragment;
-import com.jf.xyweather.cityweather.RealTimeWeatherActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ import java.util.List;
  * The main activity in this App,It used ViewPager with Fragment to show various city's weather information.
  * It also has some other function
  */
-public class MainActivity extends BaseActivity
+public class CityWeatherActivity extends BaseActivity
         implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private TextView mCityNameTv;           //To show the city's name of current page
@@ -34,16 +31,16 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_city_weather);
         init();
     }
 
     private void init() {
         //Initial the title
-        findViewById(R.id.tv_main_more_index).setOnClickListener(this);
-        findViewById(R.id.tv_main_manage_city).setOnClickListener(this);
-        mCityNameTv = (TextView) findViewById(R.id.tv_main_city_name);
-        mLastUpdateTimeTv = (TextView) findViewById(R.id.tv_main_last_update_time);
+        findViewById(R.id.tv_city_weather_more_index).setOnClickListener(this);
+        findViewById(R.id.tv_city_weather_manage_city).setOnClickListener(this);
+        mCityNameTv = (TextView) findViewById(R.id.tv_city_weather_city_name);
+        mLastUpdateTimeTv = (TextView) findViewById(R.id.tv_city_weather_last_update_time);
         //Get city list from database,this is some date used to test
         cityNameList = new ArrayList<>();
         cityNameList.add(new CityInfo("广州", "guangzhou"));
@@ -52,10 +49,10 @@ public class MainActivity extends BaseActivity
         cityNameList.add(new CityInfo("珠海", "zhuhai"));
 
         //Initial the ViewPager
-        viewPager = (ViewPager) findViewById(R.id.vp_main_city_weather);
+        viewPager = (ViewPager) findViewById(R.id.vp_city_weather_city_weather);
         cityWeatherFragmentPageAdapter = new CityWeatherFragmentPageAdapter(this, getSupportFragmentManager(), cityNameList);
         viewPager.setAdapter(cityWeatherFragmentPageAdapter);
-        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator_main_city_weather);
+        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator_city_weather);
         circlePageIndicator.setViewPager(viewPager);
         circlePageIndicator.setOnPageChangeListener(this);
         if (cityNameList.size() < 2) {
@@ -68,13 +65,13 @@ public class MainActivity extends BaseActivity
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.tv_main_more_index){
+        if(id == R.id.tv_city_weather_more_index){
             //Start An Activity to show more real-time-weather information
             Intent intent = new Intent(this, RealTimeWeatherActivity.class);
             CityWeatherFragment fragment = cityWeatherFragmentPageAdapter.getFragment(viewPager.getCurrentItem());
             intent.putExtra(RealTimeWeatherActivity.KEY_REAL_TIME_WEATHER_FORECAST, fragment.getRealTimeWeather());
             startActivity(intent);
-        }else if(id == R.id.tv_main_manage_city){
+        }else if(id == R.id.tv_city_weather_manage_city){
 
         }
     }

@@ -2,12 +2,12 @@ package com.jf.xyweather.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
+import com.jf.xyweather.cityweather.CityWeatherActivity;
 
 /**
  * Created by jf on 2016/6/20.
@@ -42,8 +42,7 @@ public class WelcomeActivity extends BaseActivity implements Animation.Animation
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        //direct to the MainActivity when the animation is finished
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, CityWeatherActivity.class));
         finish();
     }
 

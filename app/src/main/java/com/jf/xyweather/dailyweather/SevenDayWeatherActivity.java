@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
-import com.jf.xyweather.baseadapter.BaseViewPagerAdapter;
 import com.jf.xyweather.model.DailyWeatherForecast;
 import com.viewpagerindicator.TabPageIndicator;
 
