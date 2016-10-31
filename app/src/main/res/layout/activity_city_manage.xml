@@ -1,19 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@mipmap/bg_all_app_background">
 
-    <com.jf.xyweather.view.CustomTitles
-        android:id="@+id/custom_titles_activity_city_manage"
+    <!--<com.jf.xyweather.view.CustomTitles-->
+        <!--android:id="@+id/custom_titles_activity_city_manage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/black_translucent">-->
+    <!--</com.jf.xyweather.view.CustomTitles>-->
+
+    <TextView
+        android:id="@+id/tv_activity_city_manage_title"
+        style="@style/common_text_view"
+        android:layout_centerHorizontal="true"
+        android:text="管理城市"
+        android:textSize="16sp"
+        android:layout_margin="8dp"/>
+
+    <FrameLayout
+        android:id="@+id/layout_activity_city_manage_bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black_translucent">
-    </com.jf.xyweather.view.CustomTitles>
-
+        android:layout_alignParentBottom="true"
+        android:padding="32dp">
+        <!--Add new city-->
+        <TextView
+            android:id="@+id/tv_city_manage_add_city"
+            style="@style/common_text_view"
+            android:layout_gravity="start"
+            android:text="添加城市"
+            android:drawableTop="@mipmap/icon_city_manage_add_city"
+            android:drawablePadding="8dp"/>
+        <!--Delete city-->
+        <TextView
+            android:id="@+id/tv_city_manage_delete_city"
+            style="@style/common_text_view"
+            android:layout_gravity="center_horizontal"
+            android:text="删除城市"
+            android:drawableTop="@mipmap/icon_city_manage_delete_city"
+            android:drawablePadding="8dp"/>
+        <!--setting-->
+        <TextView
+            android:id="@+id/tv_city_manage_setting"
+            style="@style/common_text_view"
+            android:layout_gravity="end"
+            android:text="设置"
+            android:visibility="invisible"/>
+    </FrameLayout>
     <ListView
         android:id="@+id/lv_activity_city_manage_city_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_activity_city_manage_title"
+        android:layout_above="@id/layout_activity_city_manage_bottom_layout">
     </ListView>
 
-</LinearLayout>
+</RelativeLayout>

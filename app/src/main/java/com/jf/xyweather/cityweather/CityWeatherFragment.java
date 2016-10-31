@@ -136,9 +136,9 @@ public class CityWeatherFragment extends BaseFragment
 
     /*override the method of HttpListener_start*/
     @Override
-    public void onFinish(String result) {
+    public void onFinish(String jsonString) {
         mIsHttpFinished = true;
-        setWeatherInformation(result);
+        setWeatherInformation(jsonString);
     }
 
     @Override

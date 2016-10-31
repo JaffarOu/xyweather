@@ -12,8 +12,14 @@ import com.amap.api.location.AMapLocationListener;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.cityweather.CityWeatherActivity;
+import com.jf.xyweather.model.CityInfo;
 import com.jf.xyweather.util.LocationUtil;
 import com.jf.xyweather.util.LogUtil;
+import com.jf.xyweather.util.ToastUtil;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jf on 2016/6/20.
@@ -37,18 +43,27 @@ public class WelcomeActivity extends BaseActivity
         @Override
         public void handleMessage(Message msg) {
             if(msg.what == WHAT_ANIMATION_FINISH){
+                //Set the flag that animation is finished
                 isAnimationFinish = true;
             }else if(msg.what == WHAT_LOCATION_FINISH){
+                //Set the flag that location is finished and destroy the location Service
                 isLocationFinish = true;
                 mLocationUtil.onDestroy();
             }
             //If both animation and location ard finished,start CityWeatherActivity and send it the city name
             if(isAnimationFinish && isLocationFinish){
+                //If cityName != null means the location service is successful
                 if(cityName != null){
-                    Intent intent = new Intent(WelcomeActivity.this, CityWeatherActivity.class);
+                    //删除城市名字的“市”字
                     cityName = cityName.substring(0, cityName.length()-1);
-                    intent.putExtra(CityWeatherActivity.KEY_CITY_NAME, cityName);
+                    List<CityInfo> cityInfoList = new ArrayList<>();
+                    cityInfoList.add(new CityInfo(cityName, cityName));
+                    Intent intent = new Intent(WelcomeActivity.this, CityWeatherActivity.class);
+                    intent.putExtra(CityWeatherActivity.KEY_CITY_INFO_LIST, (Serializable)cityInfoList);
                     startActivity(intent);
+                    finish();
+                }else{
+                    ToastUtil.showLongToast(WelcomeActivity.this, "定位失败，应用将退出");
                     finish();
                 }
             }

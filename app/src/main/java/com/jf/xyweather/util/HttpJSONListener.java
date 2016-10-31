@@ -8,9 +8,9 @@ public interface HttpJSONListener {
 
     /**
      * call when http request finish
-     * @param JSONString the JSONString from web server
+     * @param jsonString the JSONString from web server
      */
-    public void onFinish(String JSONString);
+    public void onFinish(String jsonString);
 
     /**
      * call when http request occur error
