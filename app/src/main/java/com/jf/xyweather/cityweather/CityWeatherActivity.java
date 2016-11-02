@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.citymanage.CityManageActivity;
-import com.jf.xyweather.model.CityInfo;
+import com.jf.xyweather.model.SelectedCity;
 import com.jf.xyweather.util.LogUtil;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -24,15 +24,15 @@ import java.util.List;
 public class CityWeatherActivity extends BaseActivity
         implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
-    public static final String KEY_CITY_INFO_LIST = "keyCityInfoList";
-    private static final int sRequestCodeCityManage = 1<<1;
+    public static final String KEY_SELECTED_CITY_LIST = "keySelectedCityList";
+    private static final int REQUEST_CODE_CITY_MANAGE = 1<<1;
 
     private TextView mCityNameTv;           //To show the city's name of current page
     private TextView mLastUpdateTimeTv;     //To show the last time that information was update
     private ViewPager mViewPager;            //Hold different CityWeatherFragment
     private CirclePageIndicator mCirclePageIndicator;
     private CityWeatherFragmentPageAdapter cityWeatherFragmentPageAdapter;
-    private List<CityInfo> mCityInfoList;
+    private List<SelectedCity> mSelectedCityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class CityWeatherActivity extends BaseActivity
 
     private void init() {
         //Get city name from Intent Object
-        mCityInfoList = (List<CityInfo>)getIntent().getSerializableExtra(KEY_CITY_INFO_LIST);
-        if(mCityInfoList == null || mCityInfoList.size() == 0) {
+        mSelectedCityList = (List<SelectedCity>)getIntent().getSerializableExtra(KEY_SELECTED_CITY_LIST);
+        if(mSelectedCityList == null || mSelectedCityList.size() == 0) {
             LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
             return;
         }
@@ -58,16 +58,16 @@ public class CityWeatherActivity extends BaseActivity
         //Initial the ViewPager
         mViewPager = (ViewPager) findViewById(R.id.vp_city_weather_city_weather);
         cityWeatherFragmentPageAdapter =
-                new CityWeatherFragmentPageAdapter(this, getSupportFragmentManager(), mCityInfoList);
+                new CityWeatherFragmentPageAdapter(this, getSupportFragmentManager(), mSelectedCityList);
         mViewPager.setAdapter(cityWeatherFragmentPageAdapter);
         mCirclePageIndicator = (CirclePageIndicator) findViewById(R.id.circle_page_indicator_city_weather);
         mCirclePageIndicator.setViewPager(mViewPager);
         mCirclePageIndicator.setOnPageChangeListener(this);
-        if (mCityInfoList.size() < 2) {
+        if (mSelectedCityList.size() < 2) {
             mCirclePageIndicator.setVisibility(View.INVISIBLE);
         }
         //Set the first city's name as title
-        mCityNameTv.setText(mCityInfoList.get(0).getCityChineseName());
+        mCityNameTv.setText(mSelectedCityList.get(0).getCityName());
     }
 
     @Override
@@ -81,8 +81,8 @@ public class CityWeatherActivity extends BaseActivity
             startActivity(intent);
         }else if(id == R.id.tv_city_weather_manage_city){
             Intent intent = new Intent(this, CityManageActivity.class);
-            intent.putExtra(CityManageActivity.KEY_CITY_INFO_LIST, (Serializable)mCityInfoList);
-            startActivityForResult(intent, sRequestCodeCityManage);
+            intent.putExtra(CityManageActivity.KEY_SELECTED_CITY_LIST, (Serializable) mSelectedCityList);
+            startActivityForResult(intent, REQUEST_CODE_CITY_MANAGE);
         }
     }
 
@@ -93,7 +93,7 @@ public class CityWeatherActivity extends BaseActivity
 
     @Override
     public void onPageSelected(int position) {
-        mCityNameTv.setText(cityWeatherFragmentPageAdapter.getFragment(position).getCityInfo().getCityChineseName());
+        mCityNameTv.setText(cityWeatherFragmentPageAdapter.getFragment(position).getCityInfo().getCityName());
     }
 
     @Override
@@ -105,13 +105,21 @@ public class CityWeatherActivity extends BaseActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != RESULT_OK) return;
-        if(requestCode == sRequestCodeCityManage && data != null){
+        if(requestCode == REQUEST_CODE_CITY_MANAGE && data != null){
             String action = data.getAction();
             if(action.equals(CityManageActivity.ACTION_SELECT_CITY)){
                 //If user selected a city on CityManageActivity,show the position that he selected
                 mCirclePageIndicator.setCurrentItem(data.getIntExtra(CityManageActivity.KEY_SELECTED_POSITION, 0));
-            }else if(action.equals(CityManageActivity.ACTION_ADD_CITY) || action.equals(CityManageActivity.ACTION_DELETE_CITY)){
+            }else if(action.equals(CityManageActivity.ACTION_UPDATE_SELECTED_CITY_LIST)){
                 //User selected add or delete cities on CityManageActivity
+                mSelectedCityList = (List<SelectedCity>)data.getSerializableExtra(CityManageActivity.KEY_SELECTED_CITY_LIST);
+                //Determine if CirclePageIndicator should visibility
+                if(mSelectedCityList.size() > 1) mCirclePageIndicator.setVisibility(View.VISIBLE);
+                else mCirclePageIndicator.setVisibility(View.INVISIBLE);
+                //update adapter
+                cityWeatherFragmentPageAdapter.setSelectedCityList(mSelectedCityList);
+//                cityWeatherFragmentPageAdapter.notifyDataSetChanged();
+                mCirclePageIndicator.setCurrentItem(data.getIntExtra(CityManageActivity.KEY_SELECTED_POSITION, 0));
             }
         }
     }

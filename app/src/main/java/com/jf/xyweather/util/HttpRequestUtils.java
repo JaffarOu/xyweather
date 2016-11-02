@@ -39,7 +39,7 @@ public class HttpRequestUtils {
         sendHttpGetForJSON(WeatherContact.URL_CITY_WEATHER_INFO, parameter, httpJSONListener, requestQueue);
     }
 
-    public static void queryCityByType(String cityType, HttpJSONListener httpListener, RequestQueue requestQueue){
+    public static void queryCityListByType(String cityType, HttpJSONListener httpListener, RequestQueue requestQueue){
         Map<String,String> parameter = new HashMap<>(2);
         parameter.put("search", cityType);
         parameter.put("key" , WeatherContact.API_KEY);

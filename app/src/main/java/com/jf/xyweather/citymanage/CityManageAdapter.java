@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.jf.xyweather.R;
 import com.jf.xyweather.base.MyApplications;
-import com.jf.xyweather.model.CityInfo;
+import com.jf.xyweather.model.SelectedCity;
 
 import java.util.List;
 
@@ -19,20 +19,20 @@ import java.util.List;
  */
 public class CityManageAdapter extends BaseAdapter{
 
-    private List<CityInfo> mCityInfoList;
+    private List<SelectedCity> mSelectedCityList;
 
-    public CityManageAdapter(List<CityInfo> mCityInfoList){
-        this.mCityInfoList = mCityInfoList;
+    public CityManageAdapter(List<SelectedCity> selectedCityList){
+        this.mSelectedCityList = selectedCityList;
     }
 
     @Override
     public int getCount() {
-        return mCityInfoList == null ? 0 : mCityInfoList.size();
+        return mSelectedCityList == null ? 0 : mSelectedCityList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mCityInfoList.get(position);
+        return mSelectedCityList.get(position);
     }
 
     @Override
@@ -61,16 +61,19 @@ public class CityManageAdapter extends BaseAdapter{
         if(position == 0){
             viewHolder.locationIv.setImageResource(R.drawable.ic_location);
             viewHolder.locationIv.setVisibility(View.VISIBLE);
-            viewHolder.cityNameTv.setText("当前位置（"+mCityInfoList.get(0).getCityChineseName()+"）");
+            viewHolder.cityNameTv.setText("当前位置（"+ mSelectedCityList.get(0).getCityName()+"）");
         }else{
             viewHolder.locationIv.setVisibility(View.GONE);
-            viewHolder.cityNameTv.setText(mCityInfoList.get(position).getCityChineseName());
+            viewHolder.cityNameTv.setText(mSelectedCityList.get(position).getCityName());
         }
         return convertView;
     }
 
-    //return an id of icon according the weather condition of city
-    private int getWeatherIcon(String cityWeatherCondition){
-        return R.drawable.ic_location;
+    public void setSelectedCityList(List<SelectedCity> selectedCityList){
+        mSelectedCityList = selectedCityList;
+    }
+
+    public List<SelectedCity> getSelectedCityList(){
+        return mSelectedCityList;
     }
 }

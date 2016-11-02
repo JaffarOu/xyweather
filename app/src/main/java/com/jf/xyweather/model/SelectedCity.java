@@ -1,46 +1,37 @@
 package com.jf.xyweather.model;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 
 /**
- * Created by jf on 2016/7/1.
- * This is a java bean used as an item of ListView in CityManageActivity
+ * Created by jf on 2016/7/3.
+ * A JavaBean to describe the information of city that selected by user
+ * it include various forms of name of one city,and other information
  */
 public class SelectedCity implements Serializable{
 
-    private String cityWeatherCondition;
-    private String cityName;
-    private String temperature;
+    private String mCityChineseName;    //城市名字汉字形式
+    private String mLastUpdateWeatherTime;     //最后一次更新天气信息时间
 
-    public SelectedCity() {
+    public SelectedCity(){
     }
 
-    public SelectedCity(String cityWeatherCondition, String cityName, String temperature) {
-        this.cityWeatherCondition = cityWeatherCondition;
-        this.cityName = cityName;
-        this.temperature = temperature;
-    }
-
-    public String getCityWeatherCondition() {
-        return cityWeatherCondition;
-    }
-    public void setCityWeatherCondition(String cityWeatherCondition) {
-        this.cityWeatherCondition = cityWeatherCondition;
+    public SelectedCity(String cityName, String lastUpdateWeatherInfoTime){
+        mCityChineseName = cityName;
+        mLastUpdateWeatherTime = lastUpdateWeatherInfoTime;
     }
 
     public String getCityName() {
-        return cityName;
+        return mCityChineseName;
     }
     public void setCityName(String cityName) {
-        this.cityName = cityName;
+        mCityChineseName = cityName;
     }
 
-    public String getTemperature() {
-        return temperature;
+    public String getLastUpdateWeatherTime() {
+        return mLastUpdateWeatherTime;
     }
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
+
+    public void setLastUpdateWeatherTime(String mLastUpdateWeatherTime) {
+        this.mLastUpdateWeatherTime = mLastUpdateWeatherTime;
     }
 }

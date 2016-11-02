@@ -17,7 +17,7 @@ import com.jf.xyweather.base.fragment.BaseFragment;
 import com.jf.xyweather.dailyweather.SevenDayWeatherActivity;
 import com.jf.xyweather.lifesuggestion.LifeSuggestionActivity;
 import com.jf.xyweather.model.AirQualityIndex;
-import com.jf.xyweather.model.CityInfo;
+import com.jf.xyweather.model.SelectedCity;
 import com.jf.xyweather.model.DailyWeatherForecast;
 import com.jf.xyweather.model.LifeSuggestion;
 import com.jf.xyweather.model.RealTimeWeather;
@@ -55,7 +55,7 @@ public class CityWeatherFragment extends BaseFragment
     private DailyWeatherWidget[] mDailyWeatherWidgets;      //Show four days weather information in future
 
     //other
-    private CityInfo mCityInfo;
+    private SelectedCity mCityInfo;
     //To identity whether http request is finished or not before start http request
     private boolean mIsHttpFinished = true;
     //request queue of volley
@@ -76,15 +76,15 @@ public class CityWeatherFragment extends BaseFragment
     }
 
     private void init(View layoutView) {
-        /*Get CityInfo Object from the arguments,
-        It will initial the UI and request the weather information after get CityInfo Object,
-        or it will do nothing if the CityInfo == null*/
+        /*Get city's name from the arguments,
+        It will initial the UI and request the weather information after get city's information,
+        or it will do nothing if it can't get the city's information*/
         Bundle arguments = getArguments();
         if (arguments == null) {
             LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
             return;
         }
-        mCityInfo = (CityInfo) arguments.getSerializable(KEY_CITY_NAME);
+        mCityInfo = (SelectedCity) arguments.getSerializable(KEY_CITY_NAME);
         if (mCityInfo == null) {
             LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
             return;
@@ -128,7 +128,7 @@ public class CityWeatherFragment extends BaseFragment
         if (mIsHttpFinished) {
 //            refreshHint.setVisibility(View.VISIBLE);
             mIsHttpFinished = false;//change the flag
-            HttpRequestUtils.queryWeatherByCityName(mCityInfo.getCityPinYinName(), this, mRequestQueue);
+            HttpRequestUtils.queryWeatherByCityName(mCityInfo.getCityName(), this, mRequestQueue);
         }else{
             ToastUtil.showShortToast(getActivity(), "正在拼命拉取天气信息，稍等哦亲");
         }
@@ -160,7 +160,7 @@ public class CityWeatherFragment extends BaseFragment
                 || id == R.id.daily_weather_widget_third || id == R.id.daily_weather_widget_forth){
             //Start an Activity to show seven daily weather,send city's Chinese name and a list with seven daily weather
             Intent intent = new Intent(getActivity(), SevenDayWeatherActivity.class);
-            intent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, mCityInfo.getCityChineseName());
+            intent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, mCityInfo.getCityName());
             intent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable)mDailyWeatherForecastList);
             startActivity(intent);
         }else if(id == R.id.tv_city_weather_life_suggestion){
@@ -175,7 +175,7 @@ public class CityWeatherFragment extends BaseFragment
      * this method used by parent of this Fragment
      * @return name of city
      */
-    public CityInfo getCityInfo(){
+    public SelectedCity getCityInfo(){
         return mCityInfo;
     }
 

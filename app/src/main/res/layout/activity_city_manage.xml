@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@mipmap/bg_all_app_background">
+    android:orientation="vertical" android:padding="8dp"
+    android:background="@mipmap/bg_all_app_background"
+    android:gravity="center_horizontal">
 
-    <!--<com.jf.xyweather.view.CustomTitles-->
-        <!--android:id="@+id/custom_titles_activity_city_manage"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/black_translucent">-->
-    <!--</com.jf.xyweather.view.CustomTitles>-->
-
+    <!--title-->
     <TextView
         android:id="@+id/tv_activity_city_manage_title"
         style="@style/common_text_view"
         android:layout_centerHorizontal="true"
         android:text="管理城市"
-        android:textSize="16sp"
-        android:layout_margin="8dp"/>
+        android:textSize="16sp"/>
 
+    <!--divider-->
+    <View
+        style="@style/divider_line"
+        android:layout_marginTop="8dp"/>
+
+    <!--The list of cities-->
+    <ListView
+        android:id="@+id/lv_activity_city_manage_city_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </ListView>
+
+    <!--divider-->
+    <View
+        style="@style/divider_line"
+        android:layout_marginTop="8dp"/>
+
+    <!--The buttons on bottom-->
     <FrameLayout
         android:id="@+id/layout_activity_city_manage_bottom_layout"
         android:layout_width="match_parent"
@@ -48,12 +62,5 @@
             android:text="设置"
             android:visibility="invisible"/>
     </FrameLayout>
-    <ListView
-        android:id="@+id/lv_activity_city_manage_city_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_activity_city_manage_title"
-        android:layout_above="@id/layout_activity_city_manage_bottom_layout">
-    </ListView>
 
-</RelativeLayout>
+</LinearLayout>

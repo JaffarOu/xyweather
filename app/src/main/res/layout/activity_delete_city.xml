@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@mipmap/bg_all_app_background"
+    tools:context=".citymanage.AddCityActivity">
+
+    <!--title-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_city_manage_delete_city_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:padding="16dp"
+            android:src="@drawable/ic_return"/>
+        <TextView
+            style="@style/common_text_view"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:text="编辑城市"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_city_manage_delete_city_confirm"
+            style="@style/common_text_view"
+            android:layout_gravity="end|center_vertical"
+            android:padding="16dp"
+            android:text="确定"/>
+    </FrameLayout>
+
+    <View
+        style="@style/divider_line"
+        android:layout_marginTop="8dp"/>
+
+    <ListView
+        android:id="@+id/lv_city_manage_delete_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+    </ListView>
+</LinearLayout>
