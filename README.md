@@ -1,2 +1,7 @@
 # xyweather
-An App for weather information.This project is just developed a little.
+这是一个天气类App，一个简洁实用的App，数据齐全，界面清爽。
+
+# 功能概括
+- 天气信息的获取与展示：实时天气，未来七天天气预报，当前温度，当天城市空气质量指数。
+- 城市管理：城市添加、删除。
+
