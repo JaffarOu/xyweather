@@ -125,6 +125,7 @@ public class CityManageActivity extends BaseActivity
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK){
             Intent intent;
+            //Return difference data according if user change city list
             if(isSelectedCityListChange){
                 intent = new Intent(ACTION_UPDATE_SELECTED_CITY_LIST);
                 intent.putExtra(KEY_SELECTED_CITY_LIST, (Serializable)mCityManageAdapter.getSelectedCityList());

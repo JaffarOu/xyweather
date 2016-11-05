@@ -46,10 +46,12 @@ public class CityWeatherFragment extends BaseFragment
     public static final String KEY_CITY_NAME = "cityName";
 
     //view
+    private View mRefreshHint;                          //A layout to remind user the data is refreshing
     private CircleTemperatureView mCircleTemperatureView;   //An circle view used to show temperature(max,now,min)
     private ImageView mWeatherIconIv;                       //An icon used to describe the weather condition
     private TextView mWeatherConditionTv;                   //Weather condition such as sunny,windy or other
     private TextView mWeekTv;                               //week
+    private TextView airQualityIndexHint;                   //hint-“空气质量”
     private TextView mAirQualityConditionTv;                //air quality condition
     private TextView mAirQualityIndexTv;                    //air quality index
     private DailyWeatherWidget[] mDailyWeatherWidgets;      //Show four days weather information in future
@@ -89,10 +91,8 @@ public class CityWeatherFragment extends BaseFragment
             LogUtil.i(getClass().getSimpleName()+"--"+"没有传入要查询的城市名字");
             return;
         }
-
         //initial the Volley in this Fragment
         mRequestQueue = Volley.newRequestQueue(getActivity());
-
         initView(layoutView);
     }
 
@@ -100,10 +100,12 @@ public class CityWeatherFragment extends BaseFragment
     private void initView(View layoutView) {
         //initiate view
         layoutView.findViewById(R.id.ll_city_weather_air_quality_index).setOnClickListener(this);
+        mRefreshHint = layoutView.findViewById(R.id.ll_city_weather_refresh_hint);
         mCircleTemperatureView = (CircleTemperatureView)layoutView.findViewById(R.id.circle_temperature_view_city_weather);
         mWeatherIconIv = (ImageView)layoutView.findViewById(R.id.iv_city_weather_weather_icon);
         mWeatherConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_weather_condition);
         mWeekTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_week);
+        airQualityIndexHint = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_hint);
         mAirQualityConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_condition);
         mAirQualityIndexTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_index);
         //Four days in the future
@@ -126,8 +128,8 @@ public class CityWeatherFragment extends BaseFragment
      */
     public void refreshWeather() {
         if (mIsHttpFinished) {
-//            refreshHint.setVisibility(View.VISIBLE);
             mIsHttpFinished = false;//change the flag
+            mRefreshHint.setVisibility(View.VISIBLE);
             HttpRequestUtils.queryWeatherByCityName(mCityInfo.getCityName(), this, mRequestQueue);
         }else{
             ToastUtil.showShortToast(getActivity(), "正在拼命拉取天气信息，稍等哦亲");
@@ -138,12 +140,14 @@ public class CityWeatherFragment extends BaseFragment
     @Override
     public void onFinish(String jsonString) {
         mIsHttpFinished = true;
+        mRefreshHint.setVisibility(View.GONE);
         setWeatherInformation(jsonString);
     }
 
     @Override
     public void onError(String error) {
         mIsHttpFinished = true;
+        mRefreshHint.setVisibility(View.GONE);
         ToastUtil.showShortToast(getActivity(), "网络异常，请稍后再尝试刷新");
     }
     /*override the method of HttpListener_end*/
@@ -210,7 +214,7 @@ public class CityWeatherFragment extends BaseFragment
         //Get the air quality index
         mAirQualityIndex = weatherInfoJsonParseUtil.getAirQualityIndex();
         if (mAirQualityIndex != null) {
-            getView().findViewById(R.id.tv_city_weather_air_quality_hint).setVisibility(View.VISIBLE);
+            airQualityIndexHint.setVisibility(View.VISIBLE);
             mAirQualityConditionTv.setText(mAirQualityIndex.getQlty());
             mAirQualityIndexTv.setText(mAirQualityIndex.getAqi()+"");
         }

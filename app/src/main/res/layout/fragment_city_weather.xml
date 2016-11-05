@@ -3,7 +3,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical" android:gravity="center_horizontal"
-    android:padding="8dp" android:id="@+id/sv_city_weather">
+    android:padding="8dp">
+
+    <!--A layout used to remind user it is refreshing data-->
+    <LinearLayout
+        android:id="@+id/ll_city_weather_refresh_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/common_text_view"
+            android:text="载入中...."/>
+    </LinearLayout>
 
     <!--A circle view to show max,min and current temperature-->
     <com.jf.xyweather.view.CircleTemperatureView
@@ -15,22 +30,17 @@
     <ImageView
         android:id="@+id/iv_city_weather_weather_icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_height="wrap_content"/>
 
-    <!--weather description-->
+    <!--weather condition-->
     <TextView
         android:id="@+id/tv_city_weather_weather_condition"
-        style="@style/common_text_view"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"/>
+        style="@style/common_text_view"/>
 
     <!--weekday-->
     <TextView
         android:id="@+id/tv_city_weather_week"
-        style="@style/common_text_view"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"/>
+        style="@style/common_text_view"/>
 
     <!--air quality index-->
     <LinearLayout
@@ -65,8 +75,7 @@
 
     <!--divider line-->
     <View
-        style="@style/divider_line"
-        android:layout_marginTop="8dp"/>
+        style="@style/divider_line"/>
 
     <!--Brief weather forecast in four days in future-->
     <LinearLayout
