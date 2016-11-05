@@ -61,7 +61,7 @@ public class AirQualityIndexListAdapter extends BaseAdapter{
             viewHolder = (ViewHolder)convertView.getTag();
         }
         viewHolder.nameTv.setText(nameString[position]);
-        viewHolder.valueTv.setText(valueString[position]+"");
+        viewHolder.valueTv.setText(valueString[position]);
         return convertView;
     }
 

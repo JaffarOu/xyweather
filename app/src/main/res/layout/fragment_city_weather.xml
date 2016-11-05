@@ -1,113 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Layout of the "CityWeatherFragment" class-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:gravity="center_horizontal"
-    android:padding="8dp">
-
-    <!--A layout used to remind user it is refreshing data-->
-    <LinearLayout
-        android:id="@+id/ll_city_weather_refresh_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            style="@style/common_text_view"
-            android:text="载入中...."/>
-    </LinearLayout>
-
-    <!--A circle view to show max,min and current temperature-->
-    <com.jf.xyweather.view.CircleTemperatureView
-        android:id="@+id/circle_temperature_view_city_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!--weather icon-->
-    <ImageView
-        android:id="@+id/iv_city_weather_weather_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!--weather condition-->
-    <TextView
-        android:id="@+id/tv_city_weather_weather_condition"
-        style="@style/common_text_view"/>
-
-    <!--weekday-->
-    <TextView
-        android:id="@+id/tv_city_weather_week"
-        style="@style/common_text_view"/>
-
-    <!--air quality index-->
-    <LinearLayout
-        android:id="@+id/ll_city_weather_air_quality_index"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
-        <TextView
-            android:id="@+id/tv_city_weather_air_quality_hint"
-            style="@style/common_text_view"
-            android:text="空气质量"/>
-        <!--Air quality condition-->
-        <TextView
-            android:id="@+id/tv_city_weather_air_quality_condition"
-            style="@style/common_text_view"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
-        <!--air quality index-->
-        <TextView
-            android:id="@+id/tv_city_weather_air_quality_index"
-            style="@style/common_text_view"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
-    </LinearLayout>
-
-    <!--Click to start an Activity to show suggestion of life-->
-    <TextView
-        android:id="@+id/tv_city_weather_life_suggestion"
-        style="@style/common_text_view"
-        android:layout_marginTop="8dp"
-        android:text="生活指数及建议"/>
-
-    <!--divider line-->
-    <View
-        style="@style/divider_line"/>
-
-    <!--Brief weather forecast in four days in future-->
-    <LinearLayout
+    android:padding="8dp" android:id="@+id/swipe_refresh_layout_city_weather">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.jf.xyweather.view.DailyWeatherWidget
-            android:id="@+id/daily_weather_widget_first"
-            android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </com.jf.xyweather.view.DailyWeatherWidget>
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <!--A circle view to show max,min and current temperature-->
+            <com.jf.xyweather.view.CircleTemperatureView
+                android:id="@+id/circle_temperature_view_city_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <!--weather icon-->
+            <ImageView
+                android:id="@+id/iv_city_weather_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <!--weather condition-->
+            <TextView
+                android:id="@+id/tv_city_weather_weather_condition"
+                style="@style/common_text_view"/>
+            <!--weekday-->
+            <TextView
+                android:id="@+id/tv_city_weather_week"
+                style="@style/common_text_view"/>
 
-        <com.jf.xyweather.view.DailyWeatherWidget
-            android:id="@+id/daily_weather_widget_second"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </com.jf.xyweather.view.DailyWeatherWidget>
+            <!--air quality index-->
+            <LinearLayout
+                android:id="@+id/ll_city_weather_air_quality_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:id="@+id/tv_city_weather_air_quality_hint"
+                    style="@style/common_text_view"
+                    android:text="空气质量"/>
+                <!--Air quality condition-->
+                <TextView
+                    android:id="@+id/tv_city_weather_air_quality_condition"
+                    style="@style/common_text_view"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"/>
+                <!--air quality index-->
+                <TextView
+                    android:id="@+id/tv_city_weather_air_quality_index"
+                    style="@style/common_text_view"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
 
-        <com.jf.xyweather.view.DailyWeatherWidget
-            android:id="@+id/daily_weather_widget_third"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </com.jf.xyweather.view.DailyWeatherWidget>
+            <!--Click to start an Activity to show suggestion of life-->
+            <TextView
+                android:id="@+id/tv_city_weather_life_suggestion"
+                style="@style/common_text_view"
+                android:layout_marginTop="8dp"
+                android:text="生活指数及建议"/>
+            <!--divider line-->
+            <View style="@style/divider_line"/>
 
-        <com.jf.xyweather.view.DailyWeatherWidget
-            android:id="@+id/daily_weather_widget_forth"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </com.jf.xyweather.view.DailyWeatherWidget>
-    </LinearLayout>
-</LinearLayout>
+            <!--Brief weather forecast in four days in future-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.jf.xyweather.view.DailyWeatherWidget
+                    android:id="@+id/daily_weather_widget_first"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                </com.jf.xyweather.view.DailyWeatherWidget>
+
+                <com.jf.xyweather.view.DailyWeatherWidget
+                    android:id="@+id/daily_weather_widget_second"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                </com.jf.xyweather.view.DailyWeatherWidget>
+
+                <com.jf.xyweather.view.DailyWeatherWidget
+                    android:id="@+id/daily_weather_widget_third"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                </com.jf.xyweather.view.DailyWeatherWidget>
+
+                <com.jf.xyweather.view.DailyWeatherWidget
+                    android:id="@+id/daily_weather_widget_forth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                </com.jf.xyweather.view.DailyWeatherWidget>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

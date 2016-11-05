@@ -16,13 +16,13 @@ import com.jf.xyweather.model.Wind;
  */
 public class RealTimeWeatherActivity extends BaseActivity{
 
-    private int temperature;
+    private String temperature;
     private String weatherType;
-    private int bodyFeelingTemperature;
-    private int humility;
+    private String bodyFeelingTemperature;
+    private String humility;
     private String wind;
-    private int visibility;
-    private int airPressure;
+    private String visibility;
+    private String airPressure;
 
     public static final String KEY_REAL_TIME_WEATHER_FORECAST = "RealTimeWeather";
     private RealTimeWeather realTimeWeather;
@@ -45,13 +45,13 @@ public class RealTimeWeatherActivity extends BaseActivity{
         //store the data in member variables
         temperature = realTimeWeather.getTmp();
         weatherType = realTimeWeather.getCond().getTxt();
-        bodyFeelingTemperature = (int)realTimeWeather.getFl();
-        humility = (int)realTimeWeather.getHum();
+        bodyFeelingTemperature = realTimeWeather.getFl();
+        humility = realTimeWeather.getHum();
         Wind windModule = realTimeWeather.getWind();
         //the direction of wind and the power of the wind,such as "东风4级"
         wind = windModule.getDir()+windModule.getSc()+"级";
-        visibility = (int)realTimeWeather.getVis();
-        airPressure = (int)realTimeWeather.getPres();
+        visibility = realTimeWeather.getVis();
+        airPressure = realTimeWeather.getPres();
 
     }
 
@@ -62,8 +62,8 @@ public class RealTimeWeatherActivity extends BaseActivity{
         ((TextView)findViewById(R.id.tv_activity_real_time_weather_body_feeling_temperature)).setText(bodyFeelingTemperature+"℃");
         ((TextView)findViewById(R.id.tv_activity_real_time_weather_humility)).setText(humility+"%");
         ((TextView)findViewById(R.id.tv_activity_real_time_weather_wind)).setText(wind);
-        ((TextView)findViewById(R.id.tv_activity_real_time_weather_visibility)).setText(visibility+"");
-        ((TextView)findViewById(R.id.tv_activity_real_time_weather_air_pressure)).setText(airPressure+"");
+        ((TextView)findViewById(R.id.tv_activity_real_time_weather_visibility)).setText(visibility);
+        ((TextView)findViewById(R.id.tv_activity_real_time_weather_air_pressure)).setText(airPressure);
 
         findViewById(R.id.ll_activity_short_term_forecast_layout).setOnClickListener(new View.OnClickListener() {
             @Override

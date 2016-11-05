@@ -2,7 +2,10 @@ package com.jf.xyweather.cityweather;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +44,13 @@ import java.util.List;
  * The weather information about a city
  */
 public class CityWeatherFragment extends BaseFragment
-        implements View.OnClickListener, HttpJSONListener {
+        implements View.OnClickListener, HttpJSONListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String KEY_CITY_NAME = "cityName";
+    private static final int WHAT_REFRESH_WEATHER_DATA = 1<<1;
 
     //view
-    private View mRefreshHint;                          //A layout to remind user the data is refreshing
+    private SwipeRefreshLayout mRefreshLayout;
     private CircleTemperatureView mCircleTemperatureView;   //An circle view used to show temperature(max,now,min)
     private ImageView mWeatherIconIv;                       //An icon used to describe the weather condition
     private TextView mWeatherConditionTv;                   //Weather condition such as sunny,windy or other
@@ -58,8 +62,6 @@ public class CityWeatherFragment extends BaseFragment
 
     //other
     private SelectedCity mCityInfo;
-    //To identity whether http request is finished or not before start http request
-    private boolean mIsHttpFinished = true;
     //request queue of volley
     private RequestQueue mRequestQueue;
 
@@ -94,13 +96,14 @@ public class CityWeatherFragment extends BaseFragment
         //initial the Volley in this Fragment
         mRequestQueue = Volley.newRequestQueue(getActivity());
         initView(layoutView);
+        postRefreshData();
     }
 
     //Find view and set listener and others
     private void initView(View layoutView) {
         //initiate view
         layoutView.findViewById(R.id.ll_city_weather_air_quality_index).setOnClickListener(this);
-        mRefreshHint = layoutView.findViewById(R.id.ll_city_weather_refresh_hint);
+        mRefreshLayout = (SwipeRefreshLayout)layoutView.findViewById(R.id.swipe_refresh_layout_city_weather);
         mCircleTemperatureView = (CircleTemperatureView)layoutView.findViewById(R.id.circle_temperature_view_city_weather);
         mWeatherIconIv = (ImageView)layoutView.findViewById(R.id.iv_city_weather_weather_icon);
         mWeatherConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_weather_condition);
@@ -119,38 +122,42 @@ public class CityWeatherFragment extends BaseFragment
         mDailyWeatherWidgets[2].setOnClickListener(this);
         mDailyWeatherWidgets[3].setOnClickListener(this);
         layoutView.findViewById(R.id.tv_city_weather_life_suggestion).setOnClickListener(this);
-        //Get new data
-        refreshWeather();
+        //Initial SwipeRefreshLayout
+        mRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
+        mRefreshLayout.setOnRefreshListener(this);
+    }
+
+    //Send a message that refresh city data 200ms in the future
+    private void postRefreshData(){
+        MyHandler myHandler = new MyHandler();
+        myHandler.sendEmptyMessageDelayed(WHAT_REFRESH_WEATHER_DATA, 200);
     }
 
     /**
      * refresh the weather information on this page
      */
     public void refreshWeather() {
-        if (mIsHttpFinished) {
-            mIsHttpFinished = false;//change the flag
-            mRefreshHint.setVisibility(View.VISIBLE);
-            HttpRequestUtils.queryWeatherByCityName(mCityInfo.getCityName(), this, mRequestQueue);
-        }else{
-            ToastUtil.showShortToast(getActivity(), "正在拼命拉取天气信息，稍等哦亲");
-        }
+        HttpRequestUtils.queryWeatherByCityName(mCityInfo.getCityName(), this, mRequestQueue);
     }
 
     /*override the method of HttpListener_start*/
     @Override
     public void onFinish(String jsonString) {
-        mIsHttpFinished = true;
-        mRefreshHint.setVisibility(View.GONE);
+        mRefreshLayout.setRefreshing(false);
         setWeatherInformation(jsonString);
     }
 
     @Override
     public void onError(String error) {
-        mIsHttpFinished = true;
-        mRefreshHint.setVisibility(View.GONE);
+        mRefreshLayout.setRefreshing(false);
         ToastUtil.showShortToast(getActivity(), "网络异常，请稍后再尝试刷新");
     }
     /*override the method of HttpListener_end*/
+
+    @Override
+    public void onRefresh() {
+        refreshWeather();
+    }
 
     @Override
     public void onClick(View v) {
@@ -241,10 +248,22 @@ public class CityWeatherFragment extends BaseFragment
         //Set current temperature,max temperature,min temperature for the CircleTemperatureView
         if(mRealTimeWeather!=null && mDailyWeatherForecastList!=null){
             Temperature todayTemperature = mDailyWeatherForecastList.get(0).getTmp();
-            mCircleTemperatureView.setTemperature((int)todayTemperature.getMax(), mRealTimeWeather.getTmp(), (int)todayTemperature.getMin());
+            mCircleTemperatureView.setTemperature((int)todayTemperature.getMax(), Integer.valueOf(mRealTimeWeather.getTmp()), (int)todayTemperature.getMin());
         }
 
         //Get and keep the life suggestion
         mLifeSuggestion = weatherInfoJsonParseUtil.getLifeSuggestion();
     }//setWeatherInformation()
+
+    private class MyHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == WHAT_REFRESH_WEATHER_DATA){
+                mRefreshLayout.setRefreshing(true);
+                refreshWeather();
+            }else{
+                super.handleMessage(msg);
+            }
+        }
+    }
 }

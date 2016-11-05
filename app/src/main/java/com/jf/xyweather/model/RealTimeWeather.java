@@ -10,19 +10,19 @@ public class RealTimeWeather implements Serializable{
 
 //    private RealTimeWeatherCondition cond;
     private WeatherCondition cond;//real-time weather condition
-    private float fl;//body feeling temperature
-    private float hum;//humidity(%)
+    private String fl;//body feeling temperature
+    private String hum;//humidity(%)
     private String pcpn;//precipitation rainfall capacity（mm）
-    private float pres;//air pressure
-    private int tmp;//temperature （℃）
-    private float vis;//visibility
+    private String pres;//air pressure
+    private String tmp;//temperature （℃）
+    private String vis;//visibility
     private Wind wind;//wind condition
 
     public RealTimeWeather(){
 
     }
 
-    public RealTimeWeather(WeatherCondition cond, float fl, float hum, String pcpn, float pres, int tmp, float vis, Wind wind) {
+    public RealTimeWeather(WeatherCondition cond, String fl, String hum, String pcpn, String pres, String tmp, String vis, Wind wind) {
         this.cond = cond;
         this.fl = fl;
         this.hum = hum;
@@ -41,19 +41,19 @@ public class RealTimeWeather implements Serializable{
         this.cond = cond;
     }
 
-    public float getFl() {
+    public String getFl() {
         return fl;
     }
 
-    public void setFl(float fl) {
+    public void setFl(String fl) {
         this.fl = fl;
     }
 
-    public float getHum() {
+    public String getHum() {
         return hum;
     }
 
-    public void setHum(float hum) {
+    public void setHum(String hum) {
         this.hum = hum;
     }
 
@@ -65,27 +65,27 @@ public class RealTimeWeather implements Serializable{
         this.pcpn = pcpn;
     }
 
-    public float getPres() {
+    public String getPres() {
         return pres;
     }
 
-    public void setPres(float pres) {
+    public void setPres(String pres) {
         this.pres = pres;
     }
 
-    public int getTmp() {
+    public String getTmp() {
         return tmp;
     }
 
-    public void setTmp(int tmp) {
+    public void setTmp(String tmp) {
         this.tmp = tmp;
     }
 
-    public float getVis() {
+    public String getVis() {
         return vis;
     }
 
-    public void setVis(float vis) {
+    public void setVis(String vis) {
         this.vis = vis;
     }
 

@@ -86,14 +86,16 @@ public class WelcomeActivity extends BaseActivity
             if (aMapLocation.getErrorCode() == 0) {
                 //可在其中解析aMapLocation获取相应内容。
                 locationCityName = aMapLocation.getCity();
+                myHandler.sendEmptyMessage(MyHandler.WHAT_LOCATION_FINISH);
             }else {
                 //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 LogUtil.i("location Error, ErrCode:" +
                         aMapLocation.getErrorCode() + ", errInfo:"
                         + aMapLocation.getErrorInfo());
+                ToastUtil.showShortToast(this, "定位失败，应用将退出");
+                myHandler.sendEmptyMessageDelayed(MyHandler.WHAT_LOCATION_FAIL, 2000);
             }
         }
-        myHandler.sendEmptyMessage(MyHandler.WHAT_LOCATION_FINISH);
     }
     /*override the method of AnimationListener__end*/
 
@@ -121,6 +123,7 @@ public class WelcomeActivity extends BaseActivity
         //Variable "what" in Handler
         private static final int WHAT_ANIMATION_FINISH = 1<<3;
         private static final int WHAT_LOCATION_FINISH = 1<<4;
+        private static final int WHAT_LOCATION_FAIL = 1<<5;
 
         private boolean isAnimationFinish = false;
         private boolean isLocationFinish = false;
@@ -132,8 +135,8 @@ public class WelcomeActivity extends BaseActivity
 
         @Override
         public void handleMessage(Message msg) {
-            WelcomeActivity welcomeActivity = mWeakReference.get();
-            if(welcomeActivity == null){
+            WelcomeActivity activity = mWeakReference.get();
+            if(activity == null){
                 super.handleMessage(msg);
                 return;
             }
@@ -145,11 +148,13 @@ public class WelcomeActivity extends BaseActivity
                 isLocationFinish = true;
             }else if(msg.what == GetSelectedCityThread.WHAT_SELECTED_CITY_LIST){
                 isSelectedCityListFinish = true;
-                welcomeActivity.mSelectedCityList = (List<SelectedCity>)msg.obj;
+                activity.mSelectedCityList = (List<SelectedCity>)msg.obj;
+            }else if(msg.what == WHAT_LOCATION_FAIL){
+                activity.finish();
             }
             //If both animation and location ard finished,start CityWeatherActivity and send it the city name
             if(isAnimationFinish && isLocationFinish && isSelectedCityListFinish){
-                welcomeActivity.onAllFinished();
+                activity.onAllFinished();
             }
         }
     }
