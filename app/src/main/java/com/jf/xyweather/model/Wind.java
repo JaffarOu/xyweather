@@ -8,15 +8,15 @@ import java.io.Serializable;
  */
 public class Wind implements Serializable{
 
-    private float deg;//degree
+    private String deg;//degree
     private String dir;//wind direction
     private String sc;//wind power
-    private int spd;//wind speed
+    private String spd;//wind speed
 
-    public float getDeg() {
+    public String getDeg() {
         return deg;
     }
-    public void setDeg(float deg) {
+    public void setDeg(String deg) {
         this.deg = deg;
     }
 
@@ -34,10 +34,10 @@ public class Wind implements Serializable{
         this.sc = sc;
     }
 
-    public int getSpd() {
+    public String getSpd() {
         return spd;
     }
-    public void setSpd(int spd) {
+    public void setSpd(String spd) {
         this.spd = spd;
     }
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/bg_all_app_background"
-    tools:context=".dailyweather.SevenDayWeatherActivity">
+    tools:context=".dailyweather.DailyWeatherActivity">
 
     <TextView
         android:id="@+id/tv_daily_weather_city_name"

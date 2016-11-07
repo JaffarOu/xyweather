@@ -64,36 +64,37 @@
 
             <!--Brief weather forecast in four days in future-->
             <LinearLayout
+                android:id="@+id/ll_city_weather_daily_weather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <com.jf.xyweather.view.DailyWeatherWidget
-                    android:id="@+id/daily_weather_widget_first"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                </com.jf.xyweather.view.DailyWeatherWidget>
+                <!--<com.jf.xyweather.view.DailyWeatherWidget-->
+                    <!--android:id="@+id/daily_weather_widget_first"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+                <!--</com.jf.xyweather.view.DailyWeatherWidget>-->
 
-                <com.jf.xyweather.view.DailyWeatherWidget
-                    android:id="@+id/daily_weather_widget_second"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                </com.jf.xyweather.view.DailyWeatherWidget>
+                <!--<com.jf.xyweather.view.DailyWeatherWidget-->
+                    <!--android:id="@+id/daily_weather_widget_second"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+                <!--</com.jf.xyweather.view.DailyWeatherWidget>-->
 
-                <com.jf.xyweather.view.DailyWeatherWidget
-                    android:id="@+id/daily_weather_widget_third"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                </com.jf.xyweather.view.DailyWeatherWidget>
+                <!--<com.jf.xyweather.view.DailyWeatherWidget-->
+                    <!--android:id="@+id/daily_weather_widget_third"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+                <!--</com.jf.xyweather.view.DailyWeatherWidget>-->
 
-                <com.jf.xyweather.view.DailyWeatherWidget
-                    android:id="@+id/daily_weather_widget_forth"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                </com.jf.xyweather.view.DailyWeatherWidget>
+                <!--<com.jf.xyweather.view.DailyWeatherWidget-->
+                    <!--android:id="@+id/daily_weather_widget_forth"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1">-->
+                <!--</com.jf.xyweather.view.DailyWeatherWidget>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

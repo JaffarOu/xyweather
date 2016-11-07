@@ -25,7 +25,7 @@ public class CircleTemperatureView extends View{
     private int mMinTemperature = 1;
     private int mCurrentTemperature;
     private boolean isDataReady = false;    //是否准备好绘图的温度数据
-    private int lineLength = 20;            //温度刻度线的长度
+    private int lineLength;                 //温度刻度线的长度
     private int spaceWidth = 40;            //温度刻度线到控件边缘距离，留下这个距离用来绘制最高温最低温文字
 
     //The member variable about draw
@@ -76,6 +76,8 @@ public class CircleTemperatureView extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
+        //确定温度刻度线的长度
+        lineLength = getMeasuredWidth()/12;
         //将坐标轴移到控件中心，控件宽高必须一致，所以只考虑宽度/高度就可以
         int halfMeasuredSize = getMeasuredWidth()/2;
         canvas.translate(halfMeasuredSize, halfMeasuredSize);
@@ -130,7 +132,7 @@ public class CircleTemperatureView extends View{
             //坐标移动到最低温那里，绘制文字
             int degree = -135+(mMinTemperature-MIN_TEMPERATURE)*3;
             canvas.rotate(degree);
-            //注意Y轴的数字是反的
+            //注意Y轴的坐标是反的
             canvas.translate(0, spaceWidth/2-halfMeasuredSize);
             canvas.rotate(-degree);
             canvas.drawText(mMinTemperature+"", 0, maxMinBaseLineHeight, mTextPaint);

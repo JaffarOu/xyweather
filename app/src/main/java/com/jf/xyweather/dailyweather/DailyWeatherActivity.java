@@ -1,7 +1,6 @@
 package com.jf.xyweather.dailyweather;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
@@ -10,7 +9,6 @@ import com.jf.xyweather.base.activity.BaseActivity;
 import com.jf.xyweather.model.DailyWeatherForecast;
 import com.viewpagerindicator.TabPageIndicator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ import java.util.List;
  * An Activity to show recent seven-day weather forecast.
  * This Activity will load seven DailyWeatherFragment,every DailyWeatherFragment will show one-day weather forecast
  */
-public class SevenDayWeatherActivity extends BaseActivity{
+public class DailyWeatherActivity extends BaseActivity{
 
     /**Key in Intent Object,city's name*/
     public static final String KEY_CITY_NAME = "keyCityName";
@@ -28,7 +26,7 @@ public class SevenDayWeatherActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seven_day_weather);
+        setContentView(R.layout.activity_daily_weather);
         init();
     }
 

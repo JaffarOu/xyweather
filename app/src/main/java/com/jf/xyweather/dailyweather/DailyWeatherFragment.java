@@ -56,7 +56,7 @@ public class DailyWeatherFragment extends BaseFragment{
 
         mWeatherIconIv.setImageResource(WeatherIconUtil.getResourceAccordingCode(dailyWeatherForecast.getCond().getCode_d()));
         Temperature temperature = dailyWeatherForecast.getTmp();
-        mTemperatureTv.setText((int)temperature.getMax()+"°/"+(int)temperature.getMin()+"°");
+        mTemperatureTv.setText(temperature.getMax()+"°/"+temperature.getMin()+"°");
         mWeatherConditionTv.setText(dailyWeatherForecast.getCond().getTxt_d());
 
         //set data for GridView

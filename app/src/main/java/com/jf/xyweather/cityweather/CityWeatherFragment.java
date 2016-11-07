@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -17,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.jf.xyweather.R;
 import com.jf.xyweather.airqualityindex.AqiActivity;
 import com.jf.xyweather.base.fragment.BaseFragment;
-import com.jf.xyweather.dailyweather.SevenDayWeatherActivity;
+import com.jf.xyweather.dailyweather.DailyWeatherActivity;
 import com.jf.xyweather.lifesuggestion.LifeSuggestionActivity;
 import com.jf.xyweather.model.AirQualityIndex;
 import com.jf.xyweather.model.SelectedCity;
@@ -58,6 +59,7 @@ public class CityWeatherFragment extends BaseFragment
     private TextView airQualityIndexHint;                   //hint-“空气质量”
     private TextView mAirQualityConditionTv;                //air quality condition
     private TextView mAirQualityIndexTv;                    //air quality index
+    private LinearLayout mDailyWeatherLl;
     private DailyWeatherWidget[] mDailyWeatherWidgets;      //Show four days weather information in future
 
     //other
@@ -111,16 +113,18 @@ public class CityWeatherFragment extends BaseFragment
         airQualityIndexHint = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_hint);
         mAirQualityConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_condition);
         mAirQualityIndexTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_index);
-        //Four days in the future
-        mDailyWeatherWidgets = new DailyWeatherWidget[4];
-        mDailyWeatherWidgets[0] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_first);
-        mDailyWeatherWidgets[1] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_second);
-        mDailyWeatherWidgets[2] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_third);
-        mDailyWeatherWidgets[3] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_forth);
-        mDailyWeatherWidgets[0].setOnClickListener(this);
-        mDailyWeatherWidgets[1].setOnClickListener(this);
-        mDailyWeatherWidgets[2].setOnClickListener(this);
-        mDailyWeatherWidgets[3].setOnClickListener(this);
+        mDailyWeatherLl = (LinearLayout)layoutView.findViewById(R.id.ll_city_weather_daily_weather);
+        mDailyWeatherLl.setOnClickListener(this);
+//        //Daily weather forecast in the future
+//        mDailyWeatherWidgets = new DailyWeatherWidget[4];
+//        mDailyWeatherWidgets[0] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_first);
+//        mDailyWeatherWidgets[1] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_second);
+//        mDailyWeatherWidgets[2] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_third);
+//        mDailyWeatherWidgets[3] = (DailyWeatherWidget)layoutView.findViewById(R.id.daily_weather_widget_forth);
+//        mDailyWeatherWidgets[0].setOnClickListener(this);
+//        mDailyWeatherWidgets[1].setOnClickListener(this);
+//        mDailyWeatherWidgets[2].setOnClickListener(this);
+//        mDailyWeatherWidgets[3].setOnClickListener(this);
         layoutView.findViewById(R.id.tv_city_weather_life_suggestion).setOnClickListener(this);
         //Initial SwipeRefreshLayout
         mRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light);
@@ -167,12 +171,11 @@ public class CityWeatherFragment extends BaseFragment
             Intent intent = new Intent(getActivity(), AqiActivity.class);
             intent.putExtra(AqiActivity.KEY_AIR_QUALITY_INDEX, mAirQualityIndex);
             startActivity(intent);
-        }else if(id == R.id.daily_weather_widget_first || id == R.id.daily_weather_widget_second
-                || id == R.id.daily_weather_widget_third || id == R.id.daily_weather_widget_forth){
+        }else if(id == R.id.ll_city_weather_daily_weather){
             //Start an Activity to show seven daily weather,send city's Chinese name and a list with seven daily weather
-            Intent intent = new Intent(getActivity(), SevenDayWeatherActivity.class);
-            intent.putExtra(SevenDayWeatherActivity.KEY_CITY_NAME, mCityInfo.getCityName());
-            intent.putExtra(SevenDayWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable)mDailyWeatherForecastList);
+            Intent intent = new Intent(getActivity(), DailyWeatherActivity.class);
+            intent.putExtra(DailyWeatherActivity.KEY_CITY_NAME, mCityInfo.getCityName());
+            intent.putExtra(DailyWeatherActivity.KEY_SEVEN_DAY_WEATHER, (Serializable)mDailyWeatherForecastList);
             startActivity(intent);
         }else if(id == R.id.tv_city_weather_life_suggestion){
             Intent intent = new Intent(getActivity(), LifeSuggestionActivity.class);
@@ -226,7 +229,7 @@ public class CityWeatherFragment extends BaseFragment
             mAirQualityIndexTv.setText(mAirQualityIndex.getAqi()+"");
         }
 
-        //Get seven day's daily weather forecast
+        //Get and set Daily weather forecast
         mDailyWeatherForecastList = weatherInfoJsonParseUtil.getDailyWeatherForecast();
         if (mDailyWeatherForecastList != null) {
             //Set today's weather information
@@ -238,17 +241,24 @@ public class CityWeatherFragment extends BaseFragment
                 LogUtil.i(CityWeatherFragment.class.getName()+"--日期解析发生异常");
             }
             mWeekTv.setText(week);
-            //Set future weather forecast
-            mDailyWeatherWidgets[0].setDailyWeather(mDailyWeatherForecastList.get(1));
-            mDailyWeatherWidgets[1].setDailyWeather(mDailyWeatherForecastList.get(2));
-            mDailyWeatherWidgets[2].setDailyWeather(mDailyWeatherForecastList.get(3));
-            mDailyWeatherWidgets[3].setDailyWeather(mDailyWeatherForecastList.get(4));
+            // Add view to show daily weather forecast according the number of list
+            if(mDailyWeatherLl.getChildCount() != 0) mDailyWeatherLl.removeAllViews();
+            DailyWeatherWidget dailyWeatherWidget;
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.weight = 1;
+            // Start from index 1,because index 0 means today,we need start from tomorrow,
+            // the max daily we can show is four
+            for(int i = 1, length = mDailyWeatherForecastList.size(); i < length && i < 5; i++){
+                dailyWeatherWidget = new DailyWeatherWidget(getActivity());
+                dailyWeatherWidget.setDailyWeather(mDailyWeatherForecastList.get(i));
+                mDailyWeatherLl.addView(dailyWeatherWidget, layoutParams);
+            }
         }
 
         //Set current temperature,max temperature,min temperature for the CircleTemperatureView
         if(mRealTimeWeather!=null && mDailyWeatherForecastList!=null){
             Temperature todayTemperature = mDailyWeatherForecastList.get(0).getTmp();
-            mCircleTemperatureView.setTemperature((int)todayTemperature.getMax(), Integer.valueOf(mRealTimeWeather.getTmp()), (int)todayTemperature.getMin());
+            mCircleTemperatureView.setTemperature(Integer.valueOf(todayTemperature.getMax()), Integer.valueOf(mRealTimeWeather.getTmp()), Integer.valueOf(todayTemperature.getMin()));
         }
 
         //Get and keep the life suggestion

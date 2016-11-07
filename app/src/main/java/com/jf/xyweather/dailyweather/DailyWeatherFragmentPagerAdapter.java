@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Created by jf on 2016/7/5.
- * Return DailyWeatherFragment for SevenDayWeatherActivity
+ * Return DailyWeatherFragment for DailyWeatherActivity
  */
 public class DailyWeatherFragmentPagerAdapter extends FragmentStatePagerAdapter {
 

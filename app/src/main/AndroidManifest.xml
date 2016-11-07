@@ -65,7 +65,7 @@
 
         <!-- seven day weather forecast -->
         <activity
-            android:name=".dailyweather.SevenDayWeatherActivity"
+            android:name=".dailyweather.DailyWeatherActivity"
             android:theme="@style/AppTheme.DailyWeatherVpi"></activity>
 
         <!-- air quality index -->

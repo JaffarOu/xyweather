@@ -9,15 +9,15 @@ public class CityBasicInformation {
     private String city;        //city's name（城市名字）
     private String cnty;        //country's name（城市所在国家名字）
     private String id;          //city's id（城市ID）
-    private double lat;         //the latitude of the city（纬度）
-    private double lon;         //the longitude of the city（经度）
+    private String lat;         //the latitude of the city（纬度）
+    private String lon;         //the longitude of the city（经度）
     private Update update;      //the time of the data update
 
     public CityBasicInformation(){
 
     }
 
-    public CityBasicInformation(String city, String cnty, String id, double lat, double lon, Update update) {
+    public CityBasicInformation(String city, String cnty, String id, String lat, String lon, Update update) {
         this.city = city;
         this.cnty = cnty;
         this.id = id;
@@ -47,17 +47,17 @@ public class CityBasicInformation {
         this.id = id;
     }
 
-    public double getLat() {
+    public String getLat() {
         return lat;
     }
-    public void setLat(double lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
 
-    public double getLon() {
+    public String getLon() {
         return lon;
     }
-    public void setLon(double lon) {
+    public void setLon(String lon) {
         this.lon = lon;
     }
 

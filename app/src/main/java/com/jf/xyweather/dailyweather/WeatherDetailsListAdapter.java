@@ -41,7 +41,7 @@ public class WeatherDetailsListAdapter extends BaseAdapter {
         Astronomy astronomy = dailyWeatherForecast.getAstro();
         WeatherCondition weatherCondition = dailyWeatherForecast.getCond();
         mTopTexts = new String[]{wind.getDir(), "日出：" + astronomy.getSr(), "白天：" + weatherCondition.getTxt_d(), "降雨量：" + dailyWeatherForecast.getPcpn()};
-        mBottomTexts = new String[]{"风速：" + wind.getSpd(), "日落：" + astronomy.getSs(), "夜晚：" + weatherCondition.getTxt_n(), "概率：" + (int) dailyWeatherForecast.getPop() + "%" };
+        mBottomTexts = new String[]{"风速：" + wind.getSpd(), "日落：" + astronomy.getSs(), "夜晚：" + weatherCondition.getTxt_n(), "概率：" + dailyWeatherForecast.getPop() + "%" };
     }
 
     @Override

@@ -8,20 +8,20 @@ import java.io.Serializable;
  */
 public class Temperature implements Serializable{
 
-    private float max;
-    private float min;
+    private String max;
+    private String min;
 
-    public float getMax() {
+    public String getMax() {
         return max;
     }
-    public void setMax(float max) {
+    public void setMax(String max) {
         this.max = max;
     }
 
-    public float getMin() {
+    public String getMin() {
         return min;
     }
-    public void setMin(float min) {
+    public void setMin(String min) {
         this.min = min;
     }
 }

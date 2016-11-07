@@ -69,7 +69,7 @@
 
 
     <!-- daily weather__start-->
-    <!-- Theme of SevenDayWeatherActivity-->
+    <!-- Theme of DailyWeatherActivity-->
     <style name="AppTheme.DailyWeatherVpi" parent="AppTheme">
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>

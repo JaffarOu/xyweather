@@ -9,14 +9,14 @@ public class HeFengWeatherCityInfo {
     private String city;    //name of city
     private String cnty;    //name of country that city belong to
     private String id;      //id of city
-    private double lat;     //latitude（经度）
-    private double lon;     //longitude（纬度）
+    private String lat;     //latitude（经度）
+    private String lon;     //longitude（纬度）
     private String prov;    //name of province that city belong to
 
     public HeFengWeatherCityInfo(){
     }
 
-    public HeFengWeatherCityInfo(String city, String cnty, String id, double lat, double lon, String prov) {
+    public HeFengWeatherCityInfo(String city, String cnty, String id, String lat, String lon, String prov) {
         this.city = city;
         this.cnty = cnty;
         this.id = id;
@@ -49,19 +49,19 @@ public class HeFengWeatherCityInfo {
         this.id = id;
     }
 
-    public double getLat() {
+    public String getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(String lat) {
         this.lat = lat;
     }
 
-    public double getLon() {
+    public String getLon() {
         return lon;
     }
 
-    public void setLon(double lon) {
+    public void setLon(String lon) {
         this.lon = lon;
     }
 

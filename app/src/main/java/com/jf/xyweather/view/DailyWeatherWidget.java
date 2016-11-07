@@ -1,6 +1,7 @@
 package com.jf.xyweather.view;
 
 import android.content.Context;
+import android.support.v4.app.DialogFragment;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.ImageView;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 import com.jf.xyweather.R;
 import com.jf.xyweather.model.DailyWeatherForecast;
 import com.jf.xyweather.model.Temperature;
+import com.jf.xyweather.model.WeatherCondition;
 import com.jf.xyweather.util.DateUtil;
 import com.jf.xyweather.util.LogUtil;
+import com.jf.xyweather.util.WeatherIconUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,16 +33,23 @@ public class DailyWeatherWidget extends LinearLayout{
     private TextView mWeatherCondition;
     private ImageView mWeatherIconIv;
 
-//    private DailyWeatherForecast dailyWeatherForecast;
+    public DailyWeatherWidget(Context context){
+        super(context);
+        init();
+    }
 
     public DailyWeatherWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //Set attributes
+        init();
+    }
+
+    //Set attributes
+    private void init(){
         setPadding(8, 8, 8, 8);
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER_HORIZONTAL);
         //Initial view
-        inflate(context, R.layout.layout_daily_weather_widget, this);
+        inflate(getContext(), R.layout.layout_daily_weather_widget, this);
         mWeatherIconIv = (ImageView)findViewById(R.id.iv_layout_daily_weather_widget_weather_icon);
         mWeatherCondition = (TextView) findViewById(R.id.tv_daily_weather_widget_weather_condition);
         mMaxAndMinTemperatureTv = (TextView)findViewById(R.id.tv_daily_weather_widget_max_and_min_temperature);
@@ -51,9 +61,11 @@ public class DailyWeatherWidget extends LinearLayout{
      * @param dailyWeatherForecast
      */
     public void setDailyWeather(DailyWeatherForecast dailyWeatherForecast){
-        mWeatherCondition.setText(dailyWeatherForecast.getCond().getTxt_d());
+        WeatherCondition weatherCondition = dailyWeatherForecast.getCond();
+        mWeatherIconIv.setImageResource(WeatherIconUtil.getResourceAccordingCode(weatherCondition.getCode_d()));
+        mWeatherCondition.setText(weatherCondition.getTxt_d());
         Temperature temperature = dailyWeatherForecast.getTmp();
-        mMaxAndMinTemperatureTv.setText((int)temperature.getMax()+"/"+(int)temperature.getMin()+"℃");
+        mMaxAndMinTemperatureTv.setText(temperature.getMax()+"/"+temperature.getMin()+"℃");
         String week;
         try{
             week = DateUtil.getWeekFromDate(dailyWeatherForecast.getDate(), "yyyy-MM-dd");
