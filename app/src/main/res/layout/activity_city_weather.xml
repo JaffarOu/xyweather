@@ -3,39 +3,42 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="@mipmap/bg_all_app_background">
 
-<!--title-->
-    <RelativeLayout
+    <!--title-->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!--more real-time-weather-->
         <TextView
             android:id="@+id/tv_city_weather_more_index"
             style="@style/common_text_view"
+            android:layout_gravity="start|center_vertical"
             android:padding="8dp"
             android:text="更多指标"/>
         <!--name of city-->
-        <TextView
-            android:id="@+id/tv_city_weather_city_name"
-            style="@style/common_text_view"
-            android:paddingTop="8dp"
-            android:layout_centerHorizontal="true"/>
-        <!--last update time-->
-        <TextView
-            android:id="@+id/tv_city_weather_last_update_time"
-            style="@style/common_text_view"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/tv_city_weather_city_name"
-            android:paddingBottom="8dp"
-            android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/tv_city_weather_city_name"
+                style="@style/title_text_view"/>
+            <!--last update time,un complete-->
+            <TextView
+                android:id="@+id/tv_city_weather_last_update_time"
+                style="@style/common_text_view"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+        </LinearLayout>
         <!--manage city-->
         <TextView
             android:id="@+id/tv_city_weather_manage_city"
             style="@style/common_text_view"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_gravity="end|center_vertical"
             android:padding="8dp"
             android:text="管理城市"/>
-    </RelativeLayout>
+    </FrameLayout>
 
     <!--A ViewPager with CityWeatherFragment-->
     <android.support.v4.view.ViewPager

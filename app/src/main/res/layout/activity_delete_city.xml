@@ -17,11 +17,10 @@
             android:padding="16dp"
             android:src="@drawable/ic_return"/>
         <TextView
-            style="@style/common_text_view"
+            style="@style/title_text_view"
             android:layout_gravity="center"
             android:padding="16dp"
-            android:text="编辑城市"
-            android:textSize="16sp"/>
+            android:text="编辑城市"/>
         <TextView
             android:id="@+id/tv_city_manage_delete_city_confirm"
             style="@style/common_text_view"

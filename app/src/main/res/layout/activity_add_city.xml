@@ -19,10 +19,9 @@
             android:padding="16dp"
             android:src="@drawable/ic_return"/>
         <TextView
-            style="@style/common_text_view"
+            style="@style/title_text_view"
             android:layout_gravity="center"
-            android:text="添加城市"
-            android:textSize="16sp"/>
+            android:text="添加城市"/>
     </FrameLayout>
 
     <View

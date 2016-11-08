@@ -61,9 +61,15 @@ public class DeleteCityAdapter extends BaseAdapter implements View.OnClickListen
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
-        viewHolder.cityNameTv.setText(mSelectedCityList.get(position).getCityName());
-        viewHolder.deleteIv.setTag(position);
-        viewHolder.deleteIv.setOnClickListener(this);
+        if(position == 0){
+            viewHolder.cityNameTv.setText("当前位置"+"("+mSelectedCityList.get(position).getCityName()+")");
+            viewHolder.deleteIv.setVisibility(View.GONE);
+        }else {
+            viewHolder.cityNameTv.setText(mSelectedCityList.get(position).getCityName());
+            viewHolder.deleteIv.setVisibility(View.VISIBLE);
+            viewHolder.deleteIv.setTag(position);
+            viewHolder.deleteIv.setOnClickListener(this);
+        }
         return convertView;
     }
 

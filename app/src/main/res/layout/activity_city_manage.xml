@@ -8,10 +8,9 @@
     <!--title-->
     <TextView
         android:id="@+id/tv_activity_city_manage_title"
-        style="@style/common_text_view"
+        style="@style/title_text_view"
         android:layout_centerHorizontal="true"
-        android:text="管理城市"
-        android:textSize="16sp"/>
+        android:text="管理城市"/>
 
     <!--divider-->
     <View
