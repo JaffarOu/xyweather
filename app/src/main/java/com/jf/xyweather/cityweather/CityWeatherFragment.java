@@ -17,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.jf.xyweather.R;
 import com.jf.xyweather.airqualityindex.AqiActivity;
+import com.jf.xyweather.base.MyApplications;
 import com.jf.xyweather.base.fragment.BaseFragment;
 import com.jf.xyweather.dailyweather.DailyWeatherActivity;
 import com.jf.xyweather.lifesuggestion.LifeSuggestionActivity;
@@ -33,7 +34,7 @@ import com.jf.xyweather.util.LogUtil;
 import com.jf.xyweather.util.ToastUtil;
 import com.jf.xyweather.util.WeatherIconUtil;
 import com.jf.xyweather.util.WeatherInfoJsonParseUtil;
-import com.jf.xyweather.view.CircleTemperatureView;
+import com.jf.xyweather.view.CircleTemperature;
 import com.jf.xyweather.view.DailyWeatherWidget;
 
 import java.io.Serializable;
@@ -52,15 +53,14 @@ public class CityWeatherFragment extends BaseFragment
 
     //view
     private SwipeRefreshLayout mRefreshLayout;
-    private CircleTemperatureView mCircleTemperatureView;   //An circle view used to show temperature(max,now,min)
-    private ImageView mWeatherIconIv;                       //An icon used to describe the weather condition
+    private CircleTemperature mCircleTemperatureView;   //An circle view used to show temperature(max,now,min)
+//    private ImageView mWeatherIconIv;                       //An icon used to describe the weather condition
     private TextView mWeatherConditionTv;                   //Weather condition such as sunny,windy or other
     private TextView mWeekTv;                               //week
     private TextView airQualityIndexHint;                   //hint-“空气质量”
     private TextView mAirQualityConditionTv;                //air quality condition
     private TextView mAirQualityIndexTv;                    //air quality index
     private LinearLayout mDailyWeatherLl;
-    private DailyWeatherWidget[] mDailyWeatherWidgets;      //Show four days weather information in future
 
     //other
     private SelectedCity mCityInfo;
@@ -106,8 +106,8 @@ public class CityWeatherFragment extends BaseFragment
         //initiate view
         layoutView.findViewById(R.id.ll_city_weather_air_quality_index).setOnClickListener(this);
         mRefreshLayout = (SwipeRefreshLayout)layoutView.findViewById(R.id.swipe_refresh_layout_city_weather);
-        mCircleTemperatureView = (CircleTemperatureView)layoutView.findViewById(R.id.circle_temperature_view_city_weather);
-        mWeatherIconIv = (ImageView)layoutView.findViewById(R.id.iv_city_weather_weather_icon);
+        mCircleTemperatureView = (CircleTemperature)layoutView.findViewById(R.id.circle_temperature_view_city_weather);
+//        mWeatherIconIv = (ImageView)layoutView.findViewById(R.id.iv_city_weather_weather_icon);
         mWeatherConditionTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_weather_condition);
         mWeekTv = (TextView)layoutView.findViewById(R.id.tv_city_weather_week);
         airQualityIndexHint = (TextView)layoutView.findViewById(R.id.tv_city_weather_air_quality_hint);
@@ -154,7 +154,7 @@ public class CityWeatherFragment extends BaseFragment
     @Override
     public void onError(String error) {
         mRefreshLayout.setRefreshing(false);
-        ToastUtil.showShortToast(getActivity(), "网络异常，请稍后再尝试刷新");
+        ToastUtil.showShortToast(MyApplications.getContext(), "网络异常，请稍后再尝试刷新");
     }
     /*override the method of HttpListener_end*/
 
@@ -217,7 +217,7 @@ public class CityWeatherFragment extends BaseFragment
         mRealTimeWeather = weatherInfoJsonParseUtil.getRealTimeWeather();
         if (mRealTimeWeather != null) {
             RealTimeWeather.WeatherCondition condition = mRealTimeWeather.getCond();
-            mWeatherIconIv.setImageResource(WeatherIconUtil.getResourceAccordingCode(condition.getCode()));
+//            mWeatherIconIv.setImageResource(WeatherIconUtil.getResourceAccordingCode(condition.getCode()));
             mWeatherConditionTv.setText(condition.getTxt());
         }
 
@@ -249,7 +249,7 @@ public class CityWeatherFragment extends BaseFragment
             // Start from index 1,because index 0 means today,we need start from tomorrow,
             // the max daily we can show is four
             for(int i = 1, length = mDailyWeatherForecastList.size(); i < length && i < 5; i++){
-                dailyWeatherWidget = new DailyWeatherWidget(getActivity());
+                dailyWeatherWidget = new DailyWeatherWidget(MyApplications.getContext());
                 dailyWeatherWidget.setDailyWeather(mDailyWeatherForecastList.get(i));
                 mDailyWeatherLl.addView(dailyWeatherWidget, layoutParams);
             }
